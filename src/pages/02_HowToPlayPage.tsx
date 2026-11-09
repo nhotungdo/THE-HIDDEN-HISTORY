@@ -44,11 +44,11 @@ export default function HowToPlayPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-[#101827] pt-20 pb-16 px-4">
+    <div className="flex-1 w-full py-8 md:py-12 px-4 relative flex flex-col justify-center text-[#E9D8B7]">
       {/* BG gradient */}
       <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,rgba(214,167,92,0.06)_0%,transparent_60%)] pointer-events-none" />
 
-      <div className="relative z-10 max-w-4xl mx-auto">
+      <div className="relative z-10 max-w-5xl mx-auto w-full">
 
         {/* Title */}
         <motion.div

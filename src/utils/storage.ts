@@ -56,6 +56,7 @@ export function loadProgress(): PlayerProgress | null {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return null;
     const parsed = JSON.parse(raw) as PlayerProgress;
+    parsed.reflection ??= localStorage.getItem('vnr202-reflection') ?? '';
     if (!parsed || !parsed.chapters || !parsed.profile || typeof parsed.profile.nickname !== 'string' || !['exploration', 'challenge'].includes(parsed.profile.gameMode) || !Array.isArray(parsed.collectedFragments) || !Number.isFinite(parsed.totalScore)) return null;
     // Ensure all 5 chapters exist in loaded state (migration safety)
     for (let i = 1; i <= 5; i++) {
@@ -63,6 +64,7 @@ export function loadProgress(): PlayerProgress | null {
         parsed.chapters[i] = DEFAULT_CHAPTER_PROGRESS(i);
       }
       const c = parsed.chapters[i];
+      if (c.replayResults !== undefined && (!Array.isArray(c.replayResults) || c.replayResults.some(r => !r || typeof r.taskId !== 'string' || !Number.isFinite(r.score) || !Number.isFinite(r.hintsUsed)))) return null;
       if (!Array.isArray(c.taskResults) || !['locked','unlocked','in-progress','completed'].includes(c.status) || !Number.isFinite(c.totalScore) || !Number.isFinite(c.bestScore) || !Number.isFinite(c.hintsUsed) || c.taskResults.some(r => !r || typeof r.taskId !== 'string' || !Number.isFinite(r.score) || !Number.isFinite(r.hintsUsed))) return null;
     }
     return parsed;
@@ -161,4 +163,3 @@ export function generateCertificateCode(): string {
   }
   return code;
 }
-

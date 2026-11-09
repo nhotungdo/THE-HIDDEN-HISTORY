@@ -80,11 +80,11 @@ export default function TimelinePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#101827] pt-20 pb-16 px-4">
+    <div className="flex-1 w-full py-8 md:py-12 px-4 text-[#E9D8B7] relative overflow-hidden">
       {/* BG */}
       <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,rgba(214,167,92,0.07)_0%,transparent_60%)] pointer-events-none" />
 
-      <div className="relative z-10 max-w-5xl mx-auto">
+      <div className="relative z-10 max-w-6xl mx-auto w-full">
 
         {/* Header */}
         <motion.div
@@ -92,11 +92,12 @@ export default function TimelinePage() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-10"
         >
-          <div className="text-[#D6A75C]/60 text-xs tracking-[0.4em] uppercase mb-2">Kho Lưu Trữ Thời Gian</div>
-          <h1 className="font-['Cinzel',serif] text-3xl md:text-4xl text-[#E9D8B7] mb-2">BẢN ĐỒ THỜI GIAN</h1>
-          <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-[#D6A75C] to-transparent mx-auto mb-4" />
-          <p className="text-[#8A9BB0] text-sm max-w-xl mx-auto">
-            Chọn cổng thời gian để bước vào cuộc phiêu lưu giải mã. Mỗi mốc lịch sử là một nhiệm vụ thiêng liêng.
+          <div className="red-stamp text-[10px] mb-2">SA BÀN KHÔNG GIAN THỜI GIAN</div>
+          <h1 className="font-['Cinzel',serif] text-3xl md:text-5xl font-black text-gold-foil mb-2">
+            BẢN ĐỒ THỜI GIAN
+          </h1>
+          <p className="text-[#8A9BB0] text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
+            Chọn một cổng thời gian đã được mở khóa để bắt đầu giải mã. Thu thập đủ 5 mảnh ký ức để hợp nhất cuốn Biên Niên Ký.
           </p>
 
           {/* Progress bar */}
@@ -127,6 +128,7 @@ export default function TimelinePage() {
               const chProgress = getChapterProgress(portal.id);
               const isLocked = status === 'locked';
               const isCompleted = status === 'completed';
+              const isLastOdd = i === 4;
 
               return (
                 <motion.div
@@ -134,7 +136,7 @@ export default function TimelinePage() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.12 }}
-                  className="relative"
+                  className={`relative ${isLastOdd ? 'sm:col-span-2 lg:col-span-1 sm:max-w-sm sm:mx-auto lg:max-w-none w-full' : ''}`}
                   onMouseEnter={() => setHoveredId(portal.id)}
                   onMouseLeave={() => setHoveredId(null)}
                 >
@@ -247,22 +249,22 @@ export default function TimelinePage() {
         >
           <button
             onClick={() => navigate('/collection')}
-            className="btn-secondary text-xs px-4 py-2 flex items-center gap-2"
+            className="btn-heritage-secondary text-xs px-4 py-2.5 flex items-center gap-2"
           >
             <Award size={14} />
-            Bộ Sưu Tập Ký Ức ({progress.collectedFragments.length}/5)
+            <span>Bộ Sưu Tập Ký Ức ({progress.collectedFragments.length}/5)</span>
           </button>
           <button
             onClick={() => navigate('/archive')}
-            className="btn-secondary text-xs px-4 py-2 flex items-center gap-2"
+            className="btn-heritage-secondary text-xs px-4 py-2.5 flex items-center gap-2"
           >
             <BookOpen size={14} />
-            Thư Viện Lịch Sử
+            <span>Thư Viện Lịch Sử</span>
           </button>
           {totalDone === 5 && (
             <button
               onClick={() => navigate('/ending')}
-              className="btn-primary text-xs px-4 py-2"
+              className="btn-heritage-primary text-xs px-5 py-2.5 shadow-xl"
             >
               🏆 XEM KẾT THÚC & NHẬN CHỨNG NHẬN
             </button>

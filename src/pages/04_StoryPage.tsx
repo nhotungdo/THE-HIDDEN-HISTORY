@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useGame } from '../context/GameContext';
+import NarrationButton from '../components/common/NarrationButton';
 
 const STORY_LINES = [
   'Năm 2026, Viện Lưu Trữ Thời Gian phát hiện một sự cố nghiêm trọng...',
@@ -61,7 +62,7 @@ export default function StoryPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#06101A] flex flex-col items-center justify-center px-4 py-8 relative overflow-hidden">
+    <div className="flex-1 w-full py-8 md:py-12 flex flex-col items-center justify-center px-4 relative overflow-hidden text-[#E9D8B7]">
 
       {/* Ambient bg */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(214,167,92,0.08)_0%,transparent_60%)]" />
@@ -69,12 +70,13 @@ export default function StoryPage() {
       {/* Skip button */}
       <button
         onClick={handleSkip}
-        className="fixed top-24 right-6 text-[#8A9BB0] text-xs hover:text-[#D6A75C] transition-colors z-50 border border-[#D6A75C]/20 px-3 py-1.5 rounded"
+        className="fixed top-20 right-6 text-[#8A9BB0] text-xs hover:text-[#D6A75C] transition-colors z-40 border border-[#D6A75C]/30 bg-[#0A1020]/80 backdrop-blur px-3 py-1.5 rounded"
       >
         Bỏ Qua →
       </button>
 
       <div className="relative z-10 max-w-3xl w-full mx-auto">
+        <div className="flex justify-center mb-4"><NarrationButton text={STORY_LINES.join(' ')} /></div>
 
         {/* Ancient book */}
         <motion.div
@@ -166,9 +168,9 @@ export default function StoryPage() {
               </div>
               <button
                 onClick={handleAcceptMission}
-                className="btn-primary text-base px-10 py-4 animate-pulse hover:animate-none"
+                className="btn-heritage-primary text-sm px-10 py-4 shadow-2xl"
               >
-                ⚡ NHẬN NHIỆM VỤ THỜI GIAN
+                ⚡ TIẾP NHẬN NHIỆM VỤ THỜI GIAN
               </button>
               <p className="text-[#8A9BB0] text-xs mt-3 italic">
                 Cuốn Biên Niên Ký đang chờ bạn khôi phục, {nickname}.
@@ -180,4 +182,3 @@ export default function StoryPage() {
     </div>
   );
 }
-

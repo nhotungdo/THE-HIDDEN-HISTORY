@@ -39,6 +39,8 @@ type GameAction =
   | { type: 'CREATE_PROFILE'; payload: PlayerProfile }
   | { type: 'RESET_GAME' }
   | { type: 'SET_CURRENT_CHAPTER'; payload: number }
+  | { type: 'REPLAY_CHAPTER'; payload: number }
+  | { type: 'SET_REFLECTION'; payload: string }
   | { type: 'SET_CURRENT_TASK_INDEX'; payload: number }
   | { type: 'SUBMIT_TASK_RESULT'; payload: TaskResult }
   | { type: 'COMPLETE_CHAPTER'; payload: number }
@@ -74,7 +76,7 @@ export function gameReducer(state: GameContextState, action: GameAction): GameCo
         profile: action.payload,
         lastPlayedAt: new Date().toISOString(),
       };
-      return { ...state, progress: newProgress };
+      return { ...initialState, soundEnabled: state.soundEnabled, progress: newProgress };
     }
 
     case 'RESET_GAME':
@@ -105,12 +107,33 @@ export function gameReducer(state: GameContextState, action: GameAction): GameCo
     case 'SET_CURRENT_TASK_INDEX':
       return { ...state, currentTaskIndex: action.payload };
 
+    case 'SET_REFLECTION':
+      return { ...state, progress: { ...state.progress, reflection: action.payload.slice(0, 300) } };
+
+    case 'REPLAY_CHAPTER': {
+      const chapter = state.progress.chapters[action.payload];
+      if (!state.progress.profile || chapter?.status !== 'completed') return state;
+      return {
+        ...state, currentChapterId: action.payload, currentTaskIndex: 0, isGamePaused: false,
+        progress: { ...state.progress, chapters: { ...state.progress.chapters,
+          [action.payload]: { ...chapter, replayResults: [], runNumber: (chapter.runNumber ?? 0) + 1 },
+        } },
+      };
+    }
+
     case 'SUBMIT_TASK_RESULT': {
       const result = action.payload;
       const chapterId = state.currentChapterId;
       if (!chapterId) return state;
 
       const chapter = state.progress.chapters[chapterId];
+      if (chapter.status === 'locked' || !chapters.find(c => c.id === chapterId)?.tasks.some(t => t.id === result.taskId) || !result.completed || !result.answeredCorrectly || !Number.isFinite(result.score) || result.score < 0 || !Number.isInteger(result.hintsUsed) || result.hintsUsed < 0 || result.hintsUsed > 2) return state;
+      if (chapter.replayResults) {
+        const results = chapter.replayResults.filter(r => r.taskId !== result.taskId);
+        return { ...state, progress: { ...state.progress, chapters: { ...state.progress.chapters,
+          [chapterId]: { ...chapter, replayResults: [...results, result] },
+        } } };
+      }
       // Replace or add task result
       const existingIdx = chapter.taskResults.findIndex(r => r.taskId === result.taskId);
       const newResults = existingIdx >= 0
@@ -145,13 +168,16 @@ export function gameReducer(state: GameContextState, action: GameAction): GameCo
     case 'COMPLETE_CHAPTER': {
       const chapterId = action.payload;
       const chapter = state.progress.chapters[chapterId];
-      if (!chapter || !chapters.find(c => c.id === chapterId)?.tasks.every(t => chapter.taskResults.some(r => r.taskId === t.id && r.completed && r.answeredCorrectly))) return state;
-      const chapterScore = chapter.taskResults.reduce((s, r) => s + r.score, 0);
+      const results = chapter?.replayResults ?? chapter?.taskResults;
+      if (!chapter || !results || !chapters.find(c => c.id === chapterId)?.tasks.every(t => results.some(r => r.taskId === t.id && r.completed && r.answeredCorrectly))) return state;
+      const chapterScore = results.reduce((s, r) => s + r.score, 0);
       const fragment = `fragment-${chapterId}`;
       const alreadyHasFragment = state.progress.collectedFragments.includes(fragment);
 
       let updatedProgress: PlayerProgress = {
         ...state.progress,
+        totalScore: state.progress.totalScore - chapter.totalScore + chapterScore,
+        hintsUsedTotal: state.progress.hintsUsedTotal - chapter.hintsUsed + results.reduce((s, r) => s + r.hintsUsed, 0),
         collectedFragments: alreadyHasFragment
           ? state.progress.collectedFragments
           : [...state.progress.collectedFragments, fragment],
@@ -159,6 +185,9 @@ export function gameReducer(state: GameContextState, action: GameAction): GameCo
           ...state.progress.chapters,
           [chapterId]: {
             ...chapter,
+            replayResults: undefined,
+            taskResults: results,
+            hintsUsed: results.reduce((s, r) => s + r.hintsUsed, 0),
             status: 'completed' as ChapterStatus,
             totalScore: chapterScore,
             bestScore: Math.max(chapter.bestScore, chapterScore),
@@ -235,6 +264,13 @@ export function GameProvider({ children }: { children: ReactNode }) {
     dispatch({ type: 'SET_CURRENT_CHAPTER', payload: chapterId });
   }, []);
 
+  const replayChapter = useCallback((chapterId: number) => {
+    dispatch({ type: 'REPLAY_CHAPTER', payload: chapterId });
+  }, []);
+  const setReflection = useCallback((text: string) => {
+    dispatch({ type: 'SET_REFLECTION', payload: text });
+  }, []);
+
   const setCurrentTaskIndex = useCallback((index: number) => {
     dispatch({ type: 'SET_CURRENT_TASK_INDEX', payload: index });
   }, []);
@@ -289,6 +325,8 @@ export function GameProvider({ children }: { children: ReactNode }) {
     createProfile,
     resetGame,
     setCurrentChapter,
+    replayChapter,
+    setReflection,
     setCurrentTaskIndex,
     submitTaskResult,
     completeChapter,

@@ -113,6 +113,8 @@ export interface TaskResult {
 }
 
 export interface ChapterProgress {
+  replayResults?: TaskResult[];
+  runNumber?: number;
   chapterId: number;
   status: ChapterStatus;
   taskResults: TaskResult[];
@@ -123,6 +125,7 @@ export interface ChapterProgress {
 }
 
 export interface PlayerProgress {
+  reflection?: string;
   profile: PlayerProfile | null;
   chapters: Record<number, ChapterProgress>; // keyed by chapterId
   collectedFragments: string[];              // fragment ids
@@ -152,6 +155,8 @@ export interface GameContextValue extends GameContextState {
   resetGame: () => void;
   // Navigation
   setCurrentChapter: (chapterId: number) => void;
+  replayChapter: (chapterId: number) => void;
+  setReflection: (text: string) => void;
   setCurrentTaskIndex: (index: number) => void;
   // Gameplay
   submitTaskResult: (result: TaskResult) => void;
@@ -240,4 +245,3 @@ export type SoundEffect =
   | 'warp'
   | 'victory'
   | 'button-click';
-

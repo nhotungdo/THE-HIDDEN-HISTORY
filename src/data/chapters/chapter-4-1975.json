@@ -8,8 +8,7 @@
   "secondaryColor": "#E8C84A",
   "backgroundTheme": "liberation-dawn",
   "unlockRequirement": {
-    "previousChapterId": 3,
-    "minimumScore": 200
+    "previousChapterId": 3
   },
   "historicalContext": "Mùa Xuân 1975 ghi dấu ấn lịch sử với cuộc Tổng tiến công và nổi dậy thần tốc, chớp nhoáng của quân và dân ta. Chỉ trong 55 ngày đêm, từ Tây Nguyên đến Sài Gòn, quân giải phóng đã quét sạch chính quyền Sài Gòn, thống nhất đất nước sau hơn 20 năm chia cắt.",
   "tasks": [
@@ -19,7 +18,7 @@
       "order": 1,
       "title": "Dòng Thời Gian Lịch Sử",
       "points": 100,
-      "timeLimit": 90,
+      "timeLimit": 180,
       "historicalDocument": {
         "title": "Tiến trình cuộc Tổng tiến công Mùa Xuân 1975",
         "excerpt": "Cuộc Tổng tiến công Mùa Xuân 1975 diễn ra với tốc độ thần tốc: Mở đầu bằng Chiến dịch Tây Nguyên với đòn đánh vào Buôn Ma Thuột ngày 10/3/1975. Thắng lợi tại Tây Nguyên kéo theo sự tan rã dây chuyền của quân đội Sài Gòn trên toàn chiến trường. Huế giải phóng ngày 25/3, Đà Nẵng giải phóng ngày 29/3, mở đường cho chiến dịch chiến lược cuối cùng mang tên Bác Hồ kính yêu.",
@@ -74,7 +73,7 @@
       ],
       "correctAnswerSummary": "Tiến trình thần tốc của Mùa Xuân 1975 diễn ra từ Tây Nguyên (10/3) qua Huế (25/3) và Đà Nẵng (29/3), rồi đến Chiến dịch Hồ Chí Minh (bắt đầu 26/4) và kết thúc với sự kiện Giải phóng Sài Gòn vào ngày 30/4/1975. Chỉ trong 55 ngày đêm, toàn bộ miền Nam được giải phóng.",
       "historicalLesson": "Mùa Xuân 1975 minh chứng cho sức mạnh của thời cơ chiến lược và nghệ thuật chớp thời cơ. Khi quân và dân ta nhận ra địch đang tan rã, Bộ Chính trị đã kịp thời hạ lệnh 'thần tốc, thần tốc hơn nữa', biến kế hoạch 2 năm thành thắng lợi chỉ trong 55 ngày – bài học về sự dũng cảm, quyết đoán và nhạy bén trong chớp thời cơ còn nguyên giá trị đến ngày nay.",
-      "instructions": "Sắp xếp 5 sự kiện quan trọng của Mùa Xuân 1975 theo đúng trình tự thời gian từ sớm nhất đến muộn nhất. Kéo thả để sắp xếp.",
+      "instructions": "Sắp xếp 5 sự kiện quan trọng của Mùa Xuân 1975 từ sớm đến muộn. Kéo thả hoặc dùng nút lên/xuống.",
       "question": "Dòng Thời Gian Lịch Sử",
       "correctAnswerIds": []
     },
@@ -84,7 +83,7 @@
       "order": 2,
       "title": "Giải Mã Tài Liệu Lịch Sử",
       "points": 100,
-      "timeLimit": 120,
+      "timeLimit": 180,
       "historicalDocument": {
         "title": "Hai Tài Liệu Lịch Sử Mùa Xuân 1975",
         "excerpt": "Lệnh của Đại tướng Võ Nguyên Giáp – Ngày 7/4/1975\n\"Thần tốc, thần tốc hơn nữa! Táo bạo, táo bạo hơn nữa! Tranh thủ từng giờ, từng phút, xốc tới mặt trận, giải phóng miền Nam. Quyết chiến và toàn thắng!\"\n\n– Đại tướng Võ Nguyên Giáp, Tổng Tư lệnh Quân đội Nhân dân Việt Nam, ngày 7 tháng 4 năm 1975\n\nTuyên bố đầu hàng của Dương Văn Minh – 30/4/1975\n\"Tôi, Đại tướng Dương Văn Minh, Tổng thống Chính quyền Sài Gòn, kêu gọi Quân lực Việt Nam Cộng hòa hạ vũ khí đầu hàng Quân Giải phóng miền Nam Việt Nam vô điều kiện. Tôi tuyên bố chính quyền Sài Gòn, từ trung ương đến địa phương, phải giải tán hoàn toàn. Chúng tôi chờ đợi bàn giao chính quyền cho lực lượng Mặt trận Giải phóng miền Nam Việt Nam.\"\n\n– Dương Văn Minh, phát trên Đài Phát thanh Sài Gòn, 11 giờ 30 phút ngày 30/4/1975",
@@ -104,7 +103,7 @@
         {
           "id": "hotspot-1",
           "text": "Thần tốc, thần tốc hơn nữa",
-          "question": "Tại sao Đại tướng Võ Nguyên Giáp lại dùng từ 'thần tốc' trong mệnh lệnh tháng 3/1975? Điều gì trong tình hình chiến trường lúc đó đòi hỏi tốc độ cao đến vậy?",
+          "question": "Vì sao Đại tướng Võ Nguyên Giáp nhấn mạnh 'thần tốc' trong bức điện ngày 7/4/1975?",
           "options": [
             {
               "id": "hs1-opt-a",
@@ -114,9 +113,9 @@
             },
             {
               "id": "hs1-opt-b",
-              "text": "Vì quân Mỹ đang chuẩn bị can thiệp trở lại và quân địch đang tan rã – phải chớp thời cơ trước khi địch kịp phục hồi",
+              "text": "Để chớp thời cơ chiến lược khi lực lượng đối phương suy sụp, đẩy nhanh tiến công và không để đối phương củng cố phòng thủ",
               "isCorrect": true,
-              "explanation": "ĐÚNG. Đại tướng nhận định đây là thời cơ 'ngàn năm có một': địch đang tan rã sau Tây Nguyên, nhưng nếu cho chúng thời gian, Mỹ có thể can thiệp hoặc địch tổ chức phòng thủ mới. Phải hành động ngay trước khi cơ hội qua đi."
+              "explanation": "Bức điện ngày 7/4/1975 yêu cầu tranh thủ từng giờ, từng phút để phát huy thắng lợi và chớp thời cơ giải phóng miền Nam."
             },
             {
               "id": "hs1-opt-c",
@@ -185,7 +184,7 @@
       "order": 3,
       "title": "Sự Thật Về Ngày 30/4",
       "points": 100,
-      "timeLimit": 90,
+      "timeLimit": 180,
       "historicalDocument": {
         "title": "Ý nghĩa lịch sử của ngày 30/4/1975 và sự thống nhất đất nước",
         "excerpt": "Ngày 30/4/1975 kết thúc cuộc kháng chiến chống Mỹ cứu nước kéo dài 21 năm (1954–1975). Chiến thắng này chấm dứt sự chia cắt đất nước từ năm 1954 theo Hiệp định Giơ-ne-vơ. Ngày 2/7/1976, Quốc hội nước Việt Nam thống nhất họp kỳ đầu tiên, thông qua quyết định đổi tên nước thành Cộng hòa Xã hội Chủ nghĩa Việt Nam, Thủ đô là Hà Nội, Quốc kỳ là cờ đỏ sao vàng, Quốc ca là bài Tiến Quân Ca, và thành phố Sài Gòn được đổi tên thành Thành phố Hồ Chí Minh.",

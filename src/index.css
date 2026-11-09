@@ -1,32 +1,46 @@
 @import "tailwindcss";
 
-/* ==========================================
-   GLOBAL DESIGN SYSTEM – MẬT MÃ THỜI GIAN
-   ========================================== */
+/* ==========================================================================
+   GLOBAL DESIGN SYSTEM – MẬT MÃ THỜI GIAN (VNR202)
+   HISTORICAL ARCHIVE & VIETNAMESE HERITAGE ART DIRECTION
+   ========================================================================== */
 
-/* Custom CSS Variables */
 :root {
+  /* Core Atmosphere */
+  --color-archive-dark: #0A1020;
   --color-midnight: #101827;
+  --color-slate-blue: #162032;
+  --color-slate-card: #1A263D;
+
+  /* Metals & Royalty */
   --color-gold: #D6A75C;
-  --color-gold-light: #F0C878;
-  --color-gold-dark: #A87A30;
-  --color-papyrus: #E9D8B7;
-  --color-papyrus-dark: #C8B48A;
+  --color-gold-light: #F5CF8E;
+  --color-gold-dark: #9E7428;
+  --color-copper: #B87333;
+
+  /* Historical Materials & Documents */
+  --color-papyrus-bg: #F4EBD9;
+  --color-papyrus-card: #EFE2C8;
+  --color-papyrus-edge: #DFCEAA;
+  --color-ink-black: #24160A;
+  --color-ink-muted: #4A3A2A;
+
+  /* Revolution & Stamps */
+  --color-stamp-red: #A31D1D;
   --color-crimson: #8D3038;
   --color-crimson-light: #B84050;
-  --color-bg-dark: #0A1020;
-  --color-bg-card: #162032;
+
+  /* Typography Colors */
   --color-text-primary: #E9D8B7;
   --color-text-muted: #8A9BB0;
+  --color-text-bright: #FFFFFF;
 }
 
-/* Google Fonts */
 
 
-/* ==========================================
-   BASE RESET & TYPOGRAPHY
-   ========================================== */
-
+/* ==========================================================================
+   RESET & BASE TYPOGRAPHY
+   ========================================================================== */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -39,321 +53,300 @@ html {
 }
 
 body {
-  background-color: var(--color-midnight);
+  background-color: var(--color-archive-dark);
   color: var(--color-text-primary);
-  font-family: 'Be Vietnam Pro', 'Inter', system-ui, sans-serif;
+  font-family: 'Be Vietnam Pro', system-ui, sans-serif;
   line-height: 1.6;
   overflow-x: hidden;
   min-height: 100vh;
+  background-image: 
+    radial-gradient(ellipse at 50% 0%, rgba(214, 167, 92, 0.08) 0%, transparent 60%),
+    radial-gradient(circle at 100% 100%, rgba(141, 48, 56, 0.05) 0%, transparent 50%);
+  background-attachment: fixed;
 }
 
-h1, h2, h3 {
-  font-family: 'Cinzel', 'Georgia', serif;
+h1, h2, h3, .font-heading {
+  font-family: 'Cinzel', 'Playfair Display', serif;
   letter-spacing: 0.05em;
 }
 
-/* ==========================================
-   CUSTOM SCROLLBAR
-   ========================================== */
+.font-serif-vi {
+  font-family: 'Playfair Display', 'Cinzel', serif;
+}
+
+.font-typewriter {
+  font-family: 'Courier Prime', monospace;
+}
+
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 7px;
+  height: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-bg-dark);
+  background: #080D1A;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-gold-dark);
-  border-radius: 3px;
+  background: #4A3A20;
+  border-radius: 4px;
+  border: 1px solid rgba(214, 167, 92, 0.3);
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-gold);
 }
 
-/* ==========================================
-   TEXT SELECTION
-   ========================================== */
 ::selection {
-  background: rgba(214, 167, 92, 0.3);
-  color: var(--color-papyrus);
+  background: rgba(214, 167, 92, 0.35);
+  color: #FFF2D6;
 }
 
-/* ==========================================
-   REUSABLE UTILITY CLASSES
-   ========================================== */
+/* ==========================================================================
+   HISTORICAL ARTIFACTS & TEXTURES (THE ARCHIVIST'S ASSETS)
+   ========================================================================== */
 
-/* Gold gradient text */
-.text-gold-gradient {
-  background: linear-gradient(135deg, #F0C878 0%, #D6A75C 50%, #A87A30 100%);
+/* 1. Giấy Dó Cổ (Vietnamese Parchment Sheet) */
+.parchment-sheet {
+  background: #F4EBD9;
+  background-image: 
+    radial-gradient(#E8D9BD 15%, transparent 16%),
+    radial-gradient(#EFE2C8 15%, transparent 16%);
+  background-size: 60px 60px;
+  background-position: 0 0, 30px 30px;
+  color: var(--color-ink-black);
+  border: 1px solid #D5C29B;
+  box-shadow: 
+    0 10px 30px -5px rgba(0, 0, 0, 0.6),
+    inset 0 0 40px rgba(184, 134, 72, 0.18),
+    inset 0 0 10px rgba(80, 50, 20, 0.12);
+  position: relative;
+  border-radius: 3px;
+}
+
+/* Nếp gấp sờn góc của tài liệu lưu trữ */
+.parchment-sheet::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, transparent 50%, #DAC497 50%);
+  box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.2);
+  border-bottom-left-radius: 3px;
+}
+
+/* 2. Con Dấu Mộc Đỏ Lịch Sử (Historical Red Stamps) */
+.red-stamp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cinzel', 'Playfair Display', serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--color-stamp-red);
+  border: 2.5px solid var(--color-stamp-red);
+  padding: 4px 12px;
+  border-radius: 4px;
+  letter-spacing: 0.15em;
+  transform: rotate(-3deg);
+  opacity: 0.9;
+  text-shadow: 0 0 1px rgba(163, 29, 29, 0.4);
+  box-shadow: 0 0 0 1px rgba(163, 29, 29, 0.15), inset 0 0 6px rgba(163, 29, 29, 0.15);
+  user-select: none;
+}
+
+.red-stamp-circle {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  border: 2px dashed var(--color-stamp-red);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-stamp-red);
+  transform: rotate(-6deg);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-align: center;
+  line-height: 1.1;
+  background: rgba(163, 29, 29, 0.04);
+}
+
+/* 3. Kẹp Ghim Đồng Thau (Brass Paper Clip) */
+.brass-clip {
+  position: absolute;
+  top: -10px;
+  left: 28px;
+  width: 16px;
+  height: 38px;
+  border: 2.5px solid var(--color-gold);
+  border-radius: 8px;
+  background: transparent;
+  box-shadow: 1px 2px 5px rgba(0,0,0,0.4);
+  z-index: 10;
+}
+
+/* 4. Thẻ Hồ Sơ Cơ Mật (Confidential Dossier Card) */
+.dossier-card {
+  background: linear-gradient(145deg, #162032 0%, #0F1726 100%);
+  border: 1px solid rgba(214, 167, 92, 0.25);
+  border-radius: 6px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.dossier-card:hover {
+  border-color: var(--color-gold);
+  box-shadow: 0 8px 30px rgba(214, 167, 92, 0.15);
+  transform: translateY(-2px);
+}
+
+/* 5. Khung Viền Trống Đồng & Sơn Mài (Dong Son Heritage Borders) */
+.border-dongson {
+  border: 1px solid var(--color-gold);
+  position: relative;
+}
+.border-dongson::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1px dashed rgba(214, 167, 92, 0.4);
+  pointer-events: none;
+}
+
+/* 6. Chữ Mạ Vàng Cổ (Gold Gradient Foil) */
+.text-gold-foil {
+  background: linear-gradient(135deg, #FFF0D0 0%, #D6A75C 50%, #9E7428 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Parchment card background */
-.bg-parchment {
-  background: linear-gradient(145deg, #E9D8B7 0%, #D4C09A 100%);
-  color: #2D1B00;
-}
-
-/* Dark card background */
-.bg-dark-card {
-  background: linear-gradient(145deg, #162032 0%, #0F1B2D 100%);
+/* 7. Bàn Làm Việc Nhà Nghiên Cứu (Archivist Desk Layout) */
+.archivist-desk {
+  background: radial-gradient(circle at 50% 30%, #152238 0%, #0A1020 90%);
   border: 1px solid rgba(214, 167, 92, 0.2);
+  border-radius: 8px;
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.8), 0 10px 40px rgba(0, 0, 0, 0.6);
 }
 
-/* Gold border glow */
-.border-gold-glow {
-  border: 1px solid var(--color-gold);
-  box-shadow: 0 0 10px rgba(214, 167, 92, 0.3), inset 0 0 10px rgba(214, 167, 92, 0.05);
-}
+/* ==========================================================================
+   BUTTONS & CONTROLS (HERITAGE STYLING)
+   ========================================================================== */
 
-/* Button base styles */
-.btn-primary {
+.btn-heritage-primary {
   background: linear-gradient(135deg, #D6A75C 0%, #A87A30 100%);
   color: #0A1020;
   font-family: 'Cinzel', serif;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  padding: 0.75rem 2rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  padding: 0.8rem 2.2rem;
   border-radius: 4px;
-  border: none;
+  border: 1px solid #FFE4A0;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(214, 167, 92, 0.3);
   position: relative;
   overflow: hidden;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
-.btn-primary::before {
-  content: '';
-  position: absolute;
-  top: 0; left: -100%;
-  width: 100%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.5s ease;
-}
-.btn-primary:hover::before {
-  left: 100%;
-}
-.btn-primary:hover {
+.btn-heritage-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(214, 167, 92, 0.4);
+  box-shadow: 0 8px 25px rgba(214, 167, 92, 0.5);
+  background: linear-gradient(135deg, #F5CF8E 0%, #B88535 100%);
 }
-.btn-primary:active {
+.btn-heritage-primary:active {
   transform: translateY(0);
 }
+.btn-heritage-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
 
-.btn-secondary {
-  background: transparent;
+.btn-heritage-secondary {
+  background: rgba(22, 32, 50, 0.8);
   color: var(--color-gold);
   font-family: 'Cinzel', serif;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  padding: 0.7rem 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.75rem 1.8rem;
   border-radius: 4px;
-  border: 1px solid var(--color-gold);
+  border: 1px solid rgba(214, 167, 92, 0.5);
   cursor: pointer;
   transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
-.btn-secondary:hover {
-  background: rgba(214, 167, 92, 0.1);
-  box-shadow: 0 4px 15px rgba(214, 167, 92, 0.2);
+.btn-heritage-secondary:hover {
+  background: rgba(214, 167, 92, 0.15);
+  border-color: var(--color-gold);
+  box-shadow: 0 0 15px rgba(214, 167, 92, 0.25);
   transform: translateY(-1px);
 }
 
-/* ==========================================
-   PARTICLE / AMBIENT EFFECTS
-   ========================================== */
-@keyframes float-particle {
-  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
-  50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
-}
+/* ==========================================================================
+   ANIMATIONS & GLOWS
+   ========================================================================== */
 
-@keyframes clock-tick {
-  0% { transform: rotate(-3deg); }
-  50% { transform: rotate(3deg); }
-  100% { transform: rotate(-3deg); }
-}
-
-@keyframes pulse-gold {
-  0%, 100% { box-shadow: 0 0 5px rgba(214, 167, 92, 0.3); }
-  50% { box-shadow: 0 0 20px rgba(214, 167, 92, 0.7), 0 0 40px rgba(214, 167, 92, 0.3); }
-}
-
-@keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-
-@keyframes fragment-appear {
-  0% { opacity: 0; transform: scale(0.5) rotate(-10deg); }
-  70% { opacity: 1; transform: scale(1.1) rotate(3deg); }
-  100% { opacity: 1; transform: scale(1) rotate(0deg); }
-}
-
-@keyframes warp-in {
-  0% { opacity: 0; transform: scale(1.5); filter: blur(20px); }
-  100% { opacity: 1; transform: scale(1); filter: blur(0); }
-}
-
-/* ==========================================
-   GAME-SPECIFIC COMPONENTS
-   ========================================== */
-
-/* Chapter portal card */
-.portal-card {
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  cursor: pointer;
-}
-.portal-card:hover {
-  transform: scale(1.05) translateY(-5px);
-}
-.portal-card.locked {
-  filter: grayscale(0.8);
-  cursor: not-allowed;
-}
-.portal-card.completed {
-  animation: pulse-gold 3s ease-in-out infinite;
-}
-
-/* Historical document styling */
-.historical-document {
-  background: linear-gradient(145deg, #EDE0C4 0%, #DDD0B0 100%);
-  color: #2D1800;
-  border-left: 4px solid var(--color-crimson);
-  padding: 1.5rem;
-  border-radius: 2px;
-  font-family: 'Be Vietnam Pro', serif;
-  box-shadow: 3px 3px 10px rgba(0,0,0,0.3), inset 0 0 30px rgba(0,0,0,0.05);
-  position: relative;
-}
-.historical-document::before {
-  content: '"';
-  font-size: 4rem;
-  color: rgba(141, 48, 56, 0.2);
-  position: absolute;
-  top: -0.5rem;
-  left: 1rem;
-  font-family: Georgia, serif;
-  line-height: 1;
-}
-
-/* Progress bar */
-.progress-track {
-  background: rgba(255,255,255,0.1);
-  border-radius: 10px;
-  overflow: hidden;
-  height: 8px;
-}
-.progress-fill {
-  background: linear-gradient(90deg, #D6A75C, #F0C878);
-  height: 100%;
-  border-radius: 10px;
-  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 0 10px rgba(240, 200, 120, 0.5);
-}
-
-/* Memory fragment badge */
-.memory-fragment {
-  background: radial-gradient(ellipse at top, #F0C878, #D6A75C, #A87A30);
-  border-radius: 50%;
-  box-shadow: 0 0 20px rgba(240, 200, 120, 0.6), 0 0 40px rgba(214, 167, 92, 0.3);
-  animation: pulse-gold 2s ease-in-out infinite;
-}
-
-/* ==========================================
-   RESPONSIVE HELPERS
-   ========================================== */
-.game-container {
-  min-height: 100vh;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-/* Mobile drag-and-drop alternative: tap to select */
-@media (max-width: 768px) {
-  .draggable-item {
-    cursor: pointer;
+@keyframes pulse-artifact {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(214, 167, 92, 0.3), inset 0 0 10px rgba(214, 167, 92, 0.1);
   }
-  .drop-zone {
-    min-height: 60px;
+  50% {
+    box-shadow: 0 0 35px rgba(245, 207, 142, 0.6), 0 0 60px rgba(214, 167, 92, 0.3), inset 0 0 20px rgba(214, 167, 92, 0.3);
   }
 }
 
-/* Page transition overlay */
-.page-transition-overlay {
-  position: fixed;
-  inset: 0;
-  background: var(--color-midnight);
-  z-index: 9999;
-  pointer-events: none;
+.animate-pulse-artifact {
+  animation: pulse-artifact 3s ease-in-out infinite;
 }
 
-/* AI Guide floating button */
-.ai-guide-btn {
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  z-index: 100;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #1A2E50, #0D1A2E);
-  border: 2px solid var(--color-gold);
-  box-shadow: 0 4px 20px rgba(214, 167, 92, 0.4);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
+/* Sa bàn quân sự ô kẻ tọa độ */
+.military-grid {
+  background-color: #1A261D;
+  background-image: 
+    linear-gradient(rgba(100, 140, 110, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(100, 140, 110, 0.15) 1px, transparent 1px);
+  background-size: 25px 25px;
+  border: 2px solid #3F5E46;
 }
-.ai-guide-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 30px rgba(214, 167, 92, 0.6);
+
+/* Shared controls used by the adviser and archive. */
+.stack { display: flex; flex-direction: column; gap: 1rem; }
+.stack label { display: flex; flex-direction: column; gap: .5rem; }
+.stack input, .stack select, .stack textarea {
+  width: 100%; min-width: 0; padding: .75rem; border: 1px solid #D6A75C66;
+  border-radius: .25rem; background: #101827; color: #E9D8B7;
 }
-.page { max-width: 1120px; margin: auto; padding: 110px 24px 70px; min-height: 80vh; }
-.stack { display: flex; flex-direction: column; gap: 22px; }
-.page h1 { font-size: clamp(27px,4vw,48px); line-height:1.25; }
-.page h2 { font-size: 23px; }
-.eyebrow { color: #D6A75C; font-size: 12px; letter-spacing: .2em; }
-.lead { font-size: 20px; color: #b7c2d0; }
-.panel { padding: 28px; border: 1px solid #d6a75c40; border-radius: 12px; background: #162032; }
-.page button,.page .action { padding: 12px 20px; border:1px solid #D6A75C; border-radius:6px; cursor:pointer; text-align:center; }
-.page .action { background:#D6A75C; color:#101827; font-weight:700; }
-.page button:disabled { opacity:.45; cursor:default; }
-.page a:not(.action) { color:#D6A75C; }
-.toolbar { display:flex; gap:20px; align-items:center; flex-wrap:wrap; }
-.page input:not([type=radio]),.page select,.page textarea { display:block; width:100%; background:#0a1020; border:1px solid #8a9bb060; color:#E9D8B7; padding:12px; border-radius:5px; }
-.page select { white-space:normal; max-width:100%; }
-.page textarea { min-height:100px; }
-.page progress { width:100%; accent-color:#D6A75C; }
-.game-columns { display:grid; grid-template-columns: .8fr 1.2fr; gap:24px; align-items:start; }
-.game-columns > * { min-width:0; }
-.parchment { background:#E9D8B7; color:#30271c; }
-.parchment .eyebrow { color:#725124; }
-.document-text { white-space:pre-line; line-height:1.9; }
-.puzzle-row { display:flex; flex-direction:column; gap:12px; }
-.page fieldset { border:0; min-width:0; }
-.page legend { font-weight:600; margin-bottom:14px; }
-.choice { display:flex; gap:10px; align-items:baseline; margin:16px 0; }
-.page summary { cursor:pointer; padding:8px 0; }
-.page details[open] summary { margin-bottom:16px; color:#D6A75C; }
-.collection-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:20px; }
-.artifact { font-size:clamp(32px,6vw,68px); text-align:center; padding:20px 0; }
-.certificate { width:100%; border-radius:8px; }
-.map-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:5px; }
-.map-grid>div { min-height:85px; padding:5px; background:#243c37; font-size:11px; }
-.page ol { padding-left:24px; }
-:focus-visible { outline:3px solid #f0c878; outline-offset:4px; }
-@media(max-width:760px){.game-columns{grid-template-columns:1fr}.page{padding:90px 16px 40px}.panel{padding:20px}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
-.timeline-row { display:grid; grid-template-columns:25px 1fr 44px 44px; gap:8px; align-items:center; padding:12px; border:1px solid #d6a75c35; border-radius:6px; }
-.page .timeline-row button { padding:8px; }
-.page .match-card { border:1px solid #d6a75c35; border-radius:6px; padding:16px; }
-.page .match-card legend { padding:0 5px; }
-.page .map-grid button { min-height:110px; padding:6px; background:#243c37; font-size:11px; overflow-wrap:anywhere; }
-.page button[aria-pressed=true] { background:#D6A75C; color:#101827; }
-.page .choice { cursor:pointer; }
-.page .choice input { flex-shrink:0; accent-color:#D6A75C; }
+.stack button { padding: .75rem; border: 1px solid #D6A75C88; border-radius: .25rem; color: #D6A75C; }
+.document-text { white-space: pre-wrap; line-height: 1.8; }
+.feedback-error { color: #fecaca; background: #8D303833; padding: 1rem; border: 1px solid #8D3038; border-radius: .4rem; margin-bottom: 1rem; }
+button, a, input, select, textarea, summary { -webkit-tap-highlight-color: transparent; }
+button:not(:disabled), summary { cursor: pointer; }
+button:disabled { cursor: not-allowed; }
+:focus-visible { outline: 3px solid #F5CF8E; outline-offset: 4px; }
+label:has(input:focus-visible) { outline: 2px solid #F5CF8E; outline-offset: 2px; }
+fieldset { min-width: 0; }
+.skip-link { position: fixed; left: 1rem; top: -5rem; z-index: 100; padding: 1rem; background: #D6A75C; color: #101827; }
+.skip-link:focus { top: 1rem; }
+.memory-artifact { width: 100%; height: 100%; max-width: 180px; filter: drop-shadow(0 8px 10px #0008); transition: transform .3s; }
+.evidence-board { position: relative; }
+.evidence-board svg { display: block; width: 100%; border-radius: .5rem; }
+.evidence-board figcaption { font-size: .7rem; color: #8A9BB0; padding: .5rem 0; }
+.evidence-hotspots { position: absolute; inset: 0 0 2rem; pointer-events: none; }
+.evidence-hotspots button { position: absolute; left: 6%; width: 36px; height: 36px; border-radius: 50%; background: #8D3038; color: #fff0d0; border: 2px solid #D6A75C; pointer-events: auto; }
+.evidence-hotspots button[aria-pressed="true"] { background: #D6A75C; color: #101827; box-shadow: 0 0 20px #D6A75C; }
+@keyframes chronicle-merge { from { opacity: 0; transform: translateY(-100px) rotateY(120deg) scale(.3); } to { opacity: 1; transform: translateY(0) rotateY(0) scale(1); } }
+.chronicle-fusion > div { animation: chronicle-merge 1.5s both cubic-bezier(.2,.8,.2,1); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}

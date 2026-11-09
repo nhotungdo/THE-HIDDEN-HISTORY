@@ -1,23 +1,24 @@
-// ==========================================
+// ==========================================================================
 // PLAYER SETUP PAGE (Màn 03) – MẬT MÃ THỜI GIAN
-// ==========================================
+// BALANCED 2-COLUMN ARCHIVIST DOSSIER INITIALIZATION
+// ==========================================================================
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, AlertCircle } from 'lucide-react';
+import { Check, AlertCircle, Shield, Sparkles, User, Award } from 'lucide-react';
 import type { GameMode, PlayerProfile } from '../types/game';
 import { useGame } from '../context/GameContext';
 
 const AVATARS = [
-  { id: 'historian', emoji: '🧑‍🏫', label: 'Nhà Sử Học' },
+  { id: 'student', emoji: '🎓', label: 'Sinh Viên FPT' },
   { id: 'detective', emoji: '🕵️', label: 'Thám Tử Thời Gian' },
-  { id: 'librarian', emoji: '👩‍💼', label: 'Nữ Liên Lạc Viên' },
+  { id: 'historian', emoji: '🧑‍🏫', label: 'Nhà Sử Học' },
   { id: 'soldier', emoji: '💂', label: 'Chiến Sĩ Giải Phóng' },
+  { id: 'librarian', emoji: '👩‍💼', label: 'Nữ Liên Lạc Viên' },
   { id: 'engineer', emoji: '👨‍💻', label: 'Kỹ Sư Đổi Mới' },
   { id: 'professor', emoji: '👴', label: 'Giáo Sư Cổ Văn' },
   { id: 'journalist', emoji: '📰', label: 'Nhà Báo Cách Mạng' },
-  { id: 'student', emoji: '🎓', label: 'Sinh Viên FPT' },
 ];
 
 const MODES: { id: GameMode; icon: string; name: string; desc: string }[] = [
@@ -25,13 +26,13 @@ const MODES: { id: GameMode; icon: string; name: string; desc: string }[] = [
     id: 'exploration',
     icon: '🌿',
     name: 'Chế Độ Khám Phá',
-    desc: 'Thong thả đọc tư liệu, không giới hạn thời gian. Phù hợp để ôn thi và khám phá sâu lịch sử.',
+    desc: 'Thong thả đọc tư liệu, không giới hạn thời gian. Phù hợp để ôn tập và khám phá sâu lịch sử.',
   },
   {
     id: 'challenge',
     icon: '⚡',
     name: 'Chế Độ Thử Thách',
-    desc: 'Giới hạn 180 giây mỗi nhiệm vụ. Điểm thưởng tốc độ. Dành cho người muốn thách thức bản thân.',
+    desc: 'Giới hạn 180 giây mỗi nhiệm vụ. Thưởng điểm tốc độ. Dành cho người muốn thử thách phản xạ.',
   },
 ];
 
@@ -59,7 +60,9 @@ export default function PlayerSetupPage() {
   const handleSubmit = () => {
     setError('');
     if (!validate()) return;
-    if (progress.profile && !window.confirm("Tạo hồ sơ mới sẽ thay thế tiến độ hiện tại. Tiếp tục?")) return;
+    if (progress.profile && !window.confirm('Tạo hồ sơ mới sẽ thay thế tiến độ hiện tại. Tiếp tục?')) {
+      return;
+    }
     setIsConfirming(true);
 
     const profile: PlayerProfile = {
@@ -72,156 +75,218 @@ export default function PlayerSetupPage() {
     setTimeout(() => {
       createProfile(profile);
       navigate('/story');
-    }, 1500);
+    }, 1200);
   };
 
   const selectedAvatarData = AVATARS.find(a => a.id === selectedAvatar)!;
 
   return (
-    <div className="min-h-screen bg-[#101827] pt-20 pb-16 px-4">
-      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_center,rgba(141,48,56,0.06)_0%,transparent_60%)] pointer-events-none" />
+    <div className="flex-1 w-full py-8 md:py-12 px-4 relative flex flex-col justify-center text-[#E9D8B7]">
+      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_center,rgba(214,167,92,0.06)_0%,transparent_60%)] pointer-events-none" />
 
-      <div className="relative z-10 max-w-2xl mx-auto">
+      <div className="relative z-10 max-w-5xl mx-auto w-full">
+        
+        {/* Header Title */}
+        <div className="text-center mb-8">
+          <div className="red-stamp text-[10px] mb-2">HỒ SƠ KHẢO SÁT VNR202</div>
+          <h1 className="text-3xl md:text-5xl font-['Cinzel',serif] font-black text-gold-foil mb-2">
+            THIẾT LẬP ĐẶC PHÁI VIÊN
+          </h1>
+          <p className="text-xs sm:text-sm text-[#8A9BB0] max-w-md mx-auto">
+            Khởi tạo căn cước nhà nghiên cứu thời gian để bước vào kho lưu trữ cơ mật.
+          </p>
+        </div>
 
-        {/* Title */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-10"
-        >
-          <div className="text-[#D6A75C]/60 text-xs tracking-[0.4em] uppercase mb-3">Khởi Tạo Hồ Sơ</div>
-          <h1 className="font-['Cinzel',serif] text-3xl text-[#E9D8B7] mb-3">ĐẶC PHÁI VIÊN THỜI GIAN</h1>
-          <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-[#D6A75C] to-transparent mx-auto" />
-        </motion.div>
+        {/* 2-Column Balanced Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 items-start">
+          
+          {/* ================================================================
+              LEFT: LIVE ARCHIVIST ID CARD PREVIEW (5 COLS)
+              ================================================================ */}
+          <div className="md:col-span-5 md:sticky md:top-24">
+            <div className="parchment-sheet p-6 rounded-lg shadow-2xl relative border border-[#D5C29B]">
+              <div className="brass-clip" />
 
-        {/* ID Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="bg-gradient-to-br from-[#162032] to-[#0A1020] border border-[#D6A75C]/30 rounded-lg p-6 mb-6 relative overflow-hidden"
-        >
-          {/* Card decorative corner */}
-          <div className="absolute top-0 right-0 w-16 h-16 bg-[#D6A75C]/5 border-b border-l border-[#D6A75C]/20 rounded-bl-lg" />
+              <div className="flex items-center justify-between mb-6 pt-1 pl-4">
+                <span className="red-stamp text-[9px]">THẺ ĐẶC PHÁI VIÊN</span>
+                <span className="text-[10px] font-mono font-bold text-[#8D3038]">
+                  ID #2026-FPT
+                </span>
+              </div>
 
-          <div className="text-[#D6A75C]/40 text-[10px] tracking-widest mb-4 font-mono">
-            KHO LƯU TRỮ THỜI GIAN – HỒ SƠ ĐẶC PHÁI VIÊN
+              {/* Big Avatar Portrait */}
+              <div className="flex flex-col items-center text-center my-4">
+                <div className="w-24 h-24 rounded-full bg-[#162032] border-2 border-[#8D3038] flex items-center justify-center text-5xl mb-3 shadow-lg">
+                  {selectedAvatarData.emoji}
+                </div>
+
+                <div className="font-['Playfair_Display',serif] font-bold text-lg text-[#24160A] truncate max-w-full">
+                  {nickname.trim() || 'Biệt Danh Của Bạn'}
+                </div>
+
+                <div className="text-xs text-[#8D3038] font-semibold mt-0.5">
+                  {selectedAvatarData.label}
+                </div>
+
+                <div className="inline-flex items-center gap-1.5 mt-2 px-2.5 py-0.5 rounded-full bg-black/5 text-[10px] font-mono text-[#4A3A2A]">
+                  <span>{gameMode === 'exploration' ? '🌿 Chế độ Khám phá' : '⚡ Chế độ Thử thách'}</span>
+                </div>
+              </div>
+
+              {/* ID Details Strip */}
+              <div className="border-t border-[#D5C29B] pt-4 space-y-1.5 text-[11px] text-[#4A3A2A] font-sans">
+                <div className="flex justify-between">
+                  <span className="text-[#8A9BB0]">Đơn vị công tác:</span>
+                  <span className="font-semibold text-[#24160A]">Viện Lưu Trữ Thời Gian</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-[#8A9BB0]">Môn học:</span>
+                  <span className="font-semibold text-[#24160A]">VNR202 – Đại học FPT</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-[#8A9BB0]">Trạng thái:</span>
+                  <span className="font-semibold text-[#8D3038]">Sẵn sàng tiếp nhận nhiệm vụ</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-3 text-center text-[10px] text-[#8A9BB0] flex items-center justify-center gap-1">
+              <Shield size={12} className="text-[#D6A75C]" />
+              <span>Hồ sơ lưu trữ cục bộ trên trình duyệt – Không cần mật khẩu.</span>
+            </div>
           </div>
 
-          {/* Avatar preview */}
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-16 h-16 rounded-full border-2 border-[#D6A75C] bg-[#D6A75C]/10 flex items-center justify-center text-3xl flex-shrink-0">
-              {selectedAvatarData.emoji}
-            </div>
-            <div>
-              <div className="text-[#E9D8B7] font-semibold">{nickname.trim() || 'Biệt Danh Của Bạn'}</div>
-              <div className="text-[#8A9BB0] text-xs">{selectedAvatarData.label}</div>
-              <div className="text-[#D6A75C]/60 text-[10px] mt-0.5">
-                {gameMode === 'exploration' ? '🌿 Chế Độ Khám Phá' : '⚡ Chế Độ Thử Thách'}
+          {/* ================================================================
+              RIGHT: SETUP FORM (7 COLS)
+              ================================================================ */}
+          <div className="md:col-span-7">
+            <div className="dossier-card border-dongson p-6 sm:p-8 rounded-lg shadow-2xl space-y-6">
+              
+              {/* Nickname Input */}
+              <div>
+                <label className="text-xs font-semibold text-[#E9D8B7] uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                  <User size={14} className="text-[#D6A75C]" />
+                  <span>Biệt Danh Nhà Nghiên Cứu</span>
+                  <span className="text-[#F87171]">*</span>
+                </label>
+
+                <input
+                  type="text"
+                  value={nickname}
+                  onChange={e => {
+                    setNickname(e.target.value);
+                    setError('');
+                  }}
+                  placeholder="Nhập tên hoặc biệt danh của bạn (2 - 20 ký tự)"
+                  maxLength={20}
+                  className="w-full bg-[#0A1020] border border-[#D6A75C]/35 text-[#E9D8B7] placeholder:text-[#8A9BB0]/50 rounded-md px-4 py-3 text-sm outline-none focus:border-[#D6A75C] transition-colors"
+                />
+
+                <div className="flex justify-between items-center mt-1.5">
+                  <AnimatePresence>
+                    {error ? (
+                      <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="text-[#F87171] text-xs flex items-center gap-1"
+                      >
+                        <AlertCircle size={12} /> {error}
+                      </motion.p>
+                    ) : (
+                      <span className="text-[10px] text-[#8A9BB0]">Tên này sẽ xuất hiện trên Bằng Chứng Nhận</span>
+                    )}
+                  </AnimatePresence>
+                  <span className="text-[10px] font-mono text-[#8A9BB0]">{nickname.length}/20</span>
+                </div>
+              </div>
+
+              {/* Avatar Selector Grid */}
+              <div>
+                <label className="text-xs font-semibold text-[#E9D8B7] uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
+                  <Award size={14} className="text-[#D6A75C]" />
+                  <span>Chọn Nhân Vật Đại Diện</span>
+                </label>
+
+                <div className="grid grid-cols-4 gap-2 sm:gap-2.5">
+                  {AVATARS.map(avatar => {
+                    const isSelected = selectedAvatar === avatar.id;
+                    return (
+                      <button
+                        key={avatar.id}
+                        type="button"
+                        onClick={() => setSelectedAvatar(avatar.id)}
+                        className={`flex flex-col items-center gap-1 p-2 rounded-md border transition-all ${
+                          isSelected
+                            ? 'border-[#D6A75C] bg-[#D6A75C]/20 shadow-[0_0_12px_rgba(214,167,92,0.3)] scale-105'
+                            : 'border-[#D6A75C]/15 bg-[#0A1020]/60 hover:border-[#D6A75C]/40 text-[#8A9BB0]'
+                        }`}
+                      >
+                        <span className="text-2xl">{avatar.emoji}</span>
+                        <span className={`text-[10px] text-center leading-tight font-medium ${
+                          isSelected ? 'text-[#E9D8B7]' : 'text-[#8A9BB0]'
+                        }`}>
+                          {avatar.label}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Game Mode Selector */}
+              <div>
+                <label className="text-xs font-semibold text-[#E9D8B7] uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
+                  <Sparkles size={14} className="text-[#D6A75C]" />
+                  <span>Chọn Chế Độ Trải Nghiệm</span>
+                </label>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {MODES.map(mode => {
+                    const isSelected = gameMode === mode.id;
+                    return (
+                      <button
+                        key={mode.id}
+                        type="button"
+                        onClick={() => setGameMode(mode.id)}
+                        className={`text-left p-3.5 rounded-md border transition-all ${
+                          isSelected
+                            ? 'border-[#D6A75C] bg-[#D6A75C]/15 shadow-sm'
+                            : 'border-[#D6A75C]/15 bg-[#0A1020]/50 hover:border-[#D6A75C]/40'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="text-sm font-bold text-[#E9D8B7] flex items-center gap-1.5">
+                            <span>{mode.icon}</span>
+                            <span>{mode.name}</span>
+                          </span>
+                          {isSelected && <Check size={14} className="text-[#D6A75C]" />}
+                        </div>
+                        <p className="text-[11px] text-[#8A9BB0] leading-snug">
+                          {mode.desc}
+                        </p>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Submit CTA */}
+              <div className="pt-2">
+                <button
+                  type="button"
+                  onClick={handleSubmit}
+                  disabled={isConfirming}
+                  className="btn-heritage-primary w-full text-sm py-4 shadow-xl"
+                >
+                  <Sparkles size={16} />
+                  <span>{isConfirming ? 'ĐANG KHỞI TẠO HỒ SƠ...' : 'KHỞI TẠO HỒ SƠ & VÀO KHO LƯU TRỮ'}</span>
+                </button>
               </div>
             </div>
           </div>
-
-          {/* Nickname Input */}
-          <div className="mb-5">
-            <label className="text-[#E9D8B7] text-sm font-semibold mb-2 block">
-              Biệt Danh <span className="text-[#8D3038]">*</span>
-            </label>
-            <input
-              type="text"
-              value={nickname}
-              onChange={e => { setNickname(e.target.value); setError(''); }}
-              placeholder="Nhập biệt danh của bạn (2-20 ký tự)"
-              maxLength={20}
-              className="w-full bg-[#0A1020] border border-[#D6A75C]/30 text-[#E9D8B7] placeholder:text-[#8A9BB0]/60 rounded px-4 py-3 text-sm outline-none focus:border-[#D6A75C] transition-colors"
-            />
-            <div className="flex justify-between mt-1">
-              <AnimatePresence>
-                {error && (
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="text-[#8D3038] text-xs flex items-center gap-1"
-                  >
-                    <AlertCircle size={12} /> {error}
-                  </motion.p>
-                )}
-              </AnimatePresence>
-              <span className="text-[#8A9BB0] text-xs ml-auto">{nickname.length}/20</span>
-            </div>
-          </div>
-
-          {/* Avatar selector */}
-          <div className="mb-5">
-            <label className="text-[#E9D8B7] text-sm font-semibold mb-3 block">Chọn Nhân Vật</label>
-            <div className="grid grid-cols-4 gap-2">
-              {AVATARS.map(avatar => (
-                <button
-                  key={avatar.id}
-                  onClick={() => setSelectedAvatar(avatar.id)}
-                  className={`flex flex-col items-center gap-1 p-2 rounded border transition-all duration-200 ${
-                    selectedAvatar === avatar.id
-                      ? 'border-[#D6A75C] bg-[#D6A75C]/15 scale-105'
-                      : 'border-[#D6A75C]/20 bg-transparent hover:bg-[#D6A75C]/5'
-                  }`}
-                >
-                  <span className="text-2xl">{avatar.emoji}</span>
-                  <span className="text-[9px] text-[#8A9BB0] text-center leading-tight">{avatar.label}</span>
-                  {selectedAvatar === avatar.id && (
-                    <Check size={10} className="text-[#D6A75C]" />
-                  )}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Mode selector */}
-          <div>
-            <label className="text-[#E9D8B7] text-sm font-semibold mb-3 block">Chế Độ Chơi</label>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {MODES.map(mode => (
-                <button
-                  key={mode.id}
-                  onClick={() => setGameMode(mode.id)}
-                  className={`text-left p-4 rounded border transition-all duration-200 ${
-                    gameMode === mode.id
-                      ? 'border-[#D6A75C] bg-[#D6A75C]/10'
-                      : 'border-[#D6A75C]/20 hover:bg-[#D6A75C]/5'
-                  }`}
-                >
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-lg">{mode.icon}</span>
-                    <span className="text-[#E9D8B7] text-sm font-semibold">{mode.name}</span>
-                    {gameMode === mode.id && <Check size={14} className="text-[#D6A75C] ml-auto" />}
-                  </div>
-                  <p className="text-[#8A9BB0] text-xs leading-relaxed">{mode.desc}</p>
-                </button>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Submit */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="text-center"
-        >
-          <button
-            onClick={handleSubmit}
-            disabled={isConfirming}
-            className={`btn-primary text-base px-10 py-4 ${isConfirming ? 'opacity-70 cursor-wait' : ''}`}
-          >
-            {isConfirming ? '⏳ Đang Khởi Tạo...' : '🚀 KHỞI TẠO HỒ SƠ & VÀO KHO LƯU TRỮ'}
-          </button>
-          <p className="text-[#8A9BB0] text-xs mt-3">
-            Dữ liệu được lưu cục bộ trên trình duyệt – không cần đăng nhập.
-          </p>
-        </motion.div>
+        </div>
       </div>
     </div>
   );
 }
-

@@ -4,6 +4,8 @@ import { GameProvider, useGame } from './context/GameContext';
 import { AudioProvider } from './context/AudioContext';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
+import { MotionConfig } from 'framer-motion';
+
 const Landing = lazy(() => import('./pages/01_LandingPage'));
 const HowToPlay = lazy(() => import('./pages/02_HowToPlayPage'));
 const Setup = lazy(() => import('./pages/03_PlayerSetupPage'));
@@ -16,6 +18,71 @@ const Collection = lazy(() => import('./pages/09_CollectionPage'));
 const Archive = lazy(() => import('./pages/10_HistoryArchivePage'));
 const Ending = lazy(() => import('./pages/11_EndingPage'));
 const Certificate = lazy(() => import('./pages/12_CertificatePage'));
-function Protected({children}:{children:ReactNode}){const {progress}=useGame();return progress.profile?children:<Navigate to="/setup" replace/>}
-function Shell(){const {pathname}=useLocation();useEffect(()=>{window.scrollTo(0,0)},[pathname]);const routes: [string, ReactNode][] = [['/story',<Story/>],['/timeline',<Timeline/>],['/chapter/:id',<Chapter/>],['/play/:id',<Game/>],['/result/:id',<Result/>],['/collection',<Collection/>],['/ending',<Ending/>],['/certificate',<Certificate/>]];return <><Header/><Suspense fallback={<main className="page" role="status">Đang mở hồ sơ…</main>}><Routes><Route path="/" element={<Landing/>}/><Route path="/how-to-play" element={<HowToPlay/>}/><Route path="/setup" element={<Setup/>}/><Route path="/archive" element={<Archive/>}/>{routes.map(([path,element])=><Route key={path} path={path} element={<Protected>{element}</Protected>}/>)}<Route path="*" element={<Navigate to="/" replace/>}/></Routes></Suspense><Footer/></>}
-export default function App(){return <BrowserRouter><GameProvider><AudioProvider><Shell/></AudioProvider></GameProvider></BrowserRouter>}
+
+function Protected({ children }: { children: ReactNode }) {
+  const { progress } = useGame();
+  return progress.profile ? <>{children}</> : <Navigate to="/setup" replace />;
+}
+
+function Shell() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [pathname]);
+
+  const routes: [string, ReactNode][] = [
+    ['/story', <Story />],
+    ['/timeline', <Timeline />],
+    ['/chapter/:id', <Chapter />],
+    ['/play/:id', <Game />],
+    ['/result/:id', <Result />],
+    ['/collection', <Collection />],
+    ['/ending', <Ending />],
+    ['/certificate', <Certificate />],
+  ];
+
+  return (
+    <div className="min-h-screen flex flex-col bg-[#070D18] text-[#E9D8B7] relative overflow-x-hidden selection:bg-[#D6A75C]/30 selection:text-[#FFF2D6]">
+      <Header />
+      <main className="flex-1 w-full flex flex-col pt-[58px]">
+        <Suspense
+          fallback={
+            <div className="flex-1 flex flex-col items-center justify-center py-24 text-center">
+              <div className="w-10 h-10 rounded-full border-2 border-[#D6A75C] border-t-transparent animate-spin mb-4" />
+              <div className="text-xs font-mono text-[#D6A75C] tracking-widest uppercase">
+                ĐANG MỞ HỒ SƠ LƯU TRỮ...
+              </div>
+            </div>
+          }
+        >
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/how-to-play" element={<HowToPlay />} />
+            <Route path="/setup" element={<Setup />} />
+            <Route path="/archive" element={<Archive />} />
+            {routes.map(([path, element]) => (
+              <Route key={path} path={path} element={<Protected>{element}</Protected>} />
+            ))}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Suspense>
+      </main>
+      <Footer />
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <MotionConfig reducedMotion="user">
+      <BrowserRouter>
+        <GameProvider>
+          <AudioProvider>
+            <Shell />
+          </AudioProvider>
+        </GameProvider>
+      </BrowserRouter>
+    </MotionConfig>
+  );
+}

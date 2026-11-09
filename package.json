@@ -23,6 +23,7 @@
     "tailwindcss": "^4.3.5"
   },
   "devDependencies": {
+    "@playwright/test": "^1.65.0",
     "@types/canvas-confetti": "^1.9.0",
     "@types/howler": "^2.2.13",
     "@types/html2canvas": "^0.5.35",
@@ -32,6 +33,7 @@
     "@vitejs/plugin-react": "^6.1.2",
     "oxlint": "^1.90.0",
     "typescript": "~7.0.2",
-    "vite": "^8.3.6"
+    "vite": "^8.3.6",
+    "vite-plugin-pwa": "^2.0.0"
   }
 }

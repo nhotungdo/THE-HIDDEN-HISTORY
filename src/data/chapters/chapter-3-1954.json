@@ -8,8 +8,7 @@
   "secondaryColor": "#C8A951",
   "backgroundTheme": "jungle-fortress",
   "unlockRequirement": {
-    "previousChapterId": 2,
-    "minimumScore": 150
+    "previousChapterId": 2
   },
   "historicalContext": "Chiến dịch Điện Biên Phủ là trận quyết chiến chiến lược kết thúc cuộc kháng chiến 9 năm chống thực dân Pháp của nhân dân Việt Nam. Quân và dân ta dưới sự chỉ huy của Đại tướng Võ Nguyên Giáp đã tiêu diệt và bắt sống toàn bộ tập đoàn cứ điểm mạnh nhất Đông Dương.",
   "tasks": [
@@ -19,7 +18,7 @@
       "order": 1,
       "title": "Bản Đồ Chiến Trường",
       "points": 100,
-      "timeLimit": 120,
+      "timeLimit": 180,
       "gridSize": {
         "rows": 4,
         "cols": 4
@@ -78,7 +77,7 @@
       ],
       "correctAnswerSummary": "Bốn vị trí chiến lược của tập đoàn cứ điểm Điện Biên Phủ được phân bố từ phân khu Bắc (Him Lam) đến trung tâm Mường Thanh (Mường Thanh, Hầm Đờ Cát-xtri) và điểm cao chiến lược Đồi A1 ở phía Đông. Nắm được địa hình và vai trò từng cứ điểm là chìa khóa để hiểu nghệ thuật chỉ huy tài tình của Đại tướng Võ Nguyên Giáp.",
       "historicalLesson": "Chiến dịch Điện Biên Phủ là minh chứng hùng hồn cho học thuyết chiến tranh nhân dân của Chủ tịch Hồ Chí Minh: 'Lấy ít địch nhiều, lấy yếu thắng mạnh'. Việc chủ động thay đổi phương châm từ 'đánh nhanh thắng nhanh' sang 'đánh chắc tiến chắc' của Đại tướng Võ Nguyên Giáp là quyết định lịch sử, bảo đảm cho chiến thắng toàn vẹn của quân và dân ta.",
-      "instructions": "Xác định vị trí 4 cứ điểm quan trọng trên chiến trường Điện Biên Phủ. Kéo thả tên từng cứ điểm vào ô tương ứng trên bản đồ 4×4.",
+      "instructions": "Xác định vị trí 4 cứ điểm quan trọng. Chọn tên rồi chạm ô tương ứng trên sa bàn quy ước 4×4 (không phải bản đồ địa lý).",
       "question": "Bản Đồ Chiến Trường",
       "correctAnswerIds": []
     },
@@ -88,7 +87,7 @@
       "order": 2,
       "title": "Sự Thật Hay Huyền Thoại?",
       "points": 100,
-      "timeLimit": 90,
+      "timeLimit": 180,
       "historicalDocument": {
         "title": "Ba đợt tiến công trong Chiến dịch Điện Biên Phủ",
         "excerpt": "Chiến dịch Điện Biên Phủ diễn ra qua ba đợt tấn công: Đợt 1 (13/3 – 17/3/1954): Tiêu diệt các cứ điểm Him Lam, Độc Lập, buộc địch bỏ Bản Kéo đầu hàng. Đợt 2 (30/3 – 26/4/1954): Tiến công đồng loạt các cứ điểm phía Đông và sân bay Mường Thanh. Đợt 3 (1/5 – 7/5/1954): Tổng công kích, tiêu diệt hoàn toàn tập đoàn cứ điểm, bắt sống tướng De Castries cùng toàn bộ ban tham mưu.",
@@ -140,7 +139,7 @@
       "order": 3,
       "title": "Hồ Sơ Nhân Vật",
       "points": 100,
-      "timeLimit": 90,
+      "timeLimit": 180,
       "historicalDocument": {
         "title": "Nhân vật chủ chốt trong Chiến dịch Điện Biên Phủ",
         "excerpt": "Chiến dịch Điện Biên Phủ ghi danh nhiều nhân vật lịch sử quan trọng ở cả hai phía. Phía Việt Nam có Đại tướng Võ Nguyên Giáp – Tổng Tư lệnh chiến dịch. Phía Pháp có Tướng Henri Navarre – Tổng chỉ huy quân đội viễn chinh Pháp tại Đông Dương, Tướng René Cogny – Chỉ huy quân Pháp tại Bắc Việt, và Tướng Christian de la Croix de Castries – Chỉ huy tập đoàn cứ điểm Điện Biên Phủ.",
