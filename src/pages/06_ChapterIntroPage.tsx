@@ -5,7 +5,7 @@
 
 import { Link, Navigate, useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Compass, Shield, Award, Sparkles, ScrollText, CheckCircle } from 'lucide-react';
+import { ArrowLeft, Compass, Shield, Award, Sparkles, ScrollText, CheckCircle, Clock } from 'lucide-react';
 import { chapters } from '../data/chapters';
 import { useGame } from '../context/GameContext';
 import { useAudio } from '../context/AudioContext';
@@ -75,11 +75,11 @@ export default function ChapterIntroPage() {
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="mb-6 flex items-center justify-between"
+          className="mb-6 flex flex-wrap items-center justify-between gap-3"
         >
           <Link
             to="/timeline"
-            className="inline-flex items-center gap-2 text-sm text-[#8A9BB0] hover:text-[#D6A75C] transition-colors"
+            className="inline-flex items-center gap-2 min-h-10 text-sm text-[#8A9BB0] hover:text-[#D6A75C] transition-colors py-2"
           >
             <ArrowLeft size={16} />
             <span>Trở về Bản đồ thời gian</span>
@@ -99,7 +99,7 @@ export default function ChapterIntroPage() {
           initial={{ opacity: 0, y: 30, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="dossier-card border-dongson rounded-lg overflow-hidden p-6 md:p-10 relative"
+          className="dossier-card border-dongson rounded-lg overflow-hidden p-5 sm:p-6 md:p-10 relative"
           style={{
             borderColor: `${c.primaryColor}80`,
             boxShadow: `0 20px 50px -10px rgba(0,0,0,0.8), 0 0 30px ${c.primaryColor}20`,
@@ -119,6 +119,17 @@ export default function ChapterIntroPage() {
             <p className="text-base md:text-lg text-[#E9D8B7] font-['Playfair_Display',serif] italic max-w-2xl mx-auto">
               "{c.slogan}"
             </p>
+
+            <div className="flex flex-wrap justify-center gap-2 mt-4">
+              <span className="chip"><Shield size={12} aria-hidden="true" /> 3 nhiệm vụ giải mã</span>
+              <span className="chip"><Award size={12} aria-hidden="true" /> Tối đa 300 điểm</span>
+              <span className="chip"><Clock size={12} aria-hidden="true" /> Khoảng 10 phút</span>
+              {isCompleted && (
+                <span className="chip border-[#4ADE80]/40 text-[#86EFAC]">
+                  <CheckCircle size={12} aria-hidden="true" /> Điểm tốt nhất: {game.getChapterProgress(c.id)?.bestScore}đ
+                </span>
+              )}
+            </div>
           </div>
 
           {/* Historical Context Quote */}
@@ -160,7 +171,7 @@ export default function ChapterIntroPage() {
                   {c.tasks.map((task, idx) => (
                     <div
                       key={task.id}
-                      className="bg-[#0A1020]/70 border border-[#D6A75C]/15 rounded p-2.5 flex items-start gap-3"
+                      className="bg-[#0A1020]/70 border border-[#D6A75C]/15 rounded p-3 flex items-start gap-3"
                     >
                       <span className="w-5 h-5 rounded-full bg-[#D6A75C]/20 text-[#D6A75C] font-mono font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">
                         {idx + 1}

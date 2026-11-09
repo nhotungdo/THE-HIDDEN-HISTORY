@@ -89,7 +89,7 @@ export default function PlayerSetupPage() {
         {/* Header Title */}
         <div className="text-center mb-8">
           <div className="red-stamp text-[10px] mb-2">HỒ SƠ KHẢO SÁT VNR202</div>
-          <h1 className="text-3xl md:text-5xl font-['Cinzel',serif] font-black text-gold-foil mb-2">
+          <h1 id="setup-heading" className="text-3xl md:text-5xl font-['Cinzel',serif] font-black text-gold-foil mb-2">
             THIẾT LẬP ĐẶC PHÁI VIÊN
           </h1>
           <p className="text-xs sm:text-sm text-[#8A9BB0] max-w-md mx-auto">
@@ -103,7 +103,7 @@ export default function PlayerSetupPage() {
           {/* ================================================================
               LEFT: LIVE ARCHIVIST ID CARD PREVIEW (5 COLS)
               ================================================================ */}
-          <div className="md:col-span-5 md:sticky md:top-24">
+          <div className="md:col-span-5 md:sticky md:top-24 order-2 md:order-1">
             <div className="parchment-sheet p-6 rounded-lg shadow-2xl relative border border-[#D5C29B]">
               <div className="brass-clip" />
 
@@ -159,18 +159,28 @@ export default function PlayerSetupPage() {
           {/* ================================================================
               RIGHT: SETUP FORM (7 COLS)
               ================================================================ */}
-          <div className="md:col-span-7">
-            <div className="dossier-card border-dongson p-6 sm:p-8 rounded-lg shadow-2xl space-y-6">
+          <div className="md:col-span-7 order-1 md:order-2">
+            <form
+              noValidate
+              onSubmit={event => { event.preventDefault(); handleSubmit(); }}
+              aria-labelledby="setup-heading"
+              className="dossier-card border-dongson p-5 sm:p-8 rounded-lg shadow-2xl space-y-6"
+            >
               
               {/* Nickname Input */}
               <div>
-                <label className="text-xs font-semibold text-[#E9D8B7] uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                  <User size={14} className="text-[#D6A75C]" />
+                <label
+                  htmlFor="envoy-nickname"
+                  className="text-xs font-semibold text-[#E9D8B7] uppercase tracking-wider mb-2 flex items-center gap-1.5"
+                >
+                  <User size={14} className="text-[#D6A75C]" aria-hidden="true" />
                   <span>Biệt Danh Nhà Nghiên Cứu</span>
-                  <span className="text-[#F87171]">*</span>
+                  <span className="text-[#F87171]" aria-hidden="true">*</span>
                 </label>
 
                 <input
+                  id="envoy-nickname"
+                  name="nickname"
                   type="text"
                   value={nickname}
                   onChange={e => {
@@ -179,6 +189,11 @@ export default function PlayerSetupPage() {
                   }}
                   placeholder="Nhập tên hoặc biệt danh của bạn (2 - 20 ký tự)"
                   maxLength={20}
+                  autoFocus
+                  autoComplete="off"
+                  enterKeyHint="done"
+                  aria-invalid={error ? true : undefined}
+                  aria-describedby="nickname-help"
                   className="w-full bg-[#0A1020] border border-[#D6A75C]/35 text-[#E9D8B7] placeholder:text-[#8A9BB0]/50 rounded-md px-4 py-3 text-sm outline-none focus:border-[#D6A75C] transition-colors"
                 />
 
@@ -186,18 +201,20 @@ export default function PlayerSetupPage() {
                   <AnimatePresence>
                     {error ? (
                       <motion.p
+                        id="nickname-help"
+                        role="alert"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         className="text-[#F87171] text-xs flex items-center gap-1"
                       >
-                        <AlertCircle size={12} /> {error}
+                        <AlertCircle size={12} aria-hidden="true" /> {error}
                       </motion.p>
                     ) : (
-                      <span className="text-[10px] text-[#8A9BB0]">Tên này sẽ xuất hiện trên Bằng Chứng Nhận</span>
+                      <span id="nickname-help" className="text-[10px] text-[#8A9BB0]">Tên này sẽ xuất hiện trên Bằng Chứng Nhận</span>
                     )}
                   </AnimatePresence>
-                  <span className="text-[10px] font-mono text-[#8A9BB0]">{nickname.length}/20</span>
+                  <span className="text-[10px] font-mono text-[#8A9BB0] tabular-nums">{nickname.length}/20</span>
                 </div>
               </div>
 
@@ -216,7 +233,9 @@ export default function PlayerSetupPage() {
                         key={avatar.id}
                         type="button"
                         onClick={() => setSelectedAvatar(avatar.id)}
-                        className={`flex flex-col items-center gap-1 p-2 rounded-md border transition-all ${
+                        aria-pressed={isSelected}
+                        title={avatar.label}
+                        className={`flex flex-col items-center justify-center gap-1 min-h-[74px] p-2 rounded-md border transition-all ${
                           isSelected
                             ? 'border-[#D6A75C] bg-[#D6A75C]/20 shadow-[0_0_12px_rgba(214,167,92,0.3)] scale-105'
                             : 'border-[#D6A75C]/15 bg-[#0A1020]/60 hover:border-[#D6A75C]/40 text-[#8A9BB0]'
@@ -249,6 +268,7 @@ export default function PlayerSetupPage() {
                         key={mode.id}
                         type="button"
                         onClick={() => setGameMode(mode.id)}
+                        aria-pressed={isSelected}
                         className={`text-left p-3.5 rounded-md border transition-all ${
                           isSelected
                             ? 'border-[#D6A75C] bg-[#D6A75C]/15 shadow-sm'
@@ -274,16 +294,22 @@ export default function PlayerSetupPage() {
               {/* Submit CTA */}
               <div className="pt-2">
                 <button
-                  type="button"
-                  onClick={handleSubmit}
+                  type="submit"
                   disabled={isConfirming}
                   className="btn-heritage-primary w-full text-sm py-4 shadow-xl"
                 >
-                  <Sparkles size={16} />
+                  {isConfirming ? (
+                    <span className="w-4 h-4 rounded-full border-2 border-[#0A1020]/40 border-t-[#0A1020] animate-spin" aria-hidden="true" />
+                  ) : (
+                    <Sparkles size={16} aria-hidden="true" />
+                  )}
                   <span>{isConfirming ? 'ĐANG KHỞI TẠO HỒ SƠ...' : 'KHỞI TẠO HỒ SƠ & VÀO KHO LƯU TRỮ'}</span>
                 </button>
+                <p className="text-center text-[10px] text-[#8A9BB0] mt-3">
+                  Không cần đăng nhập · Có thể tạo lại hồ sơ bất cứ lúc nào
+                </p>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>

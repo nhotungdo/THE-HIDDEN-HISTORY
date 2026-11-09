@@ -35,7 +35,7 @@ export default function CollectionPage() {
         <div className="flex items-center justify-between mb-8">
           <Link
             to="/timeline"
-            className="inline-flex items-center gap-2 text-sm text-[#8A9BB0] hover:text-[#D6A75C] transition-colors"
+            className="inline-flex items-center gap-2 min-h-10 text-sm text-[#8A9BB0] hover:text-[#D6A75C] transition-colors py-2"
           >
             <ArrowLeft size={16} />
             <span>Trở về Bản đồ thời gian</span>
@@ -58,10 +58,32 @@ export default function CollectionPage() {
           </p>
 
           <div className="inline-flex items-center gap-2 bg-[#162032] border border-[#D6A75C]/30 rounded-full px-4 py-1.5 text-xs text-[#D6A75C]">
-            <Award size={15} />
-            <span>Đã khôi phục: <strong>{completedCount}/5 Mảnh Ký Ức</strong></span>
+            <Award size={15} aria-hidden="true" />
+            <span>Đã khôi phục: <strong className="tabular-nums">{completedCount}/5 Mảnh Ký Ức</strong></span>
+          </div>
+
+          <div
+            className="progress-track max-w-xs mx-auto mt-4"
+            role="progressbar"
+            aria-label="Tiến độ bộ sưu tập ký ức"
+            aria-valuemin={0}
+            aria-valuemax={5}
+            aria-valuenow={completedCount}
+          >
+            <div className="progress-fill" style={{ width: `${(completedCount / 5) * 100}%` }} />
           </div>
         </div>
+
+        {completedCount === 0 && (
+          <div className="dossier-card rounded-lg p-5 sm:p-6 mb-8 border-dashed text-center">
+            <p className="text-xs text-[#8A9BB0] leading-relaxed mb-4">
+              Viện Bảo Tàng đang trống. Hoàn thành nhiệm vụ đầu tiên để khôi phục cổ vật và mở khóa tủ trưng bày.
+            </p>
+            <Link to="/timeline" className="btn-heritage-secondary text-xs px-5 py-2.5">
+              Mở Bản Đồ Thời Gian
+            </Link>
+          </div>
+        )}
 
         {/* 5 Museum Pedestals Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-12">
@@ -71,25 +93,22 @@ export default function CollectionPage() {
             const isLastOdd = idx === 4;
 
             return (
-              <motion.div
+              <motion.button
+                type="button"
                 key={c.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.1 }}
-                className={`dossier-card rounded-lg p-5 flex flex-col items-center text-center relative transition-all duration-300 ${
-                  isLastOdd ? 'sm:col-span-2 lg:col-span-1 sm:max-w-xs sm:mx-auto lg:max-w-none w-full' : ''
+                disabled={!isUnlocked}
+                className={`dossier-card rounded-lg p-5 flex flex-col items-center text-center relative transition-all duration-300 w-full ${
+                  isLastOdd ? 'sm:col-span-2 lg:col-span-1 sm:max-w-xs sm:mx-auto lg:max-w-none' : ''
                 } ${
                   isUnlocked
-                    ? 'border-[#D6A75C] shadow-[0_0_20px_rgba(214,167,92,0.2)] hover:scale-105 cursor-pointer'
-                    : 'border-[#D6A75C]/15 opacity-60'
+                    ? 'border-[#D6A75C] shadow-[0_0_20px_rgba(214,167,92,0.2)] hover:scale-[1.03] cursor-pointer'
+                    : 'border-[#D6A75C]/15 opacity-60 cursor-default'
                 }`}
-                onClick={() => {
-                  if (isUnlocked) { setRotation(0); setSelectedChapterId(c.id); }
-                }}
-                role={isUnlocked ? 'button' : undefined}
-                tabIndex={isUnlocked ? 0 : undefined}
-                aria-label={isUnlocked ? `Xem ${c.memoryFragment.name}` : undefined}
-                onKeyDown={event => { if (isUnlocked && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); setRotation(0); setSelectedChapterId(c.id); } }}
+                onClick={() => { setRotation(0); setSelectedChapterId(c.id); }}
+                aria-label={isUnlocked ? `Xem cổ vật ${c.memoryFragment.name} năm ${c.year}` : `${c.memoryFragment.name} chưa được khôi phục`}
               >
                 {/* Year Badge */}
                 <div className="text-[10px] font-mono text-[#D6A75C] uppercase tracking-widest mb-3">
@@ -124,7 +143,7 @@ export default function CollectionPage() {
                     <span className="text-[#8A9BB0]/60">Chưa khôi phục</span>
                   )}
                 </div>
-              </motion.div>
+              </motion.button>
             );
           })}
         </div>
@@ -158,29 +177,52 @@ export default function CollectionPage() {
         {/* Detailed Artifact Modal */}
         <AnimatePresence>
           {selectedChapter && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+            <div
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+              onClick={() => setSelectedChapterId(null)}
+            >
               <motion.div
-                ref={dialogRef} role="dialog" aria-modal="true" aria-label={selectedChapter.memoryFragment.name} tabIndex={-1}
+                ref={dialogRef}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="artifact-title"
+                tabIndex={-1}
+                onClick={event => event.stopPropagation()}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
-                className="dossier-card border-dongson w-full max-w-md p-6 rounded-lg relative text-center"
+                className="dossier-card border-dongson modal-panel w-full max-w-md p-6 rounded-lg relative text-center"
               >
                 <button
+                  type="button"
                   onClick={() => setSelectedChapterId(null)}
                   aria-label="Đóng cổ vật"
-                  className="absolute top-4 right-4 text-[#8A9BB0] hover:text-[#E9D8B7]"
+                  className="absolute top-3 right-3 p-2 rounded-full text-[#8A9BB0] hover:text-[#E9D8B7] hover:bg-white/5"
                 >
-                  <X size={18} />
+                  <X size={18} aria-hidden="true" />
                 </button>
 
                 <div className="w-24 h-24 rounded-full bg-[#D6A75C]/15 border-2 border-[#D6A75C] flex items-center justify-center text-5xl mx-auto mb-4 animate-pulse-artifact">
                   <MemoryArtifact chapterId={selectedChapter.id} name={selectedChapter.memoryFragment.name} rotation={rotation} />
                 </div>
-                <label className="block text-xs text-[#8A9BB0] mb-4">Xoay cổ vật minh họa<input type="range" min={-60} max={60} value={rotation} onChange={event => setRotation(Number(event.target.value))} className="block w-full mt-2" /></label>
+                <div className="mb-5">
+                  <div className="flex items-center justify-between text-[11px] text-[#8A9BB0] mb-1.5">
+                    <label htmlFor="artifact-rotation">Xoay cổ vật minh họa</label>
+                    <span className="font-mono text-[#D6A75C] tabular-nums">{rotation}°</span>
+                  </div>
+                  <input
+                    id="artifact-rotation"
+                    type="range"
+                    min={-60}
+                    max={60}
+                    value={rotation}
+                    onChange={event => setRotation(Number(event.target.value))}
+                    className="block w-full accent-[#D6A75C]"
+                  />
+                </div>
 
                 <div className="red-stamp text-[10px] mb-2">BẢO VẬT LỊCH SỬ</div>
-                <h3 className="font-['Cinzel',serif] text-lg font-bold text-gold-foil mb-2">
+                <h3 id="artifact-title" className="font-['Cinzel',serif] text-lg font-bold text-gold-foil mb-2">
                   {selectedChapter.memoryFragment.name}
                 </h3>
                 <p className="text-xs text-[#8A9BB0] leading-relaxed mb-4">
@@ -196,16 +238,17 @@ export default function CollectionPage() {
                   </p>
                 </div>
 
-                <div className="flex gap-2 justify-center">
+                <div className="flex flex-col sm:flex-row gap-2 justify-center">
                   <Link
                     to={`/chapter/${selectedChapter.id}`}
-                    className="btn-heritage-secondary text-xs py-2 px-5"
+                    className="btn-heritage-secondary text-xs py-2.5 px-5"
                   >
                     Khám Phá Lại Chương
                   </Link>
                   <button
+                    type="button"
                     onClick={() => setSelectedChapterId(null)}
-                    className="btn-heritage-primary text-xs py-2 px-5"
+                    className="btn-heritage-primary text-xs py-2.5 px-5"
                   >
                     Đóng
                   </button>

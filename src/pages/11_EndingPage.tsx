@@ -12,6 +12,7 @@ import { useGame } from '../context/GameContext';
 import { chapters } from '../data/chapters';
 import MemoryArtifact from '../components/common/MemoryArtifact';
 import { useAudio } from '../context/AudioContext';
+import { calculateRank } from '../utils/storage';
 
 export default function EndingPage() {
   const { progress, setReflection } = useGame();
@@ -62,9 +63,15 @@ export default function EndingPage() {
             KHẢI HOÀN BIÊN NIÊN KÝ
           </h1>
 
-          <p className="text-sm md:text-base text-[#E9D8B7] font-['Playfair_Display',serif] italic mb-8 max-w-2xl mx-auto">
+          <p className="text-sm md:text-base text-[#E9D8B7] font-['Playfair_Display',serif] italic mb-4 max-w-2xl mx-auto">
             Chúc mừng Đặc Phái Viên <strong className="text-[#D6A75C]">{nickname}</strong>! Bạn đã vượt qua 15 thử thách giải mã, khôi phục trọn vẹn 5 mảnh ký ức thời gian.
           </p>
+
+          <div className="flex flex-wrap justify-center gap-2 mb-8">
+            <span className="chip">Tổng điểm: {progress.totalScore}đ</span>
+            <span className="chip">Gợi ý đã dùng: {progress.hintsUsedTotal}</span>
+            <span className="chip border-[#D6A75C]/50 text-[#F5CF8E]">Danh hiệu: {calculateRank(progress.totalScore)}</span>
+          </div>
 
           {/* Unified Ancient Chronicle Book Visualization */}
           <div className="parchment-sheet p-8 rounded-lg max-w-2xl mx-auto mb-8 shadow-2xl relative border-2 border-[#D6A75C]/60">
@@ -101,13 +108,18 @@ export default function EndingPage() {
 
           {/* Reflection Question for Student */}
           <div className="bg-[#0A1020]/80 border border-[#D6A75C]/30 rounded-lg p-5 max-w-xl mx-auto text-left mb-8">
-            <label className="block text-xs font-semibold text-[#D6A75C] mb-2 uppercase tracking-wide flex items-center gap-1.5">
-              <Feather size={14} />
+            <label
+              htmlFor="ending-reflection"
+              className="text-xs font-semibold text-[#D6A75C] mb-2 uppercase tracking-wide flex items-center gap-1.5"
+            >
+              <Feather size={14} aria-hidden="true" />
               Cảm Nhận Của Bạn Về Giá Trị Lịch Sử (Lưu vào chứng nhận danh dự):
             </label>
             <textarea
+              id="ending-reflection"
               maxLength={300}
               value={reflection}
+              aria-describedby="reflection-help"
               onChange={e => {
                 setReflection(e.target.value);
               }}
@@ -115,8 +127,9 @@ export default function EndingPage() {
               rows={3}
               className="w-full bg-[#162032] border border-[#D6A75C]/25 rounded p-3 text-xs text-[#E9D8B7] placeholder:text-[#8A9BB0]/60 outline-none focus:border-[#D6A75C] transition-colors resize-none leading-relaxed"
             />
-            <div className="text-[10px] text-[#8A9BB0] text-right mt-1">
-              {reflection.length}/300 ký tự
+            <div id="reflection-help" className="flex justify-between gap-2 text-[10px] text-[#8A9BB0] mt-1.5">
+              <span>Tự động lưu vào hồ sơ và in trên chứng nhận.</span>
+              <span className="font-mono tabular-nums shrink-0">{reflection.length}/300 ký tự</span>
             </div>
           </div>
 
@@ -124,18 +137,18 @@ export default function EndingPage() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               to="/certificate"
-              className="btn-heritage-primary text-sm px-10 py-4 shadow-2xl"
+              className="btn-heritage-primary w-full sm:w-auto text-sm px-8 py-4 shadow-2xl"
             >
-              <Award size={18} />
+              <Award size={18} aria-hidden="true" />
               <span>NHẬN CHỨNG NHẬN HOÀN THÀNH DANH DỰ</span>
-              <ArrowRight size={16} />
+              <ArrowRight size={16} aria-hidden="true" />
             </Link>
 
             <Link
               to="/collection"
-              className="btn-heritage-secondary text-xs py-3.5 px-6"
+              className="btn-heritage-secondary w-full sm:w-auto text-xs py-3.5 px-6"
             >
-              <BookOpen size={14} />
+              <BookOpen size={14} aria-hidden="true" />
               <span>Xem Lại Bộ Sưu Tập</span>
             </Link>
           </div>

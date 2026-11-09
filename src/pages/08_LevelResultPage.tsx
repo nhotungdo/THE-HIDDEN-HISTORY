@@ -5,12 +5,13 @@
 
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { 
-  Award, CheckCircle, ArrowRight, RotateCcw, 
-  BookOpen, ChevronDown 
+import {
+  Award, CheckCircle, ArrowRight, RotateCcw,
+  BookOpen, ChevronDown, Clock, Lightbulb, Trophy,
 } from 'lucide-react';
 import { chapters } from '../data/chapters';
 import { useGame } from '../context/GameContext';
+import { calculateRank } from '../utils/storage';
 import MemoryArtifact from '../components/common/MemoryArtifact';
 
 export default function LevelResultPage() {
@@ -24,6 +25,10 @@ export default function LevelResultPage() {
   }
 
   const isAllCompleted = game.getTotalCompletedChapters() === 5;
+  const totalSeconds = p.taskResults.reduce((sum, result) => sum + (result.timeSpent ?? 0), 0);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  const rank = calculateRank(game.progress.totalScore);
 
   return (
     <div className="flex-1 w-full py-8 md:py-12 px-4 text-[#E9D8B7] relative flex flex-col justify-center">
@@ -38,10 +43,10 @@ export default function LevelResultPage() {
 
       <div className="relative z-10 max-w-3xl mx-auto w-full">
         <motion.div
-          initial={{ opacity: 0, scale: 0.9, y: 20 }}
+          initial={{ opacity: 0, scale: 0.94, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="dossier-card border-dongson rounded-lg p-6 md:p-10 text-center relative shadow-2xl"
+          className="dossier-card border-dongson rounded-lg p-5 sm:p-6 md:p-10 text-center relative shadow-2xl"
         >
           {/* Top Stamp */}
           <div className="mb-4">
@@ -54,11 +59,14 @@ export default function LevelResultPage() {
           <h1 className="text-2xl md:text-4xl font-['Cinzel',serif] font-black text-gold-foil mb-2">
             HOÀN THÀNH CHƯƠNG 0{c.id}
           </h1>
-          <p className="text-sm text-[#8A9BB0] mb-8">
+          <p className="text-sm text-[#8A9BB0] mb-2">
             Năm {c.year} · {c.codeName}
           </p>
+          <span className="chip mb-7">
+            <Trophy size={12} aria-hidden="true" /> {rank}
+          </span>
 
-          {/* Floating Memory Fragment Artifact */}
+          {/* Memory Fragment Artifact */}
           <motion.div
             initial={{ scale: 0, rotate: -20 }}
             animate={{ scale: 1, rotate: 0 }}
@@ -72,31 +80,43 @@ export default function LevelResultPage() {
           <div className="font-['Cinzel',serif] text-lg font-bold text-[#E9D8B7] mb-1">
             {c.memoryFragment.name}
           </div>
-          <p className="text-xs text-[#8A9BB0] max-w-lg mx-auto mb-6 leading-relaxed">
+          <p className="text-xs text-[#8A9BB0] max-w-lg mx-auto mb-2 leading-relaxed">
             {c.memoryFragment.description}
+          </p>
+          <p className="text-[10px] text-[#4ADE80] mb-7 inline-flex items-center gap-1.5">
+            <CheckCircle size={12} aria-hidden="true" /> Đã lưu vào Viện Bảo Tàng Ký Ức
           </p>
 
           {/* Score & Statistics Strip */}
-          <div className="grid grid-cols-3 gap-3 bg-[#0A1020]/90 border border-[#D6A75C]/25 rounded-lg p-4 mb-8">
-            <div>
-              <div className="text-[10px] text-[#8A9BB0] uppercase font-mono">Điểm Đạt Được</div>
-              <div className="text-xl font-bold font-mono text-[#D6A75C]">{p.totalScore}đ</div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-[#D6A75C]/15 border border-[#D6A75C]/25 rounded-lg overflow-hidden mb-8">
+            <div className="bg-[#0A1020] p-3.5">
+              <div className="text-[10px] text-[#8A9BB0] uppercase font-mono mb-1">Điểm Chương</div>
+              <div className="text-lg font-bold font-mono text-[#D6A75C] tabular-nums">{p.totalScore}đ</div>
             </div>
-            <div className="border-x border-[#D6A75C]/15">
-              <div className="text-[10px] text-[#8A9BB0] uppercase font-mono">Nhiệm Vụ</div>
-              <div className="text-xl font-bold font-mono text-[#4ADE80]">3/3</div>
+            <div className="bg-[#0A1020] p-3.5">
+              <div className="text-[10px] text-[#8A9BB0] uppercase font-mono mb-1">Điểm Tốt Nhất</div>
+              <div className="text-lg font-bold font-mono text-[#F5CF8E] tabular-nums">{p.bestScore}đ</div>
             </div>
-            <div>
-              <div className="text-[10px] text-[#8A9BB0] uppercase font-mono">Gợi Ý Đã Dùng</div>
-              <div className="text-xl font-bold font-mono text-[#E9D8B7]">{p.hintsUsed}</div>
+            <div className="bg-[#0A1020] p-3.5">
+              <div className="text-[10px] text-[#8A9BB0] uppercase font-mono mb-1 flex items-center justify-center gap-1">
+                <Lightbulb size={10} aria-hidden="true" /> Gợi Ý
+              </div>
+              <div className="text-lg font-bold font-mono text-[#E9D8B7] tabular-nums">{p.hintsUsed}/2</div>
+            </div>
+            <div className="bg-[#0A1020] p-3.5">
+              <div className="text-[10px] text-[#8A9BB0] uppercase font-mono mb-1 flex items-center justify-center gap-1">
+                <Clock size={10} aria-hidden="true" /> Thời Gian
+              </div>
+              <div className="text-lg font-bold font-mono text-[#E9D8B7] tabular-nums">
+                {minutes}′{seconds.toString().padStart(2, '0')}″
+              </div>
             </div>
           </div>
 
           {/* Historical Significance Parchment */}
-          <p className="text-xs text-[#8A9BB0] mb-6">Điểm tốt nhất: {p.bestScore}đ · Thời gian: {Math.floor(p.taskResults.reduce((sum, result) => sum + (result.timeSpent ?? 0), 0) / 60)} phút {p.taskResults.reduce((sum, result) => sum + (result.timeSpent ?? 0), 0) % 60} giây</p>
           <div className="parchment-sheet p-5 rounded text-left mb-8 relative">
             <div className="text-xs font-bold text-[#8D3038] uppercase font-['Playfair_Display',serif] tracking-wider mb-2 flex items-center gap-1.5">
-              <BookOpen size={14} />
+              <BookOpen size={14} aria-hidden="true" />
               Ý NGHĨA LỊCH SỬ CỐT LÕI (VNR202)
             </div>
             <p className="text-xs text-[#24160A] font-['Playfair_Display',serif] italic leading-relaxed">
@@ -106,20 +126,20 @@ export default function LevelResultPage() {
 
           {/* Task Accordion Summary */}
           <div className="text-left space-y-2 mb-8">
-            <div className="text-xs font-semibold text-[#8A9BB0] uppercase tracking-wider mb-2">
-              TỔNG KẾT BÀI HỌC CÁC NHIỆM VỤ:
-            </div>
+            <h2 className="text-xs font-semibold text-[#8A9BB0] uppercase tracking-wider mb-2">
+              Tổng kết bài học các nhiệm vụ
+            </h2>
             {c.tasks.map(t => (
               <details
                 key={t.id}
-                className="bg-[#0A1020]/60 border border-[#D6A75C]/20 rounded p-3 text-xs group cursor-pointer"
+                className="bg-[#0A1020]/60 border border-[#D6A75C]/20 rounded p-3 text-xs group"
               >
-                <summary className="font-semibold text-[#E9D8B7] flex items-center justify-between">
+                <summary className="font-semibold text-[#E9D8B7] flex items-center justify-between gap-2 min-h-10 py-1.5">
                   <span className="flex items-center gap-2">
-                    <CheckCircle size={14} className="text-[#4ADE80]" />
+                    <CheckCircle size={14} className="text-[#4ADE80] shrink-0" aria-hidden="true" />
                     {t.title}
                   </span>
-                  <ChevronDown size={14} className="text-[#8A9BB0] group-open:rotate-180 transition-transform" />
+                  <ChevronDown size={14} className="text-[#8A9BB0] group-open:rotate-180 transition-transform shrink-0" aria-hidden="true" />
                 </summary>
                 <p className="text-[#8A9BB0] mt-2 pt-2 border-t border-[#D6A75C]/10 leading-relaxed pl-6">
                   {t.historicalLesson}
@@ -135,23 +155,23 @@ export default function LevelResultPage() {
               className="btn-heritage-primary w-full sm:w-auto text-xs py-3.5 px-8"
             >
               <span>{isAllCompleted ? 'HỢP NHẤT BIÊN NIÊN KÝ' : 'TIẾP TỤC HÀNH TRÌNH'}</span>
-              <ArrowRight size={14} />
+              <ArrowRight size={14} aria-hidden="true" />
             </Link>
 
             <Link
               to="/collection"
               className="btn-heritage-secondary w-full sm:w-auto text-xs py-3 px-6"
             >
-              <Award size={14} />
+              <Award size={14} aria-hidden="true" />
               <span>Xem Bộ Sưu Tập</span>
             </Link>
 
             <Link
               to={`/chapter/${c.id}`}
-              className="p-2.5 rounded text-[#8A9BB0] hover:text-[#D6A75C] transition-colors text-xs flex items-center gap-1"
+              className="min-h-10 p-2.5 px-3 rounded text-[#8A9BB0] hover:text-[#D6A75C] transition-colors text-xs flex items-center justify-center gap-1"
               title="Chơi lại để tối ưu điểm"
             >
-              <RotateCcw size={13} />
+              <RotateCcw size={13} aria-hidden="true" />
               <span>Chơi lại</span>
             </Link>
           </div>

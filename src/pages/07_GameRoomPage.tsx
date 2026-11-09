@@ -3,7 +3,7 @@
 // THE ARCHIVIST'S DESK – BÀN LÀM VIỆC CỦA ĐẶC PHÁI VIÊN LƯU TRỮ
 // ==========================================================================
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Navigate, useNavigate, useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -75,6 +75,16 @@ function Room({ chapter: c }: { chapter: ChapterData }) {
   const [guideOpen, setGuideOpen] = useState(false);
   const guideRef = useDialog(guideOpen, () => setGuideOpen(false));
   const [isWrong, setIsWrong] = useState(false);
+  const resultRef = useRef<HTMLDivElement>(null);
+
+  // Bring the solved lesson into view on small screens.
+  useEffect(() => {
+    if (!solved) return;
+    const timer = window.setTimeout(() => {
+      resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 150);
+    return () => window.clearTimeout(timer);
+  }, [solved, index]);
 
   const challenge = game.progress.profile?.gameMode === 'challenge';
   useEffect(() => {
@@ -166,45 +176,54 @@ function Room({ chapter: c }: { chapter: ChapterData }) {
         {/* ==================================================================
             TOP NAVIGATION & COMMAND BAR (STICKY COMMAND HUD)
             ================================================================== */}
-        <div className="dossier-card px-4 py-3 mb-6 flex flex-wrap items-center justify-between gap-4 border-b border-[#D6A75C]/30 sticky top-[60px] z-30 bg-[#070D18]/95 backdrop-blur-md shadow-xl">
+        <div className="dossier-card px-3 sm:px-4 py-2 mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-[#D6A75C]/30 sticky top-[58px] z-30 bg-[#070D18]/95 backdrop-blur-md shadow-xl">
           {/* Left: Back & Breadcrumb */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 min-w-0 flex-1">
             <Link
               to="/timeline"
-              className="p-1.5 rounded hover:bg-[#D6A75C]/10 text-[#8A9BB0] hover:text-[#D6A75C] transition-colors"
+              className="p-2 -ml-1 min-w-10 min-h-10 flex items-center justify-center rounded hover:bg-[#D6A75C]/10 text-[#8A9BB0] hover:text-[#D6A75C] transition-colors"
               title="Về bản đồ thời gian"
+              aria-label="Về bản đồ thời gian"
             >
-              <ArrowLeft size={18} />
+              <ArrowLeft size={18} aria-hidden="true" />
             </Link>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-['Cinzel',serif] text-[#D6A75C] font-bold text-sm tracking-wider">
-                  NĂM {c.year} · {c.codeName}
+            <div className="min-w-0">
+              <div className="flex items-center gap-2 min-w-0">
+                <span
+                  className="font-['Cinzel',serif] text-[#D6A75C] font-bold text-[10px] sm:text-sm tracking-wider truncate"
+                  title={`Năm ${c.year} · ${c.codeName}`}
+                >
+                  <span className="sm:hidden">NĂM {c.year}</span>
+                  <span className="hidden sm:inline">NĂM {c.year} · {c.codeName}</span>
                 </span>
-                <span className="text-[10px] font-mono text-[#8A9BB0] bg-[#0A1020] px-2 py-0.5 rounded border border-[#D6A75C]/20">
-                  NHIỆM VỤ {index + 1}/3
+                <span className="text-[9px] sm:text-[10px] font-mono text-[#8A9BB0] bg-[#0A1020] px-1.5 py-0.5 rounded border border-[#D6A75C]/20 whitespace-nowrap shrink-0">
+                  NV {index + 1}/3
                 </span>
               </div>
-              <div className="text-[11px] text-[#8A9BB0] truncate max-w-xs sm:max-w-md">
+              <div className="text-[10px] sm:text-[11px] text-[#8A9BB0] truncate" title={task.title}>
                 {task.title}
               </div>
             </div>
           </div>
 
           {/* Right: Progress, Score & Timer */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4 shrink-0">
             {/* Challenge Mode Timer */}
             {challenge && (
-              <div className={`flex items-center gap-1.5 px-3 py-1 rounded border font-mono text-xs font-bold ${
-                left < 30 ? 'bg-[#8D3038]/30 border-[#8D3038] text-[#F87171] animate-pulse' : 'bg-[#0A1020] border-[#D6A75C]/30 text-[#D6A75C]'
-              }`}>
-                <Clock size={14} />
+              <div
+                role="timer"
+                aria-label={`Thời gian còn lại ${Math.floor(left / 60)} phút ${left % 60} giây`}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded border font-mono text-xs font-bold tabular-nums ${
+                  left < 30 ? 'bg-[#8D3038]/30 border-[#8D3038] text-[#F87171] animate-pulse' : 'bg-[#0A1020] border-[#D6A75C]/30 text-[#D6A75C]'
+                }`}
+              >
+                <Clock size={14} aria-hidden="true" />
                 <span>{Math.floor(left / 60)}:{(left % 60).toString().padStart(2, '0')}</span>
               </div>
             )}
 
-            {/* Score */}
-            <div className="text-right">
+            {/* Score (desktop; mobile shows it above the step bar) */}
+            <div className="text-right hidden sm:block">
               <div className="text-[10px] text-[#8A9BB0] uppercase tracking-wider">Điểm Chương</div>
               <div className="font-mono text-sm font-bold text-[#D6A75C]">
                 {currentScore} <span className="text-[10px] font-normal text-[#8A9BB0]">đ</span>
@@ -213,31 +232,47 @@ function Room({ chapter: c }: { chapter: ChapterData }) {
 
             {/* Pause Button */}
             <button
+              type="button"
               onClick={game.togglePause}
-              className="p-2 rounded border border-[#D6A75C]/30 hover:bg-[#D6A75C]/10 text-[#D6A75C] transition-colors"
+              className="p-2.5 min-w-10 min-h-10 flex items-center justify-center rounded border border-[#D6A75C]/30 hover:bg-[#D6A75C]/10 text-[#D6A75C] transition-colors"
               title={game.isGamePaused ? 'Tiếp tục' : 'Tạm dừng'}
+              aria-label={game.isGamePaused ? 'Tiếp tục hành trình' : 'Tạm dừng hành trình'}
+              aria-pressed={game.isGamePaused}
             >
-              {game.isGamePaused ? <Play size={16} /> : <Pause size={16} />}
+              {game.isGamePaused ? <Play size={16} aria-hidden="true" /> : <Pause size={16} aria-hidden="true" />}
             </button>
           </div>
         </div>
 
-        {/* 3-Step Milestone Progress Bar */}
-        <div className="grid grid-cols-3 gap-2 mb-6">
+        {/* Mobile score line */}
+        <div className="flex items-center justify-between mb-2 sm:hidden">
+          <span className="text-[10px] font-mono text-[#8A9BB0] tracking-wider">TIẾN ĐỘ NHIỆM VỤ</span>
+          <span className="text-[11px] font-mono font-bold text-[#D6A75C] tabular-nums">{currentScore}đ</span>
+        </div>
+
+        {/* 3-Step Milestone Progress */}
+        <div className="grid grid-cols-3 gap-3 mb-6">
           {c.tasks.map((t, idx) => {
             const isDone = (chapterProgress?.replayResults ?? chapterProgress?.taskResults)?.some(r => r.taskId === t.id && r.completed);
             const isCurrent = idx === index;
             return (
-              <div
-                key={t.id}
-                className={`h-2 rounded transition-all duration-300 ${
-                  isDone
-                    ? 'bg-gradient-to-r from-[#D6A75C] to-[#F5CF8E] shadow-[0_0_8px_rgba(214,167,92,0.5)]'
-                    : isCurrent
-                      ? 'bg-[#D6A75C]/40 animate-pulse'
-                      : 'bg-[#162032]'
-                }`}
-              />
+              <div key={t.id} className="space-y-1.5">
+                <div
+                  className={`h-1.5 rounded transition-all duration-300 ${
+                    isDone
+                      ? 'bg-gradient-to-r from-[#D6A75C] to-[#F5CF8E] shadow-[0_0_8px_rgba(214,167,92,0.5)]'
+                      : isCurrent
+                        ? 'bg-[#D6A75C]/40 animate-pulse'
+                        : 'bg-[#162032]'
+                  }`}
+                  aria-hidden="true"
+                />
+                <div className={`text-[9px] sm:text-[10px] font-mono truncate transition-colors ${
+                  isDone ? 'text-[#4ADE80]' : isCurrent ? 'text-[#D6A75C]' : 'text-[#8A9BB0]/60'
+                }`}>
+                  {isDone ? '✓ ' : ''}Nhiệm vụ {idx + 1}
+                </div>
+              </div>
             );
           })}
         </div>
@@ -322,7 +357,7 @@ function Room({ chapter: c }: { chapter: ChapterData }) {
                   <div>
                     <div className="text-xs font-semibold text-[#E9D8B7]">Cố Vấn Lịch Sử</div>
                     <div className="text-[10px] text-[#8A9BB0]">
-                      {hints === 0 ? 'Chưa dùng gợi ý (Tối đa 100đ)' : `Đã dùng ${hints} gợi ý (-${hints * 10}đ)`}
+                      {hints === 0 ? 'Chưa dùng gợi ý · giữ điểm tối đa' : `Đã dùng ${hints} gợi ý (-${hints * 10}đ)`}
                     </div>
                   </div>
                 </div>
@@ -394,9 +429,12 @@ function Room({ chapter: c }: { chapter: ChapterData }) {
                 <AnimatePresence>
                   {solved && (
                     <motion.div
+                      ref={resultRef}
+                      role="status"
+                      aria-live="polite"
                       initial={{ opacity: 0, y: 15 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="mt-6 space-y-4"
+                      className="mt-6 space-y-4 scroll-mt-32"
                     >
                       {/* Success Badge */}
                       <div className="bg-[#4ADE80]/10 border border-[#4ADE80]/40 rounded-lg p-4">

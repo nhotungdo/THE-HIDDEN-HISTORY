@@ -9,6 +9,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Download, Award, RotateCcw, AlertCircle, Share2 } from 'lucide-react';
 import { useGame } from '../context/GameContext';
 import { certificateCanvas } from '../services/certificateService';
+import { calculateRank } from '../utils/storage';
 import { useDialog } from '../hooks/useDialog';
 
 export default function CertificatePage() {
@@ -18,12 +19,16 @@ export default function CertificatePage() {
   const [error, setError] = useState('');
   const [confirmModal, setConfirmModal] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [attempt, setAttempt] = useState(0);
+  const [isRendering, setIsRendering] = useState(true);
   const dialogRef = useDialog(confirmModal, () => setConfirmModal(false));
 
   useEffect(() => {
+    if (!progress.isCompletedAll) return;
     let cancelled = false;
+    setIsRendering(true);
+    setError('');
     const render = async () => {
-    if (progress.isCompletedAll) {
       try {
         await document.fonts.ready;
         if (cancelled) return;
@@ -31,13 +36,14 @@ export default function CertificatePage() {
         setImageUrl(canvas.toDataURL('image/png'));
       } catch (err) {
         console.error(err);
-        setError('Không thể khởi tạo ảnh chứng nhận. Vui lòng thử lại trên trình duyệt khác.');
+        if (!cancelled) setError('Không thể khởi tạo ảnh chứng nhận. Vui lòng thử lại.');
+      } finally {
+        if (!cancelled) setIsRendering(false);
       }
-    }
     };
     void render();
     return () => { cancelled = true; };
-  }, [progress]);
+  }, [progress, attempt]);
 
   if (!progress.isCompletedAll) {
     return <Navigate to="/timeline" replace />;
@@ -68,6 +74,11 @@ export default function CertificatePage() {
           <p className="text-xs md:text-sm text-[#8A9BB0] max-w-lg mx-auto">
             Ghi nhận thành tích giải mã xuất sắc của bạn trong hành trình khám phá 5 mốc son lịch sử Việt Nam hiện đại.
           </p>
+          <div className="flex flex-wrap justify-center gap-2 mt-4">
+            <span className="chip">Mã: {progress.certificateCode || 'VNR202'}</span>
+            <span className="chip">Điểm: {progress.totalScore}đ</span>
+            <span className="chip border-[#D6A75C]/50 text-[#F5CF8E]">{calculateRank(progress.totalScore)}</span>
+          </div>
         </div>
 
         {/* Certificate Display Frame */}
@@ -76,6 +87,7 @@ export default function CertificatePage() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7 }}
           className="dossier-card border-dongson rounded-lg p-3 md:p-6 mb-8 shadow-2xl relative bg-[#070B14]"
+          aria-busy={!imageUrl}
         >
           {imageUrl ? (
             <div className="rounded overflow-hidden shadow-2xl border border-[#D6A75C]/40">
@@ -86,14 +98,30 @@ export default function CertificatePage() {
               />
             </div>
           ) : (
-            <div className="aspect-[16/9] flex items-center justify-center bg-[#0D1524] rounded text-sm text-[#8A9BB0]">
-              Đang kết xuất bằng chứng nhận độ nét cao...
+            <div className="aspect-[16/9] flex flex-col items-center justify-center gap-3 bg-[#0D1524] rounded text-sm text-[#8A9BB0]" role="status">
+              {isRendering ? (
+                <>
+                  <div className="w-8 h-8 rounded-full border-2 border-[#D6A75C]/30 border-t-[#D6A75C] animate-spin" aria-hidden="true" />
+                  <span>Đang kết xuất bằng chứng nhận độ nét cao...</span>
+                </>
+              ) : (
+                <span>Chưa có ảnh chứng nhận.</span>
+              )}
             </div>
           )}
 
           {error && (
-            <div className="text-[#F87171] text-xs text-center mt-3 flex items-center justify-center gap-1">
-              <AlertCircle size={14} /> {error}
+            <div className="mt-3 flex flex-col sm:flex-row items-center justify-center gap-3" role="alert">
+              <div className="text-[#F87171] text-xs flex items-center justify-center gap-1">
+                <AlertCircle size={14} aria-hidden="true" /> {error}
+              </div>
+              <button
+                type="button"
+                onClick={() => { setImageUrl(''); setAttempt(value => value + 1); }}
+                className="btn-heritage-secondary text-[11px] py-1.5 px-4"
+              >
+                Thử lại
+              </button>
             </div>
           )}
         </motion.div>
@@ -112,11 +140,12 @@ export default function CertificatePage() {
           )}
 
           <button
+            type="button"
             onClick={handleCopyLink}
             className="btn-heritage-secondary text-xs py-3 px-6"
           >
-            <Share2 size={15} />
-            <span>{copied ? 'Đã Sao Chép Liên Kết!' : 'Chia Sẻ Thành Tích'}</span>
+            <Share2 size={15} aria-hidden="true" />
+            <span aria-live="polite">{copied ? 'Đã Sao Chép Liên Kết!' : 'Chia Sẻ Thành Tích'}</span>
           </button>
 
           <Link
@@ -128,11 +157,12 @@ export default function CertificatePage() {
           </Link>
 
           <button
+            type="button"
             onClick={() => setConfirmModal(true)}
-            className="p-3 text-xs text-[#8A9BB0] hover:text-[#F87171] transition-colors flex items-center gap-1.5"
+            className="p-3 min-h-10 text-xs text-[#8A9BB0] hover:text-[#F87171] transition-colors flex items-center gap-1.5"
             title="Xóa hồ sơ và bắt đầu lại hành trình mới"
           >
-            <RotateCcw size={14} />
+            <RotateCcw size={14} aria-hidden="true" />
             <span>Khởi Động Lại</span>
           </button>
         </div>
@@ -142,16 +172,20 @@ export default function CertificatePage() {
           {confirmModal && (
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
               <motion.div
-                ref={dialogRef} role="dialog" aria-modal="true" aria-label="Khởi động lại hành trình" tabIndex={-1}
+                ref={dialogRef}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="reset-dialog-title"
+                tabIndex={-1}
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                className="dossier-card border-dongson w-full max-w-md p-6 rounded-lg text-center"
+                className="dossier-card border-dongson modal-panel w-full max-w-md p-6 rounded-lg text-center"
               >
                 <div className="w-12 h-12 rounded-full bg-[#8D3038]/20 text-[#8D3038] flex items-center justify-center mx-auto mb-3">
-                  <AlertCircle size={24} />
+                  <AlertCircle size={24} aria-hidden="true" />
                 </div>
-                <h3 className="font-['Cinzel',serif] text-base font-bold text-[#E9D8B7] mb-2">
+                <h3 id="reset-dialog-title" className="font-['Cinzel',serif] text-base font-bold text-[#E9D8B7] mb-2">
                   XÁC NHẬN KHỞI ĐỘNG LẠI HÀNH TRÌNH?
                 </h3>
                 <p className="text-xs text-[#8A9BB0] leading-relaxed mb-6">
@@ -163,11 +197,12 @@ export default function CertificatePage() {
                       resetGame();
                       navigate('/setup');
                     }}
-                    className="btn-heritage-primary text-xs py-2.5 px-5 bg-[#8D3038] border-[#8D3038]"
+                    className="btn-heritage-primary btn-danger text-xs py-2.5 px-5"
                   >
                     Xóa và Bắt Đầu Lại
                   </button>
                   <button
+                    type="button"
                     onClick={() => setConfirmModal(false)}
                     className="btn-heritage-secondary text-xs py-2.5 px-5"
                   >

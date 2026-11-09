@@ -53,9 +53,11 @@ function ClockAnimation() {
       {/* Outer Golden Ambient Glow */}
       <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#D6A75C]/15 via-[#8D3038]/10 to-transparent blur-2xl pointer-events-none" />
 
-      <svg 
-        viewBox="0 0 200 200" 
-        className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 drop-shadow-[0_0_35px_rgba(214,167,92,0.35)] relative z-10"
+      <svg
+        viewBox="0 0 200 200"
+        role="img"
+        aria-label="Đồng hồ biên niên ký với 5 mốc lịch sử 1930, 1945, 1954, 1975 và 1986"
+        className="w-40 h-40 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 drop-shadow-[0_0_35px_rgba(214,167,92,0.35)] relative z-10"
       >
         {/* Outer Dong Son / Gear Ring */}
         <circle cx="100" cy="100" r="98" fill="none" stroke="#D6A75C" strokeWidth="0.8" strokeDasharray="3,3" opacity="0.6" />
@@ -183,7 +185,7 @@ export default function LandingPage() {
           ==================================================================== */}
       <motion.section
         style={{ opacity: heroOpacity, y: heroY }}
-        className="relative min-h-[calc(100vh-58px)] flex items-center justify-center px-4 py-10 sm:py-14 lg:py-16"
+        className="relative min-h-[calc(100svh-58px)] flex items-center justify-center px-4 py-10 sm:py-14 lg:py-16"
       >
         <div className="relative z-10 max-w-6xl mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
@@ -261,8 +263,28 @@ export default function LandingPage() {
                 )}
               </div>
 
+              {/* Restore progress (only for returning players) */}
+              {hasProgress && (
+                <div className="mt-5 w-full max-w-sm">
+                  <div className="flex justify-between text-[10px] font-mono text-[#8A9BB0] mb-1.5">
+                    <span>Tiến độ khôi phục Biên niên ký</span>
+                    <span className="text-[#D6A75C] font-bold">{completedCount}/5 cổ vật</span>
+                  </div>
+                  <div
+                    className="progress-track"
+                    role="progressbar"
+                    aria-label="Tiến độ khôi phục cổ vật"
+                    aria-valuemin={0}
+                    aria-valuemax={5}
+                    aria-valuenow={completedCount}
+                  >
+                    <div className="progress-fill" style={{ width: `${(completedCount / 5) * 100}%` }} />
+                  </div>
+                </div>
+              )}
+
               {/* Quick Feature Badges */}
-              <div className="mt-6 flex flex-wrap items-center justify-center lg:justify-start gap-4 text-[11px] font-mono text-[#8A9BB0]">
+              <div className="mt-6 flex flex-wrap items-center justify-center lg:justify-start gap-x-4 gap-y-2 text-[11px] font-mono text-[#8A9BB0]">
                 <span className="flex items-center gap-1.5 text-[#D6A75C]">
                   <CheckCircle2 size={13} /> Không Cần Đăng Nhập
                 </span>
@@ -307,17 +329,19 @@ export default function LandingPage() {
 
           {/* Scroll Down Cue */}
           <div className="mt-8 lg:mt-12 flex justify-center">
-            <motion.div
+            <motion.button
+              type="button"
               animate={{ y: [0, 6, 0] }}
               transition={{ repeat: Infinity, duration: 2.2 }}
-              className="text-[#D6A75C]/60 hover:text-[#D6A75C] flex flex-col items-center gap-1 text-[10px] font-mono tracking-widest cursor-pointer transition-colors"
+              className="text-[#D6A75C]/70 hover:text-[#D6A75C] flex flex-col items-center justify-center gap-1 min-h-10 text-[10px] font-mono tracking-widest transition-colors rounded px-2 py-2"
               onClick={() => {
                 document.getElementById('metrics-strip')?.scrollIntoView({ behavior: 'smooth' });
               }}
+              aria-label="Cuộn xuống phần thông số và sứ mệnh"
             >
               <span>CUỘN ĐỂ KHÁM PHÁ CHI TIẾT</span>
-              <ChevronDown size={16} />
-            </motion.div>
+              <ChevronDown size={16} aria-hidden="true" />
+            </motion.button>
           </div>
         </div>
       </motion.section>
@@ -480,12 +504,17 @@ export default function LandingPage() {
               const isLocked = status === 'locked';
 
               return (
-                <div
+                <button
+                  type="button"
                   key={ch.id}
-                  onClick={() => {
-                    if (!isLocked) navigate(`/chapter/${ch.id}`);
-                  }}
-                  className={`dossier-card rounded-lg p-5 flex flex-col justify-between relative transition-all duration-300 min-h-[260px] ${
+                  disabled={isLocked}
+                  onClick={() => navigate(hasProgress ? `/chapter/${ch.id}` : '/setup')}
+                  aria-label={
+                    isLocked
+                      ? `Chương ${ch.id}: ${ch.name} (đang khóa, hoàn thành chương trước để mở)`
+                      : `Mở chương ${ch.id}: ${ch.name} năm ${ch.year}`
+                  }
+                  className={`dossier-card rounded-lg p-5 flex flex-col justify-between relative transition-all duration-300 min-h-[260px] text-left w-full ${
                     isDone
                       ? 'border-[#D6A75C] shadow-[0_0_20px_rgba(214,167,92,0.25)] hover:scale-[1.02] cursor-pointer'
                       : !isLocked
@@ -527,22 +556,22 @@ export default function LandingPage() {
                   </div>
 
                   {/* Card Footer Artifact */}
-                  <div className="pt-3 border-t border-[#D6A75C]/15 text-[10px] text-[#E9D8B7] flex items-center justify-between mt-4">
-                    <span className="text-[#8A9BB0]">Cổ vật:</span>
+                  <div className="pt-3 border-t border-[#D6A75C]/15 text-[10px] text-[#E9D8B7] flex items-center justify-between gap-2 mt-4">
+                    <span className="text-[#8A9BB0] shrink-0">Cổ vật:</span>
                     <span className="text-[#D6A75C] font-semibold truncate ml-1">{ch.fragment}</span>
                   </div>
-                </div>
+                </button>
               );
             })}
           </div>
 
           <div className="text-center mt-8">
             <Link
-              to="/timeline"
-              className="inline-flex items-center gap-2 text-xs font-mono text-[#D6A75C] hover:text-[#FFF2D6] transition-colors"
+              to={hasProgress ? '/timeline' : '/how-to-play'}
+              className="inline-flex items-center gap-2 min-h-10 text-xs font-mono text-[#D6A75C] hover:text-[#FFF2D6] transition-colors rounded px-2 py-2"
             >
-              <span>Xem chi tiết trên Sa bàn Bản đồ thời gian</span>
-              <ArrowRight size={14} />
+              <span>{hasProgress ? 'Xem chi tiết trên Sa bàn Bản đồ thời gian' : 'Xem hướng dẫn để mở cổng thời gian đầu tiên'}</span>
+              <ArrowRight size={14} aria-hidden="true" />
             </Link>
           </div>
         </div>
