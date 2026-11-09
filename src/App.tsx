@@ -45,6 +45,8 @@ function Shell() {
   return (
     <div className="min-h-screen flex flex-col bg-[#070D18] text-[#E9D8B7] relative overflow-x-hidden selection:bg-[#D6A75C]/30 selection:text-[#FFF2D6]">
       <a href="#main-content" className="skip-link">Bỏ qua điều hướng, tới nội dung chính</a>
+      {/* Negative-control test: intentionally overflows the mobile viewport. */}
+      <div className="w-[900px] h-1 bg-[#D6A75C]" aria-hidden="true" />
       <Header />
       <main id="main-content" tabIndex={-1} className="flex-1 w-full flex flex-col pt-[58px] outline-none">
         <Suspense
