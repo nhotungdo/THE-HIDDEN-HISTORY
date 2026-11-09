@@ -3,10 +3,12 @@
 // Central hub: 5 time gates
 // ==========================================
 
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Lock, CheckCircle2, PlayCircle, ChevronRight, Award, BookOpen } from 'lucide-react';
+import { motion } from 'framer-motion';
+import {
+  Lock, CheckCircle2, PlayCircle, ChevronRight,
+  Award, BookOpen, Compass, ArrowRight,
+} from 'lucide-react';
 import { useGame } from '../context/GameContext';
 import type { ChapterStatus } from '../types/game';
 
@@ -58,20 +60,31 @@ const PORTALS = [
   },
 ];
 
+const STATUS_LABEL: Record<ChapterStatus, string> = {
+  completed: 'HOÀN THÀNH',
+  'in-progress': 'ĐANG CHƠI',
+  unlocked: 'SẴN SÀNG',
+  locked: 'BỊ KHÓA',
+};
+
 function StatusIcon({ status }: { status: ChapterStatus }) {
   switch (status) {
-    case 'completed':  return <CheckCircle2 size={16} className="text-[#4ADE80]" />;
-    case 'in-progress': return <PlayCircle size={16} className="text-[#D6A75C]" />;
-    case 'unlocked':  return <ChevronRight size={16} className="text-[#D6A75C]" />;
-    default:           return <Lock size={16} className="text-[#8A9BB0]" />;
+    case 'completed': return <CheckCircle2 size={16} className="text-[#4ADE80]" aria-hidden="true" />;
+    case 'in-progress': return <PlayCircle size={16} className="text-[#D6A75C]" aria-hidden="true" />;
+    case 'unlocked': return <ChevronRight size={16} className="text-[#D6A75C]" aria-hidden="true" />;
+    default: return <Lock size={16} className="text-[#8A9BB0]" aria-hidden="true" />;
   }
 }
 
 export default function TimelinePage() {
   const navigate = useNavigate();
   const { getChapterStatus, getChapterProgress, progress, getTotalCompletedChapters } = useGame();
-  const [hoveredId, setHoveredId] = useState<number | null>(null);
   const totalDone = getTotalCompletedChapters();
+
+  const continuePortal =
+    PORTALS.find(portal => getChapterStatus(portal.id) === 'in-progress') ??
+    PORTALS.find(portal => getChapterStatus(portal.id) === 'unlocked') ??
+    null;
 
   const handlePortalClick = (portalId: number) => {
     const status = getChapterStatus(portalId);
@@ -80,7 +93,7 @@ export default function TimelinePage() {
   };
 
   return (
-    <div className="flex-1 w-full py-8 md:py-12 px-4 text-[#E9D8B7] relative overflow-hidden">
+    <div className="flex-1 w-full py-8 md:py-12 px-4 text-[#E9D8B7] relative">
       {/* BG */}
       <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,rgba(214,167,92,0.07)_0%,transparent_60%)] pointer-events-none" />
 
@@ -90,23 +103,30 @@ export default function TimelinePage() {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-10"
+          className="page-intro"
         >
-          <div className="red-stamp text-[10px] mb-2">SA BÀN KHÔNG GIAN THỜI GIAN</div>
-          <h1 className="font-['Cinzel',serif] text-3xl md:text-5xl font-black text-gold-foil mb-2">
+          <span className="red-stamp text-[10px]">SA BÀN KHÔNG GIAN THỜI GIAN</span>
+          <h1 className="text-3xl md:text-5xl font-['Cinzel',serif] font-black text-gold-foil">
             BẢN ĐỒ THỜI GIAN
           </h1>
-          <p className="text-[#8A9BB0] text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
-            Chọn một cổng thời gian đã được mở khóa để bắt đầu giải mã. Thu thập đủ 5 mảnh ký ức để hợp nhất cuốn Biên Niên Ký.
+          <p className="page-lede">
+            Chọn một cổng thời gian đã mở khóa để bắt đầu giải mã. Thu thập đủ 5 mảnh ký ức để hợp nhất cuốn Biên Niên Ký.
           </p>
 
-          {/* Progress bar */}
-          <div className="max-w-xs mx-auto mt-6">
+          {/* Progress */}
+          <div className="max-w-sm w-full mt-3">
             <div className="flex justify-between text-xs text-[#8A9BB0] mb-2">
               <span>Tiến Độ Khôi Phục</span>
-              <span className="text-[#D6A75C] font-semibold">{totalDone}/5 Mảnh Ký Ức</span>
+              <span className="text-[#D6A75C] font-semibold tabular-nums">{totalDone}/5 Mảnh Ký Ức</span>
             </div>
-            <div className="progress-track">
+            <div
+              className="progress-track"
+              role="progressbar"
+              aria-label="Tiến độ khôi phục mảnh ký ức"
+              aria-valuemin={0}
+              aria-valuemax={5}
+              aria-valuenow={totalDone}
+            >
               <motion.div
                 className="progress-fill"
                 initial={{ width: 0 }}
@@ -115,12 +135,25 @@ export default function TimelinePage() {
               />
             </div>
           </div>
+
+          {continuePortal && (
+            <button
+              type="button"
+              onClick={() => handlePortalClick(continuePortal.id)}
+              className="btn-heritage-primary text-xs px-6 py-3 mt-2"
+            >
+              <Compass size={15} aria-hidden="true" />
+              {getChapterStatus(continuePortal.id) === 'in-progress'
+                ? `TIẾP TỤC CHƯƠNG 0${continuePortal.id} · ${continuePortal.year}`
+                : `BẮT ĐẦU CHƯƠNG 0${continuePortal.id} · ${continuePortal.year}`}
+            </button>
+          )}
         </motion.div>
 
         {/* Timeline connector + Portals */}
         <div className="relative">
           {/* Horizontal connector line (desktop) */}
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#D6A75C]/30 to-transparent -translate-y-1/2 z-0" />
+          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#D6A75C]/30 to-transparent -translate-y-1/2 z-0" aria-hidden="true" />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 relative z-10">
             {PORTALS.map((portal, i) => {
@@ -135,20 +168,20 @@ export default function TimelinePage() {
                   key={portal.id}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.12 }}
-                  className={`relative ${isLastOdd ? 'sm:col-span-2 lg:col-span-1 sm:max-w-sm sm:mx-auto lg:max-w-none w-full' : ''}`}
-                  onMouseEnter={() => setHoveredId(portal.id)}
-                  onMouseLeave={() => setHoveredId(null)}
+                  transition={{ delay: i * 0.1 }}
+                  className={isLastOdd ? 'sm:col-span-2 lg:col-span-1' : ''}
                 >
                   <button
+                    type="button"
                     onClick={() => handlePortalClick(portal.id)}
                     disabled={isLocked}
-                    className={`w-full text-left rounded-lg border transition-all duration-300 overflow-hidden ${
+                    aria-label={`Cổng thời gian ${portal.year} – ${portal.codeName}: ${STATUS_LABEL[status]}`}
+                    className={`group w-full h-full min-h-[268px] text-left rounded-lg border transition-all duration-300 overflow-hidden flex flex-col ${
                       isLocked
-                        ? 'border-[#D6A75C]/10 opacity-50 cursor-not-allowed'
+                        ? 'border-[#D6A75C]/10 opacity-55 cursor-not-allowed'
                         : isCompleted
-                          ? 'border-[#D6A75C] shadow-[0_0_20px_rgba(214,167,92,0.3)] cursor-pointer'
-                          : 'border-[#D6A75C]/30 hover:border-[#D6A75C] hover:shadow-[0_0_15px_rgba(214,167,92,0.2)] cursor-pointer'
+                          ? 'border-[#D6A75C] shadow-[0_0_20px_rgba(214,167,92,0.3)] cursor-pointer hover:-translate-y-1'
+                          : 'border-[#D6A75C]/30 hover:border-[#D6A75C] hover:shadow-[0_0_18px_rgba(214,167,92,0.2)] hover:-translate-y-1 cursor-pointer'
                     }`}
                     style={{
                       background: isLocked
@@ -157,48 +190,67 @@ export default function TimelinePage() {
                     }}
                   >
                     {/* Top section */}
-                    <div className="p-4 text-center">
-                      <div className={`text-4xl mb-2 transition-transform duration-300 ${hoveredId === portal.id && !isLocked ? 'scale-110' : ''}`}>
+                    <div className="p-4 flex-1">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className={`text-[9px] font-mono tracking-widest ${isLocked ? 'text-[#3A4A5A]' : 'text-[#D6A75C]'}`}>
+                          CỔNG 0{portal.id}
+                        </span>
+                        <StatusIcon status={status} />
+                      </div>
+
+                      <div className={`text-3xl mb-1.5 transition-transform duration-300 ${!isLocked ? 'group-hover:scale-110' : ''}`} aria-hidden="true">
                         {isLocked ? '🔒' : portal.emoji}
                       </div>
+
                       <div
-                        className="font-['Cinzel',serif] font-bold text-xl"
+                        className="font-['Cinzel',serif] font-bold text-2xl leading-none"
                         style={{ color: isLocked ? '#3A4A5A' : portal.primaryColor }}
                       >
                         {portal.year}
                       </div>
-                      <div className={`text-[10px] font-semibold tracking-wider mt-1 ${isLocked ? 'text-[#3A4A5A]' : 'text-[#E9D8B7]'}`}>
+                      <div className={`text-[10px] font-semibold tracking-wider mt-1.5 leading-snug ${isLocked ? 'text-[#3A4A5A]' : 'text-[#E9D8B7]'}`}>
                         {portal.codeName}
                       </div>
+
+                      <p className={`text-[11px] leading-relaxed mt-2.5 line-clamp-3 ${isLocked ? 'text-[#3A4A5A]' : 'text-[#8A9BB0]'}`}>
+                        {portal.desc}
+                      </p>
+
+                      {!isLocked && (
+                        <div className="mt-3 flex items-start gap-1.5 text-[10px] text-[#E9D8B7]">
+                          <Award size={12} className="text-[#D6A75C] shrink-0 mt-0.5" aria-hidden="true" />
+                          <span className="text-[#8A9BB0]">Cổ vật:</span>
+                          <span className="text-[#D6A75C] font-semibold leading-snug">{portal.fragment}</span>
+                        </div>
+                      )}
                     </div>
 
                     {/* Status bar */}
-                    <div className={`px-3 py-2 border-t ${isLocked ? 'border-[#D6A75C]/05' : 'border-[#D6A75C]/15'}`}>
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-1.5">
-                          <StatusIcon status={status} />
-                          <span className={`text-[9px] font-semibold tracking-wide ${
-                            isCompleted ? 'text-[#4ADE80]'
-                            : status === 'in-progress' ? 'text-[#D6A75C]'
-                            : status === 'unlocked' ? 'text-[#D6A75C]/80'
-                            : 'text-[#3A4A5A]'
-                          }`}>
-                            {isCompleted ? 'HOÀN THÀNH'
-                              : status === 'in-progress' ? 'ĐANG CHƠI'
-                              : status === 'unlocked' ? 'SẴN SÀNG'
-                              : 'BỊ KHÓA'}
-                          </span>
-                        </div>
+                    <div className={`px-3 py-2 border-t shrink-0 ${isLocked ? 'border-[#D6A75C]/10' : 'border-[#D6A75C]/15'}`}>
+                      <div className="flex items-center justify-between gap-2">
+                        <span className={`text-[9px] font-semibold tracking-wide ${
+                          isCompleted ? 'text-[#4ADE80]'
+                          : status === 'in-progress' ? 'text-[#D6A75C]'
+                          : status === 'unlocked' ? 'text-[#D6A75C]/80'
+                          : 'text-[#3A4A5A]'
+                        }`}>
+                          {isLocked ? `MỞ KHÓA SAU CHƯƠNG 0${portal.id - 1}` : STATUS_LABEL[status]}
+                        </span>
                         {isCompleted && chProgress && (
-                          <span className="text-[#D6A75C] text-[9px] font-mono">
-                            {chProgress.bestScore}đ
-                          </span>
+                          <span className="text-[#D6A75C] text-[9px] font-mono tabular-nums">{chProgress.bestScore}đ</span>
                         )}
                       </div>
 
-                      {/* Score bar for completed */}
                       {isCompleted && chProgress && (
-                        <div className="progress-track mt-1.5" style={{ height: 3 }}>
+                        <div
+                          className="progress-track mt-1.5"
+                          style={{ height: 3 }}
+                          role="progressbar"
+                          aria-label={`Điểm tốt nhất chương ${portal.id}`}
+                          aria-valuemin={0}
+                          aria-valuemax={300}
+                          aria-valuenow={chProgress.bestScore}
+                        >
                           <div
                             className="progress-fill"
                             style={{ width: `${Math.min(100, (chProgress.bestScore / 300) * 100)}%` }}
@@ -207,33 +259,6 @@ export default function TimelinePage() {
                       )}
                     </div>
                   </button>
-
-                  {/* Tooltip on hover */}
-                  <AnimatePresence>
-                    {hoveredId === portal.id && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 5 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 5 }}
-                        className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 bg-[#162032] border border-[#D6A75C]/30 rounded p-3 shadow-xl z-20 pointer-events-none"
-                      >
-                        <div className="text-[#D6A75C] text-xs font-['Cinzel',serif] font-bold mb-1">{portal.year} – {portal.codeName}</div>
-                        <p className="text-[#8A9BB0] text-[10px] leading-relaxed">{portal.desc}</p>
-                        {!isLocked && (
-                          <div className="mt-2 text-[#E9D8B7] text-[9px]">
-                            🏆 Phần thưởng: <span className="text-[#D6A75C]">{portal.fragment}</span>
-                          </div>
-                        )}
-                        {isLocked && (
-                          <div className="mt-2 text-[#8A9BB0] text-[9px]">
-                            🔒 Hoàn thành chương {portal.id - 1} để mở khóa.
-                          </div>
-                        )}
-                        {/* Tooltip arrow */}
-                        <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-[#D6A75C]/30" />
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
                 </motion.div>
               );
             })}
@@ -244,34 +269,43 @@ export default function TimelinePage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7 }}
+          transition={{ delay: 0.5 }}
           className="flex flex-wrap justify-center gap-3 mt-10"
         >
           <button
+            type="button"
             onClick={() => navigate('/collection')}
-            className="btn-heritage-secondary text-xs px-4 py-2.5 flex items-center gap-2"
+            className="btn-heritage-secondary text-xs px-4 py-2.5"
           >
-            <Award size={14} />
+            <Award size={14} aria-hidden="true" />
             <span>Bộ Sưu Tập Ký Ức ({progress.collectedFragments.length}/5)</span>
           </button>
           <button
+            type="button"
             onClick={() => navigate('/archive')}
-            className="btn-heritage-secondary text-xs px-4 py-2.5 flex items-center gap-2"
+            className="btn-heritage-secondary text-xs px-4 py-2.5"
           >
-            <BookOpen size={14} />
+            <BookOpen size={14} aria-hidden="true" />
             <span>Thư Viện Lịch Sử</span>
           </button>
           {totalDone === 5 && (
             <button
+              type="button"
               onClick={() => navigate('/ending')}
-              className="btn-heritage-primary text-xs px-5 py-2.5 shadow-xl"
+              className="btn-heritage-primary text-xs px-5 py-3"
             >
               🏆 XEM KẾT THÚC & NHẬN CHỨNG NHẬN
             </button>
           )}
         </motion.div>
+
+        {totalDone < 5 && (
+          <p className="text-center text-[11px] text-[#8A9BB0] mt-4 flex items-center justify-center gap-1.5">
+            <ArrowRight size={12} className="text-[#D6A75C]" aria-hidden="true" />
+            Hoàn thành cả 3 nhiệm vụ của một chương để mở khóa cổng tiếp theo.
+          </p>
+        )}
       </div>
     </div>
   );
 }
-

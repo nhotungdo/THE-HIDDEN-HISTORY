@@ -41,10 +41,13 @@
 /* ==========================================================================
    RESET & BASE TYPOGRAPHY
    ========================================================================== */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* Reset must live in the base layer so Tailwind spacing utilities still win. */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 }
 
 html {
@@ -102,7 +105,11 @@ h1, h2, h3, .font-heading {
 
 /* ==========================================================================
    HISTORICAL ARTIFACTS & TEXTURES (THE ARCHIVIST'S ASSETS)
+   Component styles live in @layer components so per-screen Tailwind
+   utilities (spacing, radii, colours) can refine them.
    ========================================================================== */
+
+@layer components {
 
 /* 1. Giấy Dó Cổ (Vietnamese Parchment Sheet) */
 .parchment-sheet {
@@ -236,6 +243,9 @@ h1, h2, h3, .font-heading {
    ========================================================================== */
 
 .btn-heritage-primary {
+  min-height: 2.75rem;
+  line-height: 1.2;
+  text-align: center;
   background: linear-gradient(135deg, #D6A75C 0%, #A87A30 100%);
   color: #0A1020;
   font-family: 'Cinzel', serif;
@@ -271,6 +281,9 @@ h1, h2, h3, .font-heading {
 }
 
 .btn-heritage-secondary {
+  min-height: 2.5rem;
+  line-height: 1.2;
+  text-align: center;
   background: rgba(22, 32, 50, 0.8);
   color: var(--color-gold);
   font-family: 'Cinzel', serif;
@@ -291,6 +304,18 @@ h1, h2, h3, .font-heading {
   border-color: var(--color-gold);
   box-shadow: 0 0 15px rgba(214, 167, 92, 0.25);
   transform: translateY(-1px);
+}
+
+/* Destructive archive action (reset journey). */
+.btn-danger {
+  background: linear-gradient(135deg, #B84050 0%, #8D3038 100%);
+  border-color: #F0A6AE;
+  color: #FFF2D6;
+  box-shadow: 0 4px 15px rgba(141, 48, 56, 0.4);
+}
+.btn-danger:hover {
+  background: linear-gradient(135deg, #CC5262 0%, #A33139 100%);
+  box-shadow: 0 8px 25px rgba(141, 48, 56, 0.5);
 }
 
 /* ==========================================================================
@@ -320,6 +345,157 @@ h1, h2, h3, .font-heading {
   border: 2px solid #3F5E46;
 }
 
+/* ==========================================================================
+   SHARED UI PRIMITIVES (SCREEN-TO-SCREEN CONSISTENCY)
+   ========================================================================== */
+
+:root {
+  --header-h: 58px;
+  --page-max: 72rem;
+}
+
+/* Anchor targets clear the fixed command bar. */
+[id] {
+  scroll-margin-top: calc(var(--header-h) + 1.25rem);
+}
+
+/* Restored progress indicators used on the timeline and museum headers. */
+.progress-track {
+  width: 100%;
+  height: 8px;
+  background: rgba(10, 16, 32, 0.9);
+  border: 1px solid rgba(214, 167, 92, 0.28);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #9E7428 0%, #D6A75C 55%, #F5CF8E 100%);
+  box-shadow: 0 0 10px rgba(214, 167, 92, 0.45);
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Small uppercase label above page titles. */
+.eyebrow {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+/* Page intro rhythm shared by every standalone screen. */
+.page-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  text-align: center;
+  margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+.page-intro .page-lede {
+  max-width: 42rem;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  line-height: 1.75;
+}
+
+/* Compact metadata pill used for counts, rewards and time estimates. */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(214, 167, 92, 0.3);
+  background: rgba(22, 32, 50, 0.85);
+  color: var(--color-gold);
+  font-size: 0.66rem;
+  font-family: 'Courier Prime', monospace;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+}
+
+/* Historical note / lore block on parchment material. */
+.historical-document {
+  background: linear-gradient(150deg, #F4EBD9 0%, #EADFC4 100%);
+  border: 1px solid #D5C29B;
+  border-left: 4px solid var(--color-stamp-red);
+  color: var(--color-ink-black);
+  padding: 1.25rem 1.4rem;
+  border-radius: 4px;
+  box-shadow: 0 10px 26px -10px rgba(0, 0, 0, 0.7), inset 0 0 30px rgba(184, 134, 72, 0.16);
+}
+
+.historical-document strong {
+  color: var(--color-stamp-red);
+}
+
+/* Legacy surface used by the guidance screen. */
+.bg-dark-card {
+  background: linear-gradient(145deg, #162032 0%, #0F1726 100%);
+  border: 1px solid rgba(214, 167, 92, 0.25);
+  border-radius: 6px;
+}
+
+/* Dialogs that need to scroll internally without pushing the page. */
+.modal-panel {
+  max-height: min(88vh, 780px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* Inline system feedback. */
+.alert-inline {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 0.4rem;
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+.alert-inline--error {
+  color: #FCA5A5;
+  background: rgba(141, 48, 56, 0.22);
+  border: 1px solid rgba(141, 48, 56, 0.65);
+}
+.alert-inline--success {
+  color: #86EFAC;
+  background: rgba(74, 222, 128, 0.1);
+  border: 1px solid rgba(74, 222, 128, 0.35);
+}
+
+/* Native disclosure markers replaced by icon buttons that rotate. */
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+details > summary:focus-visible {
+  outline: 2px solid var(--color-gold-light);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Consistent focus treatment for free-text fields. */
+input:not([type='range']):not([type='radio']):not([type='checkbox']):focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none;
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 3px rgba(214, 167, 92, 0.18);
+}
+
+/* Disabled puzzle stages read as inert instead of broken. */
+fieldset:disabled {
+  opacity: 0.85;
+}
+
 /* Shared controls used by the adviser and archive. */
 .stack { display: flex; flex-direction: column; gap: 1rem; }
 .stack label { display: flex; flex-direction: column; gap: .5rem; }
@@ -347,6 +523,9 @@ fieldset { min-width: 0; }
 .evidence-hotspots button[aria-pressed="true"] { background: #D6A75C; color: #101827; box-shadow: 0 0 20px #D6A75C; }
 @keyframes chronicle-merge { from { opacity: 0; transform: translateY(-100px) rotateY(120deg) scale(.3); } to { opacity: 1; transform: translateY(0) rotateY(0) scale(1); } }
 .chronicle-fusion > div { animation: chronicle-merge 1.5s both cubic-bezier(.2,.8,.2,1); }
+
+} /* end @layer components */
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }

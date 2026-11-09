@@ -3,7 +3,7 @@
 // RE-ARRANGED ARCHIVAL COMMAND BAR & NAVIGATION
 // ==========================================================================
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { 
   Volume2, VolumeX, BookOpen, HelpCircle, Compass, 
@@ -17,6 +17,34 @@ export default function Header() {
   const { soundEnabled, toggleSound, progress, getTotalCompletedChapters } = useGame();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+
+  // Chapter, play and result screens belong to the timeline section.
+  const isRouteActive = (to: string) => {
+    if (to === '/') return location.pathname === '/';
+    if (location.pathname === to || location.pathname.startsWith(`${to}/`)) return true;
+    if (to === '/timeline' && /^\/(chapter|play|result)\//.test(location.pathname)) return true;
+    return false;
+  };
+
+  // Navigating away always closes the drawer.
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
+
+  // While the drawer is open: lock the page and support Escape.
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMobileMenuOpen(false);
+    };
+    document.body.style.overflow = 'hidden';
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [mobileMenuOpen]);
 
   const hasProfile = progress.profile !== null;
   const completedCount = getTotalCompletedChapters();
@@ -39,13 +67,17 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#070D18]/90 backdrop-blur-md border-b border-[#D6A75C]/25 transition-all">
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 py-2.5 flex items-center justify-between gap-3">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 py-2 flex items-center justify-between gap-3">
         
         {/* ==================================================================
             LEFT: LOGO & BRANDING
             ================================================================== */}
-        <Link to="/" className="flex items-center gap-2.5 group shrink-0">
-          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#F5CF8E] via-[#D6A75C] to-[#9E7428] p-0.5 shadow-[0_0_12px_rgba(214,167,92,0.3)] group-hover:scale-105 transition-transform">
+        <Link
+          to="/"
+          className="flex items-center gap-2.5 group shrink-0 rounded py-0.5 focus-visible:outline-offset-4"
+          aria-label="Mật Mã Thời Gian – về trang chủ"
+        >
+          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#F5CF8E] via-[#D6A75C] to-[#9E7428] p-0.5 shadow-[0_0_12px_rgba(214,167,92,0.3)] group-hover:scale-105 transition-transform" aria-hidden="true">
             <div className="w-full h-full rounded-full bg-[#0A1020] flex items-center justify-center text-sm font-bold text-[#D6A75C]">
               ⏳
             </div>
@@ -65,12 +97,13 @@ export default function Header() {
             ================================================================== */}
         <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
           {navLinks.map(link => {
-            const isActive = location.pathname === link.to;
+            const isActive = isRouteActive(link.to);
             return (
               <Link
                 key={link.to}
                 to={link.to}
-                className={`relative px-3 py-1.5 rounded-md text-xs font-semibold flex items-center gap-1.5 transition-all duration-200 ${
+                aria-current={isActive ? 'page' : undefined}
+                className={`relative px-3 py-2 rounded-md text-xs font-semibold flex items-center gap-1.5 transition-all duration-200 ${
                   isActive
                     ? 'text-[#FFF0D0] bg-[#D6A75C]/15 border border-[#D6A75C]/40 shadow-sm'
                     : link.highlight
@@ -120,8 +153,9 @@ export default function Header() {
 
           {/* Sound Toggle Button */}
           <button
+            type="button"
             onClick={toggleSound}
-            className={`w-8 h-8 rounded-full border flex items-center justify-center transition-all ${
+            className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all ${
               soundEnabled
                 ? 'border-[#D6A75C]/40 bg-[#D6A75C]/10 text-[#D6A75C] hover:bg-[#D6A75C]/20'
                 : 'border-[#8A9BB0]/30 bg-transparent text-[#8A9BB0]/60 hover:text-[#8A9BB0]'
@@ -134,11 +168,14 @@ export default function Header() {
 
           {/* Mobile Drawer Menu Toggle */}
           <button
-            className="lg:hidden w-8 h-8 rounded-full border border-[#D6A75C]/30 flex items-center justify-center text-[#D6A75C] hover:bg-[#D6A75C]/10"
+            type="button"
+            className="lg:hidden w-10 h-10 rounded-full border border-[#D6A75C]/30 flex items-center justify-center text-[#D6A75C] hover:bg-[#D6A75C]/10"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Menu"
+            aria-label={mobileMenuOpen ? 'Đóng menu điều hướng' : 'Mở menu điều hướng'}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-nav"
           >
-            {mobileMenuOpen ? <X size={16} /> : <Menu size={16} />}
+            {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
       </div>
@@ -149,12 +186,13 @@ export default function Header() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
+            id="mobile-nav"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden border-t border-[#D6A75C]/20 bg-[#0A1020]/95 backdrop-blur-md overflow-hidden"
+            className="lg:hidden border-t border-[#D6A75C]/20 bg-[#0A1020]/95 backdrop-blur-md overflow-hidden max-h-[calc(100vh-58px)] overflow-y-auto"
           >
-            <div className="px-4 py-3 space-y-2">
+            <div className="px-4 py-4 space-y-1.5">
               
               {/* Mobile Player Summary */}
               {hasProfile && (
@@ -178,12 +216,13 @@ export default function Header() {
 
               {/* Links */}
               {navLinks.map(link => {
-                const isActive = location.pathname === link.to;
+                const isActive = isRouteActive(link.to);
                 return (
                   <Link
                     key={link.to}
                     to={link.to}
-                    className={`flex items-center justify-between py-2 px-3 rounded text-xs transition-colors ${
+                    aria-current={isActive ? 'page' : undefined}
+                    className={`flex items-center justify-between min-h-11 py-2.5 px-3 rounded text-sm transition-colors ${
                       isActive
                         ? 'text-[#D6A75C] bg-[#D6A75C]/10 font-bold border-l-2 border-[#D6A75C]'
                         : 'text-[#8A9BB0] hover:text-[#E9D8B7]'
@@ -202,6 +241,27 @@ export default function Header() {
                   </Link>
                 );
               })}
+
+              {/* Mobile primary action */}
+              <div className="pt-2 mt-2 border-t border-[#D6A75C]/15">
+                {hasProfile ? (
+                  <Link
+                    to="/timeline"
+                    className="btn-heritage-primary w-full text-[11px] py-3"
+                  >
+                    <Compass size={14} aria-hidden="true" />
+                    Tiếp tục hành trình ({completedCount}/5)
+                  </Link>
+                ) : (
+                  <Link
+                    to="/setup"
+                    className="btn-heritage-primary w-full text-[11px] py-3"
+                  >
+                    <Compass size={14} aria-hidden="true" />
+                    Tạo hồ sơ Đặc Phái Viên
+                  </Link>
+                )}
+              </div>
             </div>
           </motion.div>
         )}

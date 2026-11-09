@@ -5,9 +5,9 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Search, BookOpen, ExternalLink, Calendar, 
-  ChevronDown, Globe, Bookmark, FileText 
+import {
+  Search, BookOpen, ExternalLink, Calendar,
+  ChevronDown, Globe, Bookmark, FileText, X,
 } from 'lucide-react';
 import { chapters } from '../data/chapters';
 
@@ -48,16 +48,18 @@ export default function HistoryArchivePage() {
       <div className="relative z-10 max-w-5xl mx-auto w-full">
         
         {/* Title Header */}
-        <div className="text-center mb-10">
-          <div className="text-xs font-mono tracking-[0.3em] uppercase text-[#D6A75C] mb-2">
-            KHO TƯ LIỆU VĂN KIỆN LỊCH SỬ
-          </div>
-          <h1 className="text-3xl md:text-5xl font-['Cinzel',serif] font-black text-gold-foil mb-3">
+        <div className="page-intro">
+          <span className="eyebrow">KHO TƯ LIỆU VĂN KIỆN LỊCH SỬ</span>
+          <h1 className="text-3xl md:text-5xl font-['Cinzel',serif] font-black text-gold-foil">
             THƯ VIỆN LỊCH SỬ VNR202
           </h1>
-          <p className="text-xs md:text-sm text-[#8A9BB0] max-w-xl mx-auto leading-relaxed">
+          <p className="page-lede">
             Tra cứu tự do các văn kiện, mốc son và luận điểm trọng tâm phục vụ ôn tập môn học Lịch sử Đảng Cộng sản Việt Nam tại Đại học FPT.
           </p>
+          <div className="flex flex-wrap justify-center gap-2 mt-1">
+            <span className="chip"><FileText size={12} aria-hidden="true" /> 15 hồ sơ trích văn kiện</span>
+            <span className="chip"><Search size={12} aria-hidden="true" /> Tìm không dấu</span>
+          </div>
         </div>
 
         {/* Search & Period Filter Box */}
@@ -65,18 +67,31 @@ export default function HistoryArchivePage() {
           <div className="flex flex-col md:flex-row gap-4 items-center mb-4">
             {/* Search Input */}
             <div className="relative flex-1 w-full">
-              <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#8A9BB0]" />
+              <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#8A9BB0] pointer-events-none" aria-hidden="true" />
+              <label htmlFor="archive-search" className="sr-only">Tìm kiếm hồ sơ lịch sử</label>
               <input
+                id="archive-search"
                 type="search"
                 value={query}
                 onChange={e => setQuery(e.target.value)}
                 placeholder="Tìm kiếm sự kiện, nhân vật, văn kiện, mốc thời gian..."
-                className="w-full bg-[#0A1020] border border-[#D6A75C]/30 text-xs md:text-sm text-[#E9D8B7] placeholder:text-[#8A9BB0]/60 rounded-md pl-10 pr-4 py-3 outline-none focus:border-[#D6A75C] transition-colors"
+                enterKeyHint="search"
+                className="w-full bg-[#0A1020] border border-[#D6A75C]/30 text-xs md:text-sm text-[#E9D8B7] placeholder:text-[#8A9BB0]/60 rounded-md pl-10 pr-11 py-3 outline-none focus:border-[#D6A75C] transition-colors"
               />
+              {query && (
+                <button
+                  type="button"
+                  onClick={() => setQuery('')}
+                  aria-label="Xóa từ khóa tìm kiếm"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full text-[#8A9BB0] hover:text-[#D6A75C] hover:bg-[#D6A75C]/10"
+                >
+                  <X size={14} aria-hidden="true" />
+                </button>
+              )}
             </div>
 
             {/* Total Results Stamp */}
-            <div className="shrink-0">
+            <div className="shrink-0" aria-live="polite">
               <span className="red-stamp text-[11px]">
                 {entries.length} HỒ SƠ LƯU TRỮ
               </span>
@@ -88,8 +103,10 @@ export default function HistoryArchivePage() {
             {PERIOD_TABS.map(tab => (
               <button
                 key={tab.id}
+                type="button"
                 onClick={() => setPeriod(tab.id)}
-                className={`text-xs px-3 py-1.5 rounded transition-all flex items-center gap-1.5 ${
+                aria-pressed={period === tab.id}
+                className={`min-h-10 text-xs px-3 py-2 rounded transition-all flex items-center gap-1.5 ${
                   period === tab.id
                     ? 'bg-[#D6A75C] text-[#0A1020] font-bold shadow-md'
                     : 'bg-[#162032] text-[#8A9BB0] hover:text-[#E9D8B7] border border-[#D6A75C]/15'
@@ -112,7 +129,7 @@ export default function HistoryArchivePage() {
               transition={{ delay: idx * 0.05 }}
               className="dossier-card rounded-lg overflow-hidden border border-[#D6A75C]/25 group cursor-pointer"
             >
-              <summary className="p-4 bg-[#162032]/70 flex items-center justify-between gap-3 select-none">
+              <summary className="p-3.5 sm:p-4 bg-[#162032]/70 flex items-center justify-between gap-3 select-none">
                 <div className="flex items-center gap-3">
                   <span className="w-8 h-8 rounded bg-[#D6A75C]/20 text-[#D6A75C] font-mono font-bold text-xs flex items-center justify-center shrink-0 border border-[#D6A75C]/40">
                     {c.year}
@@ -170,8 +187,21 @@ export default function HistoryArchivePage() {
           ))}
 
           {entries.length === 0 && (
-            <div className="text-center py-12 text-[#8A9BB0] text-sm">
-              Không tìm thấy hồ sơ nào phù hợp với từ khóa <span className="text-[#D6A75C]">"{query}"</span>.
+            <div className="dossier-card rounded-lg p-8 text-center" role="status">
+              <div className="text-3xl mb-2" aria-hidden="true">🔍</div>
+              <p className="text-[#E9D8B7] text-sm mb-1">Không tìm thấy hồ sơ phù hợp</p>
+              <p className="text-[#8A9BB0] text-xs mb-4">
+                {query
+                  ? <>Không có kết quả cho từ khóa <span className="text-[#D6A75C]">"{query}"</span> trong thời kỳ đã chọn.</>
+                  : <>Thời kỳ này chưa có hồ sơ nào được ghi lại.</>}
+              </p>
+              <button
+                type="button"
+                onClick={() => { setQuery(''); setPeriod(''); }}
+                className="btn-heritage-secondary text-xs px-5 py-2.5"
+              >
+                Xóa bộ lọc &amp; xem tất cả
+              </button>
             </div>
           )}
         </div>

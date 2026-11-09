@@ -61,21 +61,50 @@ export default function StoryPage() {
     navigate('/timeline');
   };
 
+  const advanceStory = () => {
+    setLineIndex(current => Math.min(STORY_LINES.length, current + 1));
+  };
+
+  const revealAll = () => {
+    setLineIndex(STORY_LINES.length);
+    setShowMission(true);
+  };
+
+  const isStoryComplete = lineIndex >= STORY_LINES.length;
+
   return (
     <div className="flex-1 w-full py-8 md:py-12 flex flex-col items-center justify-center px-4 relative overflow-hidden text-[#E9D8B7]">
 
       {/* Ambient bg */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(214,167,92,0.08)_0%,transparent_60%)]" />
 
-      {/* Skip button */}
-      <button
-        onClick={handleSkip}
-        className="fixed top-20 right-6 text-[#8A9BB0] text-xs hover:text-[#D6A75C] transition-colors z-40 border border-[#D6A75C]/30 bg-[#0A1020]/80 backdrop-blur px-3 py-1.5 rounded"
-      >
-        Bỏ Qua →
-      </button>
-
       <div className="relative z-10 max-w-3xl w-full mx-auto">
+        {/* Story controls (in flow so they never cover the text) */}
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
+          <span className="chip">LỜI KỂ MỞ ĐẦU</span>
+          {!isStoryComplete && (
+            <button
+              type="button"
+              onClick={handleSkip}
+              className="inline-flex items-center min-h-10 text-[#8A9BB0] text-xs hover:text-[#D6A75C] transition-colors border border-[#D6A75C]/30 bg-[#0A1020]/80 backdrop-blur px-3 py-2 rounded"
+            >
+              Bỏ qua cốt truyện →
+            </button>
+          )}
+        </div>
+
+        {/* Narrative progress */}
+        <div className="flex items-center justify-center gap-1.5 mb-5" aria-hidden="true">
+          {STORY_LINES.map((_, i) => (
+            <span
+              key={i}
+              className={`h-1.5 rounded-full transition-all duration-500 ${
+                i < lineIndex ? 'w-6 bg-[#D6A75C]' : 'w-1.5 bg-[#D6A75C]/25'
+              }`}
+            />
+          ))}
+        </div>
+
         <div className="flex justify-center mb-4"><NarrationButton text={STORY_LINES.join(' ')} /></div>
 
         {/* Ancient book */}
@@ -100,14 +129,14 @@ export default function StoryPage() {
               </div>
 
               {/* 5 locked pages */}
-              <div className="flex justify-center gap-2 flex-wrap">
+              <div className="grid grid-cols-5 gap-1.5 sm:gap-2">
                 {LOCKED_PAGES.map((page, i) => (
                   <motion.div
                     key={page.year}
                     initial={{ opacity: 0, scale: 0 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.3 + i * 0.2 }}
-                    className="flex flex-col items-center bg-[#E9D8B7]/10 border border-[#D6A75C]/20 rounded px-2 py-2 w-16"
+                    className="flex flex-col items-center justify-center bg-[#E9D8B7]/10 border border-[#D6A75C]/20 rounded px-1 py-2 min-h-[72px]"
                   >
                     <span className="text-xl mb-1">🔒</span>
                     <span className="text-[#D6A75C] text-[9px] font-['Cinzel',serif] font-bold">{page.year}</span>
@@ -120,7 +149,7 @@ export default function StoryPage() {
         </motion.div>
 
         {/* Typewriter story lines */}
-        <div className="min-h-[200px] space-y-3 mb-8">
+        <div className="min-h-[200px] space-y-3 mb-6" aria-live="polite">
           <AnimatePresence>
             {STORY_LINES.slice(0, lineIndex).map((line, i) => {
               const isLast = i === lineIndex - 1;
@@ -146,14 +175,31 @@ export default function StoryPage() {
           </AnimatePresence>
 
           {/* Blinking cursor */}
-          {lineIndex < STORY_LINES.length && (
+          {!isStoryComplete && (
             <motion.span
               animate={{ opacity: [1, 0, 1] }}
               transition={{ repeat: Infinity, duration: 0.8 }}
               className="inline-block w-0.5 h-4 bg-[#D6A75C] ml-1 align-middle"
+              aria-hidden="true"
             />
           )}
         </div>
+
+        {/* Manual reading controls */}
+        {!isStoryComplete && (
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-8">
+            <button type="button" onClick={advanceStory} className="btn-heritage-secondary text-xs py-2.5 px-5">
+              Tiếp tục lời kể
+            </button>
+            <button
+              type="button"
+              onClick={revealAll}
+              className="inline-flex items-center min-h-10 text-[11px] text-[#8A9BB0] hover:text-[#D6A75C] underline underline-offset-4 transition-colors px-2"
+            >
+              Hiện toàn bộ cốt truyện
+            </button>
+          </div>
+        )}
 
         {/* Accept mission CTA */}
         <AnimatePresence>
@@ -175,6 +221,13 @@ export default function StoryPage() {
               <p className="text-[#8A9BB0] text-xs mt-3 italic">
                 Cuốn Biên Niên Ký đang chờ bạn khôi phục, {nickname}.
               </p>
+              <button
+                type="button"
+                onClick={handleSkip}
+                className="text-[11px] text-[#8A9BB0] hover:text-[#D6A75C] underline underline-offset-4 transition-colors mt-4"
+              >
+                Vào thẳng bản đồ thời gian
+              </button>
             </motion.div>
           )}
         </AnimatePresence>

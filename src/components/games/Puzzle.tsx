@@ -39,8 +39,9 @@ export function TimelineOrderGame({ task, answers, onChange }: Props) {
 
   return (
     <div className="space-y-3">
-      <div className="text-xs text-[#8A9BB0] italic flex items-center gap-1.5 mb-2">
-        <span>⏱️ Sắp xếp các sự kiện theo đúng tiến trình từ sớm đến muộn:</span>
+      <div className="text-xs text-[#8A9BB0] italic flex items-start gap-1.5 mb-2">
+        <span aria-hidden="true">⏱️</span>
+        <span>Sắp xếp các sự kiện theo đúng tiến trình từ sớm đến muộn. Kéo thả hoặc dùng nút mũi tên.</span>
       </div>
 
       <div className="space-y-2.5">
@@ -80,20 +81,20 @@ export function TimelineOrderGame({ task, answers, onChange }: Props) {
                 aria-label={`Đưa lên: ${o.text}`}
                 disabled={i === 0}
                 onClick={() => move(i, -1)}
-                className="w-7 h-7 rounded border border-[#D6A75C]/40 bg-[#162032] hover:bg-[#D6A75C]/20 text-[#D6A75C] flex items-center justify-center disabled:opacity-20 disabled:cursor-not-allowed transition-colors"
+                className="w-10 h-10 rounded border border-[#D6A75C]/40 bg-[#162032] hover:bg-[#D6A75C]/20 text-[#D6A75C] flex items-center justify-center disabled:opacity-20 disabled:cursor-not-allowed transition-colors"
                 title="Đưa lên sớm hơn"
               >
-                <ArrowUp size={13} />
+                <ArrowUp size={14} aria-hidden="true" />
               </button>
               <button
                 type="button"
                 aria-label={`Đưa xuống: ${o.text}`}
                 disabled={i === ordered.length - 1}
                 onClick={() => move(i, 1)}
-                className="w-7 h-7 rounded border border-[#D6A75C]/40 bg-[#162032] hover:bg-[#D6A75C]/20 text-[#D6A75C] flex items-center justify-center disabled:opacity-20 disabled:cursor-not-allowed transition-colors"
+                className="w-10 h-10 rounded border border-[#D6A75C]/40 bg-[#162032] hover:bg-[#D6A75C]/20 text-[#D6A75C] flex items-center justify-center disabled:opacity-20 disabled:cursor-not-allowed transition-colors"
                 title="Đưa xuống muộn hơn"
               >
-                <ArrowDown size={13} />
+                <ArrowDown size={14} aria-hidden="true" />
               </button>
             </div>
           </div>
@@ -323,6 +324,23 @@ export function CampaignMapGame({ task, answers, onChange }: Props) {
         🗺️ Chọn mục tiêu rồi chạm ô để đặt ghim. Sa bàn quy ước 4×4 phục vụ trò chơi, không phải bản đồ địa lý.
       </div>
 
+      {/* Active target indicator */}
+      <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] bg-[#0A1020]/60 border border-[#D6A75C]/20 rounded px-3 py-2">
+        <span className="text-[#8A9BB0]">
+          Đang đặt ghim:{' '}
+          <strong className="text-[#D6A75C]">{task.options.find(o => o.id === active)?.text}</strong>
+        </span>
+        {Object.keys(answers).length > 0 && (
+          <button
+            type="button"
+            onClick={() => onChange({})}
+            className="text-[#8A9BB0] hover:text-[#F87171] underline underline-offset-2 transition-colors"
+          >
+            Xóa tất cả ghim
+          </button>
+        )}
+      </div>
+
       {/* Target selector pills */}
       <div className="flex flex-wrap gap-2">
         {task.options.map(o => {
@@ -344,7 +362,7 @@ export function CampaignMapGame({ task, answers, onChange }: Props) {
             >
               <MapPin size={12} />
               <span>{o.text}</span>
-              {isAssigned && <span>✓</span>}
+              {isAssigned && <span aria-hidden="true">✓</span>}
             </button>
           );
         })}
@@ -370,7 +388,7 @@ export function CampaignMapGame({ task, answers, onChange }: Props) {
               <button
                 key={i}
                 type="button"
-                aria-label={`Tọa độ hàng ${row + 1}, cột ${col + 1}`}
+                aria-label={`Tọa độ hàng ${row + 1}, cột ${col + 1}${assignedOption ? `, đang đặt ${assignedOption.text}` : ''}`}
                 onClick={() => onChange({ ...Object.fromEntries(Object.entries(answers).filter(([id, position]) => id === active || position !== coord)), [active]: coord })}
                 className={`aspect-square rounded p-1 flex flex-col items-center justify-center border text-center transition-all ${
                   assignedOption

@@ -40,6 +40,10 @@ Chưa deploy lên hosting trong phiên này. Không có service worker: cần m�
 
 ## Kiểm chứng
 
+`npm run test:layout`: 24 kiểm tra bố cục mobile bằng Playwright (12 màn × 320/375px), phát hiện tràn ngang, chữ bị cắt và vùng chạm dưới 40px. Chạy `npx playwright install chromium` một lần nếu máy chưa có trình duyệt.
+
+CI: `.github/workflows/mobile-layout.yml` chạy bộ kiểm tra này trên mỗi pull request, mỗi lần push lên `main` và trong merge queue. Để chặn merge, bật Ruleset hoặc branch protection cho `main` và chọn status check `mobile-layout` làm bắt buộc.
+
 `npm test`: 40 kiểm tra dữ liệu/logic (15 câu đố, đáp án sai, khóa chương, hoàn thành 5 chương, gửi trùng, tính điểm, storage, canvas chứng nhận) và 6 kiểm tra API. Browser smoke test: tạo hồ sơ → chương 1 → trả lời 3 nhiệm vụ → kết quả 300 điểm, tải lại tiếp tục nhiệm vụ tiếp theo. Đã quan sát giao diện desktop trang chủ và màn kết quả ở khung hẹp.
 
 Các hiệu ứng điện ảnh, ảnh tư liệu có bản quyền, đọc thuyết minh và mô hình cổ vật 3D trong bản định hướng chưa được sản xuất; hiện dùng SVG/CSS, emoji và tư liệu chữ. Nội dung lịch sử kế thừa từ bản nháp cần được giảng viên rà soát trước khi dùng làm học liệu chính thức.

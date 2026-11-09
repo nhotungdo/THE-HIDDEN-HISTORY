@@ -44,15 +44,21 @@ function Shell() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#070D18] text-[#E9D8B7] relative overflow-x-hidden selection:bg-[#D6A75C]/30 selection:text-[#FFF2D6]">
+      <a href="#main-content" className="skip-link">Bỏ qua điều hướng, tới nội dung chính</a>
       <Header />
-      <main className="flex-1 w-full flex flex-col pt-[58px]">
+      <main id="main-content" tabIndex={-1} className="flex-1 w-full flex flex-col pt-[58px] outline-none">
         <Suspense
           fallback={
-            <div className="flex-1 flex flex-col items-center justify-center py-24 text-center">
-              <div className="w-10 h-10 rounded-full border-2 border-[#D6A75C] border-t-transparent animate-spin mb-4" />
+            <div
+              className="flex-1 min-h-[60vh] flex flex-col items-center justify-center gap-4 py-24 text-center"
+              role="status"
+              aria-live="polite"
+            >
+              <div className="w-10 h-10 rounded-full border-2 border-[#D6A75C] border-t-transparent animate-spin" />
               <div className="text-xs font-mono text-[#D6A75C] tracking-widest uppercase">
                 ĐANG MỞ HỒ SƠ LƯU TRỮ...
               </div>
+              <p className="text-[11px] text-[#8A9BB0]">Hồ sơ thời gian đang được tải, vui lòng đợi trong giây lát.</p>
             </div>
           }
         >
