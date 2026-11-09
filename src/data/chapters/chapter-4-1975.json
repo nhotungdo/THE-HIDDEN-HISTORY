@@ -1,0 +1,259 @@
+{
+  "id": 4,
+  "year": 1975,
+  "codeName": "THỐNG NHẤT",
+  "title": "Đại thắng Mùa Xuân 1975",
+  "subtitle": "Non sông thu về một mối",
+  "primaryColor": "#2D5A8E",
+  "secondaryColor": "#E8C84A",
+  "backgroundTheme": "liberation-dawn",
+  "unlockRequirement": {
+    "previousChapterId": 3,
+    "minimumScore": 200
+  },
+  "historicalContext": "Mùa Xuân 1975 ghi dấu ấn lịch sử với cuộc Tổng tiến công và nổi dậy thần tốc, chớp nhoáng của quân và dân ta. Chỉ trong 55 ngày đêm, từ Tây Nguyên đến Sài Gòn, quân giải phóng đã quét sạch chính quyền Sài Gòn, thống nhất đất nước sau hơn 20 năm chia cắt.",
+  "tasks": [
+    {
+      "id": "c4-t1",
+      "taskType": "timeline-order",
+      "order": 1,
+      "title": "Dòng Thời Gian Lịch Sử",
+      "points": 100,
+      "timeLimit": 90,
+      "historicalDocument": {
+        "title": "Tiến trình cuộc Tổng tiến công Mùa Xuân 1975",
+        "excerpt": "Cuộc Tổng tiến công Mùa Xuân 1975 diễn ra với tốc độ thần tốc: Mở đầu bằng Chiến dịch Tây Nguyên với đòn đánh vào Buôn Ma Thuột ngày 10/3/1975. Thắng lợi tại Tây Nguyên kéo theo sự tan rã dây chuyền của quân đội Sài Gòn trên toàn chiến trường. Huế giải phóng ngày 25/3, Đà Nẵng giải phóng ngày 29/3, mở đường cho chiến dịch chiến lược cuối cùng mang tên Bác Hồ kính yêu.",
+        "sourceCitation": "Giáo trình Lịch sử Đảng Cộng sản Việt Nam – Bộ GD&ĐT"
+      },
+      "aiHints": {
+        "level1": "Hãy nhớ tiến trình từ Bắc vào Nam theo hướng tấn công của quân giải phóng: Tây Nguyên → các tỉnh miền Trung → Sài Gòn. Mỗi sự kiện đều có mốc tháng/ngày cụ thể.",
+        "level2": "Thứ tự đúng theo ngày: 10/3 (Tây Nguyên) → 25/3 (Huế) → 29/3 (Đà Nẵng) → 26/4 (Chiến dịch HCM bắt đầu) → 30/4 (Giải phóng Sài Gòn). Lưu ý Chiến dịch Hồ Chí Minh bắt đầu ngày 26/4, không phải 30/4.",
+        "exploration": "Tốc độ thần tốc của Mùa Xuân 1975 vượt ngoài dự tính của cả ta lẫn địch. Ban đầu kế hoạch dự kiến giải phóng miền Nam trong 2 năm (1975-1976), nhưng trước sự tan rã nhanh chóng của quân đội Sài Gòn, Bộ Chính trị quyết định 'thần tốc, táo bạo, bất ngờ, chắc thắng', đẩy nhanh toàn bộ chiến dịch trong Mùa Xuân 1975."
+      },
+      "options": [
+        {
+          "id": "opt-c4t1-1",
+          "eventDate": "10/3/1975",
+          "orderIndex": 1,
+          "description": "Đòn chiến lược mở màn, chọc thủng tuyến phòng thủ của địch tại Tây Nguyên, tạo ra sự đảo lộn toàn bộ thế trận chiến lược của Mỹ-Ngụy.",
+          "significance": "Mở màn Tổng tiến công – địch bắt đầu tháo chạy khỏi Tây Nguyên",
+          "text": "Chiến dịch Tây Nguyên – Giải phóng Buôn Ma Thuột"
+        },
+        {
+          "id": "opt-c4t1-2",
+          "eventDate": "26/3/1975",
+          "orderIndex": 2,
+          "description": "Cố đô Huế được giải phóng ngày 26/3/1975, cùng với toàn bộ tỉnh Thừa Thiên, mở ra cánh cửa tiến vào giải phóng Đà Nẵng và các tỉnh miền Trung.",
+          "significance": "Toàn bộ Trị - Thiên - Huế sạch bóng quân thù",
+          "text": "Giải phóng Huế"
+        },
+        {
+          "id": "opt-c4t1-3",
+          "eventDate": "29/3/1975",
+          "orderIndex": 3,
+          "description": "Thành phố Đà Nẵng – căn cứ quân sự lớn thứ hai miền Nam – được giải phóng ngày 29/3/1975 chỉ sau vài giờ tiến công, khi hàng ngàn tên địch bỏ chạy hoặc đầu hàng.",
+          "significance": "Căn cứ quân sự lớn thứ 2 miền Nam tan rã – con đường vào Sài Gòn rộng mở",
+          "text": "Giải phóng Đà Nẵng"
+        },
+        {
+          "id": "opt-c4t1-4",
+          "eventDate": "26/4/1975",
+          "orderIndex": 4,
+          "description": "Chiến dịch Hồ Chí Minh lịch sử chính thức bắt đầu ngày 26/4/1975 với 5 cánh quân đồng loạt tiến vào Sài Gòn từ các hướng Bắc, Đông Bắc, Đông, Tây Bắc và Tây Nam.",
+          "significance": "Trận quyết chiến lịch sử – 5 cánh quân xiết chặt vòng vây Sài Gòn",
+          "text": "Chiến dịch Hồ Chí Minh bắt đầu"
+        },
+        {
+          "id": "opt-c4t1-5",
+          "eventDate": "30/4/1975",
+          "orderIndex": 5,
+          "description": "11 giờ 30 phút ngày 30/4/1975, xe tăng quân giải phóng húc đổ cổng Dinh Độc Lập. Tổng thống cuối cùng Dương Văn Minh tuyên bố đầu hàng vô điều kiện, kết thúc 21 năm kháng chiến chống Mỹ.",
+          "significance": "Miền Nam hoàn toàn giải phóng – Non sông thống nhất một dải",
+          "text": "Giải phóng Sài Gòn – Ngày Non Sông Thu Về Một Mối"
+        }
+      ],
+      "correctAnswerSummary": "Tiến trình thần tốc của Mùa Xuân 1975 diễn ra từ Tây Nguyên (10/3) qua Huế (25/3) và Đà Nẵng (29/3), rồi đến Chiến dịch Hồ Chí Minh (bắt đầu 26/4) và kết thúc với sự kiện Giải phóng Sài Gòn vào ngày 30/4/1975. Chỉ trong 55 ngày đêm, toàn bộ miền Nam được giải phóng.",
+      "historicalLesson": "Mùa Xuân 1975 minh chứng cho sức mạnh của thời cơ chiến lược và nghệ thuật chớp thời cơ. Khi quân và dân ta nhận ra địch đang tan rã, Bộ Chính trị đã kịp thời hạ lệnh 'thần tốc, thần tốc hơn nữa', biến kế hoạch 2 năm thành thắng lợi chỉ trong 55 ngày – bài học về sự dũng cảm, quyết đoán và nhạy bén trong chớp thời cơ còn nguyên giá trị đến ngày nay.",
+      "instructions": "Sắp xếp 5 sự kiện quan trọng của Mùa Xuân 1975 theo đúng trình tự thời gian từ sớm nhất đến muộn nhất. Kéo thả để sắp xếp.",
+      "question": "Dòng Thời Gian Lịch Sử",
+      "correctAnswerIds": []
+    },
+    {
+      "id": "c4-t2",
+      "taskType": "document-detective",
+      "order": 2,
+      "title": "Giải Mã Tài Liệu Lịch Sử",
+      "points": 100,
+      "timeLimit": 120,
+      "historicalDocument": {
+        "title": "Hai Tài Liệu Lịch Sử Mùa Xuân 1975",
+        "excerpt": "Lệnh của Đại tướng Võ Nguyên Giáp – Ngày 7/4/1975\n\"Thần tốc, thần tốc hơn nữa! Táo bạo, táo bạo hơn nữa! Tranh thủ từng giờ, từng phút, xốc tới mặt trận, giải phóng miền Nam. Quyết chiến và toàn thắng!\"\n\n– Đại tướng Võ Nguyên Giáp, Tổng Tư lệnh Quân đội Nhân dân Việt Nam, ngày 7 tháng 4 năm 1975\n\nTuyên bố đầu hàng của Dương Văn Minh – 30/4/1975\n\"Tôi, Đại tướng Dương Văn Minh, Tổng thống Chính quyền Sài Gòn, kêu gọi Quân lực Việt Nam Cộng hòa hạ vũ khí đầu hàng Quân Giải phóng miền Nam Việt Nam vô điều kiện. Tôi tuyên bố chính quyền Sài Gòn, từ trung ương đến địa phương, phải giải tán hoàn toàn. Chúng tôi chờ đợi bàn giao chính quyền cho lực lượng Mặt trận Giải phóng miền Nam Việt Nam.\"\n\n– Dương Văn Minh, phát trên Đài Phát thanh Sài Gòn, 11 giờ 30 phút ngày 30/4/1975",
+        "sourceCitation": "Giáo trình Lịch sử Đảng Cộng sản Việt Nam – Bộ GD&ĐT"
+      },
+      "aiHints": {
+        "level1": "Đọc kỹ từng tài liệu và chú ý đến: (1) Ai là tác giả? (2) Tài liệu được ban hành/phát biểu vào thời điểm nào? (3) Nội dung chính là gì? Mỗi câu hỏi đều có manh mối trong chính văn bản.",
+        "level2": "Lệnh của Đại tướng Võ Nguyên Giáp nhấn mạnh yếu tố THỜI GIAN ('từng giờ, từng phút') – điều này phản ánh thời cơ chiến lược không thể bỏ lỡ. Tuyên bố của Dương Văn Minh là 'đầu hàng vô điều kiện', không phải thương lượng – điều này có ý nghĩa pháp lý và chính trị quan trọng.",
+        "exploration": "Dương Văn Minh chỉ làm Tổng thống được đúng 3 ngày (28-30/4/1975) trước khi tuyên bố đầu hàng. Có một chi tiết thú vị: khi Đại úy Phạm Xuân Thệ dẫn xe tăng vào Dinh Độc Lập, Dương Văn Minh nói 'Tôi chờ các ông để bàn giao', và Đại úy Thệ đáp lại 'Không có gì để bàn giao, ông phải đầu hàng vô điều kiện' – một khoảnh khắc lịch sử chỉ diễn ra trong vài phút ngắn ngủi."
+      },
+      "correctAnswerSummary": "Hai tài liệu lịch sử phản ánh hai mặt của cùng một sự kiện: Lệnh 'Thần tốc' của Đại tướng Võ Nguyên Giáp thể hiện tầm nhìn chiến lược và sự quyết đoán chớp thời cơ; Tuyên bố đầu hàng vô điều kiện của Dương Văn Minh đánh dấu sự cáo chung hoàn toàn của chính quyền Sài Gòn. Cùng nhau, chúng viết nên trang sử huy hoàng nhất của dân tộc Việt Nam thế kỷ XX.",
+      "historicalLesson": "Nghiên cứu tài liệu gốc giúp ta hiểu lịch sử không chỉ qua sự kiện mà còn qua cảm xúc, quyết định và bối cảnh của con người trong thời điểm đó. Lệnh 'Thần tốc' nhắc nhở thế hệ hôm nay về nghệ thuật chớp thời cơ; tuyên bố đầu hàng vô điều kiện nhắc nhở rằng sức mạnh của chính nghĩa – dù đối mặt với kẻ thù hùng mạnh nhất – cuối cùng vẫn chiến thắng.",
+      "instructions": "Phân tích hai tài liệu lịch sử quan trọng của Mùa Xuân 1975 và trả lời các câu hỏi về nội dung, bối cảnh và ý nghĩa của chúng.",
+      "question": "Giải Mã Tài Liệu Lịch Sử",
+      "options": [],
+      "clues": [
+        {
+          "id": "hotspot-1",
+          "text": "Thần tốc, thần tốc hơn nữa",
+          "question": "Tại sao Đại tướng Võ Nguyên Giáp lại dùng từ 'thần tốc' trong mệnh lệnh tháng 3/1975? Điều gì trong tình hình chiến trường lúc đó đòi hỏi tốc độ cao đến vậy?",
+          "options": [
+            {
+              "id": "hs1-opt-a",
+              "text": "Vì mùa mưa sắp đến, địa hình sẽ khó di chuyển",
+              "isCorrect": false,
+              "explanation": "Không phải. Yếu tố thời tiết không phải lý do chính trong mệnh lệnh này."
+            },
+            {
+              "id": "hs1-opt-b",
+              "text": "Vì quân Mỹ đang chuẩn bị can thiệp trở lại và quân địch đang tan rã – phải chớp thời cơ trước khi địch kịp phục hồi",
+              "isCorrect": true,
+              "explanation": "ĐÚNG. Đại tướng nhận định đây là thời cơ 'ngàn năm có một': địch đang tan rã sau Tây Nguyên, nhưng nếu cho chúng thời gian, Mỹ có thể can thiệp hoặc địch tổ chức phòng thủ mới. Phải hành động ngay trước khi cơ hội qua đi."
+            },
+            {
+              "id": "hs1-opt-c",
+              "text": "Vì các chiến sĩ muốn về ăn Tết Ất Mão",
+              "isCorrect": false,
+              "explanation": "Không phải. Mùa Xuân 1975 không liên quan đến việc về ăn Tết mà là chiến lược quân sự tối cao."
+            }
+          ]
+        },
+        {
+          "id": "hotspot-2",
+          "text": "hạ vũ khí đầu hàng Quân Giải phóng miền Nam Việt Nam vô điều kiện",
+          "question": "Từ 'vô điều kiện' trong tuyên bố đầu hàng của Dương Văn Minh có ý nghĩa gì về mặt pháp lý và chính trị?",
+          "options": [
+            {
+              "id": "hs2-opt-a",
+              "text": "Có nghĩa là hai bên sẽ tiếp tục đàm phán về các điều khoản cụ thể sau đó",
+              "isCorrect": false,
+              "explanation": "Không đúng. 'Vô điều kiện' có nghĩa là KHÔNG có đàm phán – phía Sài Gòn chấp nhận hoàn toàn mà không đặt ra bất kỳ điều kiện nào."
+            },
+            {
+              "id": "hs2-opt-b",
+              "text": "Có nghĩa là chính quyền Sài Gòn thừa nhận thất bại hoàn toàn, không có quyền đặt bất kỳ điều kiện nào, toàn bộ quyền lực chuyển giao tuyệt đối cho phía cách mạng",
+              "isCorrect": true,
+              "explanation": "ĐÚNG. Đầu hàng vô điều kiện là hình thức đầu hàng cao nhất về mặt pháp lý, chứng tỏ chính quyền Sài Gòn không còn tư cách pháp nhân. Điều này chấm dứt hoàn toàn mọi yêu sách pháp lý của chính quyền cũ."
+            },
+            {
+              "id": "hs2-opt-c",
+              "text": "Chỉ là câu nói mang tính nghi lễ, không có giá trị pháp lý thực sự",
+              "isCorrect": false,
+              "explanation": "Không đúng. Tuyên bố đầu hàng vô điều kiện có giá trị pháp lý quốc tế quan trọng, chấm dứt sự tồn tại của Việt Nam Cộng hòa."
+            }
+          ]
+        },
+        {
+          "id": "hotspot-3",
+          "text": "11 giờ 30 phút ngày 30/4/1975",
+          "question": "Thời điểm 11 giờ 30 phút ngày 30/4/1975 đánh dấu điều gì trong lịch sử dân tộc Việt Nam?",
+          "options": [
+            {
+              "id": "hs3-opt-a",
+              "text": "Đây là thời điểm quân ta bắt đầu tấn công Dinh Độc Lập",
+              "isCorrect": false,
+              "explanation": "Không chính xác. Đây là thời điểm tuyên bố đầu hàng được phát đi, không phải thời điểm bắt đầu tấn công."
+            },
+            {
+              "id": "hs3-opt-b",
+              "text": "Đây là thời điểm miền Nam Việt Nam hoàn toàn giải phóng, kết thúc 21 năm kháng chiến chống Mỹ cứu nước và 30 năm chiến tranh giải phóng dân tộc",
+              "isCorrect": true,
+              "explanation": "ĐÚNG. 11:30 ngày 30/4/1975 là thời khắc lịch sử thiêng liêng: lá cờ giải phóng tung bay trên Dinh Độc Lập, Dương Văn Minh tuyên bố đầu hàng – miền Nam hoàn toàn giải phóng, non sông thu về một mối sau hơn 30 năm."
+            },
+            {
+              "id": "hs3-opt-c",
+              "text": "Đây là thời điểm cuộc họp giữa hai phía bắt đầu để thương lượng hòa bình",
+              "isCorrect": false,
+              "explanation": "Không đúng. Không có cuộc thương lượng nào – đây là đầu hàng vô điều kiện, không phải đàm phán hòa bình."
+            }
+          ]
+        }
+      ],
+      "correctAnswerIds": []
+    },
+    {
+      "id": "c4-t3",
+      "taskType": "truth-or-myth",
+      "order": 3,
+      "title": "Sự Thật Về Ngày 30/4",
+      "points": 100,
+      "timeLimit": 90,
+      "historicalDocument": {
+        "title": "Ý nghĩa lịch sử của ngày 30/4/1975 và sự thống nhất đất nước",
+        "excerpt": "Ngày 30/4/1975 kết thúc cuộc kháng chiến chống Mỹ cứu nước kéo dài 21 năm (1954–1975). Chiến thắng này chấm dứt sự chia cắt đất nước từ năm 1954 theo Hiệp định Giơ-ne-vơ. Ngày 2/7/1976, Quốc hội nước Việt Nam thống nhất họp kỳ đầu tiên, thông qua quyết định đổi tên nước thành Cộng hòa Xã hội Chủ nghĩa Việt Nam, Thủ đô là Hà Nội, Quốc kỳ là cờ đỏ sao vàng, Quốc ca là bài Tiến Quân Ca, và thành phố Sài Gòn được đổi tên thành Thành phố Hồ Chí Minh.",
+        "sourceCitation": "Giáo trình Lịch sử Đảng Cộng sản Việt Nam – Bộ GD&ĐT"
+      },
+      "aiHints": {
+        "level1": "Hãy chú ý đến các con số chính xác: số năm kháng chiến, năm thống nhất về mặt nhà nước (1976, không phải 1975), tên gọi chính thức của đất nước sau thống nhất.",
+        "level2": "Phân biệt hai mốc: 30/4/1975 là ngày giải phóng miền Nam về mặt quân sự, nhưng thống nhất về mặt nhà nước chính thức là ngày 2/7/1976 khi Quốc hội họp và quyết định tên nước, thủ đô, quốc kỳ. Sài Gòn được đổi tên thành TP.HCM ngay sau 30/4/1975.",
+        "exploration": "Chủ tịch Hồ Chí Minh mất ngày 2/9/1969, trước khi miền Nam được giải phóng 6 năm. Suốt cuộc đời, Người luôn mong mỏi ngày thống nhất Bắc-Nam. Di chúc của Người viết: 'Dù khó khăn gian khổ đến mấy, nhân dân ta nhất định sẽ hoàn toàn thắng lợi'. Việc đặt tên Thành phố Hồ Chí Minh cho Sài Gòn là sự tri ân đặc biệt của nhân dân miền Nam với vị Cha già kính yêu."
+      },
+      "options": [
+        {
+          "id": "opt-c4t3-1",
+          "isCorrect": true,
+          "explanation": "ĐÚNG. Từ khi đất nước bị chia cắt tạm thời theo Hiệp định Giơ-ne-vơ (tháng 7/1954) đến ngày 30/4/1975 là đúng 21 năm. Chiến thắng ngày 30/4 chấm dứt hoàn toàn sự chia cắt lãnh thổ và ách thống trị của đế quốc Mỹ tại miền Nam.",
+          "text": "Ngày 30/4/1975 kết thúc cuộc kháng chiến chống Mỹ cứu nước kéo dài 21 năm (1954–1975) và chấm dứt sự chia cắt đất nước từ Hiệp định Giơ-ne-vơ 1954."
+        },
+        {
+          "id": "opt-c4t3-2",
+          "isCorrect": false,
+          "explanation": "SAI. Việc thống nhất về mặt nhà nước không diễn ra ngay trong tháng 5/1975. Phải đến ngày 2/7/1976, Quốc hội nước Việt Nam thống nhất mới chính thức họp kỳ đầu tiên và thông qua quyết định đổi tên nước thành Cộng hòa Xã hội Chủ nghĩa Việt Nam.",
+          "text": "Ngay sau ngày 30/4/1975, Quốc hội họp và chính thức đổi tên nước thành Cộng hòa Xã hội Chủ nghĩa Việt Nam vào tháng 5/1975."
+        },
+        {
+          "id": "opt-c4t3-3",
+          "isCorrect": true,
+          "explanation": "ĐÚNG. Việc đặt tên Thành phố Hồ Chí Minh cho Sài Gòn là nghĩa cử cao đẹp của nhân dân cả nước với Bác Hồ kính yêu, người đã mất ngày 2/9/1969 trước khi thấy ngày thống nhất. Di nguyện cả đời của Người – 'Nam Bắc sum họp một nhà' – đã được nhân dân thực hiện.",
+          "text": "Thành phố Sài Gòn được đổi tên thành Thành phố Hồ Chí Minh để ghi nhớ công ơn của Chủ tịch Hồ Chí Minh – người đã cống hiến cả cuộc đời vì sự nghiệp giải phóng và thống nhất đất nước."
+        },
+        {
+          "id": "opt-c4t3-4",
+          "isCorrect": false,
+          "explanation": "SAI. Đây là luận điểm sai lịch sử. Chiến thắng 30/4/1975 là kết quả của 21 năm kháng chiến kiên cường, của sức mạnh toàn dân tộc, của đường lối chiến tranh nhân dân đúng đắn của Đảng và Bác Hồ. Sự suy yếu của địch là hậu quả trực tiếp của sức mạnh chiến đấu của quân và dân ta, không phải nguyên nhân độc lập.",
+          "text": "Chiến thắng 30/4/1975 chủ yếu là do sự suy yếu của quân đội Sài Gòn và sự rút lui của Mỹ; không phản ánh sức mạnh thực sự của quân và dân ta."
+        }
+      ],
+      "correctAnswerSummary": "Ngày 30/4/1975 kết thúc 21 năm kháng chiến chống Mỹ và xóa bỏ sự chia cắt từ 1954 – đây là SỰ THẬT. Việc đặt tên TP.HCM là tri ân Bác Hồ – SỰ THẬT. Tuy nhiên, thống nhất nhà nước chính thức là ngày 2/7/1976 (không phải tháng 5/1975) – SAI khi nói 'tháng 5/1975'. Và chiến thắng hoàn toàn do sức mạnh của ta, không phải chỉ do địch suy yếu – luận điểm ngược lại là SAI.",
+      "historicalLesson": "Ý nghĩa của ngày 30/4/1975 vượt ra ngoài sự kiện quân sự thuần túy: đây là sự khẳng định sức mạnh của ý chí dân tộc, của đường lối cách mạng đúng đắn, và của tinh thần 'không có gì quý hơn độc lập tự do'. Thế hệ trẻ hôm nay cần hiểu rõ cả chiều sâu lịch sử lẫn những mốc pháp lý quan trọng (30/4/1975 giải phóng quân sự, 2/7/1976 thống nhất nhà nước) để trân trọng và phát huy xứng đáng những gì cha ông đã đổi bằng xương máu.",
+      "instructions": "Đọc các phát biểu về ý nghĩa của ngày 30/4/1975 và sự nghiệp thống nhất đất nước. Xác định phát biểu nào là SỰ THẬT (Đúng) và phát biểu nào là SAI SỰ THẬT LỊCH SỬ (Sai).",
+      "question": "Sự Thật Về Ngày 30/4",
+      "correctAnswerIds": [
+        "opt-c4t3-1",
+        "opt-c4t3-3"
+      ]
+    }
+  ],
+  "memoryFragment": {
+    "id": "fragment-4",
+    "name": "Ngôi Sao Thống Nhất",
+    "iconEmoji": "⭐",
+    "description": "Ngôi sao vàng năm cánh biểu trưng ngày non sông thu về một mối",
+    "fullStory": "Ngôi sao vàng năm cánh trên nền đỏ – Quốc kỳ Việt Nam – lần đầu xuất hiện trong Cách mạng tháng Tám 1945. Đến ngày 30/4/1975, lá cờ thiêng liêng này tung bay trên Dinh Độc Lập, biểu trưng cho ngày non sông thu về một mối. Mỗi cánh sao đại diện cho một tầng lớp nhân dân: công nhân, nông dân, trí thức, tiểu tư sản và tư sản dân tộc – cùng đoàn kết thành một khối thống nhất.",
+    "historicalDate": "30/4/1975",
+    "location": "Dinh Độc Lập, Thành phố Hồ Chí Minh",
+    "unlockedMessage": "Bạn đã tìm thấy mảnh ký ức lịch sử cuối cùng! Ngôi Sao Thống Nhất – biểu tượng của 30 năm đấu tranh, của hàng triệu hy sinh, và của niềm vui vỡ òa trong ngày non sông thu về một mối. Hãy giữ mãi ngọn lửa yêu nước trong trái tim!",
+    "historicalSignificance": "Mùa Xuân 1975 ghi dấu ấn lịch sử với cuộc Tổng tiến công và nổi dậy thần tốc, chớp nhoáng của quân và dân ta. Chỉ trong 55 ngày đêm, từ Tây Nguyên đến Sài Gòn, quân giải phóng đã quét sạch chính quyền Sài Gòn, thống nhất đất nước sau hơn 20 năm chia cắt."
+  },
+  "chapterReward": {
+    "totalPoints": 300,
+    "badgeName": "Chứng Nhân Lịch Sử",
+    "badgeEmoji": "🌟",
+    "completionMessage": "Chúc mừng! Bạn đã hoàn thành hành trình MẬT MÃ THỜI GIAN – VNR202 FPT! Từ Điện Biên Phủ 1954 đến Sài Gòn 1975, bạn đã cùng cha ông trải qua những trang sử hào hùng nhất. Hãy là thế hệ tiếp nối xứng đáng với sự hy sinh của tiền nhân!"
+  },
+  "gameCompletion": {
+    "allChaptersComplete": true,
+    "finalMessage": "BẠN ĐÃ GIẢI MÃ THÀNH CÔNG MẬT MÃ THỜI GIAN! Lịch sử không chỉ là những trang sách – lịch sử là máu và mồ hôi, là ý chí và niềm tin của hàng triệu con người Việt Nam qua các thế kỷ. Hãy sống xứng đáng với lịch sử!",
+    "totalFragmentsCollected": 4,
+    "certificateTitle": "Chứng chỉ Giải mã Lịch sử VNR202 – FPT University"
+  },
+  "slogan": "Non sông thu về một mối"
+}

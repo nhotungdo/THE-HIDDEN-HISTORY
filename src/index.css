@@ -1,0 +1,359 @@
+@import "tailwindcss";
+
+/* ==========================================
+   GLOBAL DESIGN SYSTEM – MẬT MÃ THỜI GIAN
+   ========================================== */
+
+/* Custom CSS Variables */
+:root {
+  --color-midnight: #101827;
+  --color-gold: #D6A75C;
+  --color-gold-light: #F0C878;
+  --color-gold-dark: #A87A30;
+  --color-papyrus: #E9D8B7;
+  --color-papyrus-dark: #C8B48A;
+  --color-crimson: #8D3038;
+  --color-crimson-light: #B84050;
+  --color-bg-dark: #0A1020;
+  --color-bg-card: #162032;
+  --color-text-primary: #E9D8B7;
+  --color-text-muted: #8A9BB0;
+}
+
+/* Google Fonts */
+
+
+/* ==========================================
+   BASE RESET & TYPOGRAPHY
+   ========================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--color-midnight);
+  color: var(--color-text-primary);
+  font-family: 'Be Vietnam Pro', 'Inter', system-ui, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+h1, h2, h3 {
+  font-family: 'Cinzel', 'Georgia', serif;
+  letter-spacing: 0.05em;
+}
+
+/* ==========================================
+   CUSTOM SCROLLBAR
+   ========================================== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold-dark);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold);
+}
+
+/* ==========================================
+   TEXT SELECTION
+   ========================================== */
+::selection {
+  background: rgba(214, 167, 92, 0.3);
+  color: var(--color-papyrus);
+}
+
+/* ==========================================
+   REUSABLE UTILITY CLASSES
+   ========================================== */
+
+/* Gold gradient text */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #F0C878 0%, #D6A75C 50%, #A87A30 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Parchment card background */
+.bg-parchment {
+  background: linear-gradient(145deg, #E9D8B7 0%, #D4C09A 100%);
+  color: #2D1B00;
+}
+
+/* Dark card background */
+.bg-dark-card {
+  background: linear-gradient(145deg, #162032 0%, #0F1B2D 100%);
+  border: 1px solid rgba(214, 167, 92, 0.2);
+}
+
+/* Gold border glow */
+.border-gold-glow {
+  border: 1px solid var(--color-gold);
+  box-shadow: 0 0 10px rgba(214, 167, 92, 0.3), inset 0 0 10px rgba(214, 167, 92, 0.05);
+}
+
+/* Button base styles */
+.btn-primary {
+  background: linear-gradient(135deg, #D6A75C 0%, #A87A30 100%);
+  color: #0A1020;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.75rem 2rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s ease;
+}
+.btn-primary:hover::before {
+  left: 100%;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(214, 167, 92, 0.4);
+}
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-gold);
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 0.7rem 1.8rem;
+  border-radius: 4px;
+  border: 1px solid var(--color-gold);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-secondary:hover {
+  background: rgba(214, 167, 92, 0.1);
+  box-shadow: 0 4px 15px rgba(214, 167, 92, 0.2);
+  transform: translateY(-1px);
+}
+
+/* ==========================================
+   PARTICLE / AMBIENT EFFECTS
+   ========================================== */
+@keyframes float-particle {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+  50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
+}
+
+@keyframes clock-tick {
+  0% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+  100% { transform: rotate(-3deg); }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 5px rgba(214, 167, 92, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(214, 167, 92, 0.7), 0 0 40px rgba(214, 167, 92, 0.3); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes fragment-appear {
+  0% { opacity: 0; transform: scale(0.5) rotate(-10deg); }
+  70% { opacity: 1; transform: scale(1.1) rotate(3deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+@keyframes warp-in {
+  0% { opacity: 0; transform: scale(1.5); filter: blur(20px); }
+  100% { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+
+/* ==========================================
+   GAME-SPECIFIC COMPONENTS
+   ========================================== */
+
+/* Chapter portal card */
+.portal-card {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+}
+.portal-card:hover {
+  transform: scale(1.05) translateY(-5px);
+}
+.portal-card.locked {
+  filter: grayscale(0.8);
+  cursor: not-allowed;
+}
+.portal-card.completed {
+  animation: pulse-gold 3s ease-in-out infinite;
+}
+
+/* Historical document styling */
+.historical-document {
+  background: linear-gradient(145deg, #EDE0C4 0%, #DDD0B0 100%);
+  color: #2D1800;
+  border-left: 4px solid var(--color-crimson);
+  padding: 1.5rem;
+  border-radius: 2px;
+  font-family: 'Be Vietnam Pro', serif;
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.3), inset 0 0 30px rgba(0,0,0,0.05);
+  position: relative;
+}
+.historical-document::before {
+  content: '"';
+  font-size: 4rem;
+  color: rgba(141, 48, 56, 0.2);
+  position: absolute;
+  top: -0.5rem;
+  left: 1rem;
+  font-family: Georgia, serif;
+  line-height: 1;
+}
+
+/* Progress bar */
+.progress-track {
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  height: 8px;
+}
+.progress-fill {
+  background: linear-gradient(90deg, #D6A75C, #F0C878);
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 10px rgba(240, 200, 120, 0.5);
+}
+
+/* Memory fragment badge */
+.memory-fragment {
+  background: radial-gradient(ellipse at top, #F0C878, #D6A75C, #A87A30);
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(240, 200, 120, 0.6), 0 0 40px rgba(214, 167, 92, 0.3);
+  animation: pulse-gold 2s ease-in-out infinite;
+}
+
+/* ==========================================
+   RESPONSIVE HELPERS
+   ========================================== */
+.game-container {
+  min-height: 100vh;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Mobile drag-and-drop alternative: tap to select */
+@media (max-width: 768px) {
+  .draggable-item {
+    cursor: pointer;
+  }
+  .drop-zone {
+    min-height: 60px;
+  }
+}
+
+/* Page transition overlay */
+.page-transition-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--color-midnight);
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* AI Guide floating button */
+.ai-guide-btn {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 100;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1A2E50, #0D1A2E);
+  border: 2px solid var(--color-gold);
+  box-shadow: 0 4px 20px rgba(214, 167, 92, 0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+.ai-guide-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 30px rgba(214, 167, 92, 0.6);
+}
+.page { max-width: 1120px; margin: auto; padding: 110px 24px 70px; min-height: 80vh; }
+.stack { display: flex; flex-direction: column; gap: 22px; }
+.page h1 { font-size: clamp(27px,4vw,48px); line-height:1.25; }
+.page h2 { font-size: 23px; }
+.eyebrow { color: #D6A75C; font-size: 12px; letter-spacing: .2em; }
+.lead { font-size: 20px; color: #b7c2d0; }
+.panel { padding: 28px; border: 1px solid #d6a75c40; border-radius: 12px; background: #162032; }
+.page button,.page .action { padding: 12px 20px; border:1px solid #D6A75C; border-radius:6px; cursor:pointer; text-align:center; }
+.page .action { background:#D6A75C; color:#101827; font-weight:700; }
+.page button:disabled { opacity:.45; cursor:default; }
+.page a:not(.action) { color:#D6A75C; }
+.toolbar { display:flex; gap:20px; align-items:center; flex-wrap:wrap; }
+.page input:not([type=radio]),.page select,.page textarea { display:block; width:100%; background:#0a1020; border:1px solid #8a9bb060; color:#E9D8B7; padding:12px; border-radius:5px; }
+.page select { white-space:normal; max-width:100%; }
+.page textarea { min-height:100px; }
+.page progress { width:100%; accent-color:#D6A75C; }
+.game-columns { display:grid; grid-template-columns: .8fr 1.2fr; gap:24px; align-items:start; }
+.game-columns > * { min-width:0; }
+.parchment { background:#E9D8B7; color:#30271c; }
+.parchment .eyebrow { color:#725124; }
+.document-text { white-space:pre-line; line-height:1.9; }
+.puzzle-row { display:flex; flex-direction:column; gap:12px; }
+.page fieldset { border:0; min-width:0; }
+.page legend { font-weight:600; margin-bottom:14px; }
+.choice { display:flex; gap:10px; align-items:baseline; margin:16px 0; }
+.page summary { cursor:pointer; padding:8px 0; }
+.page details[open] summary { margin-bottom:16px; color:#D6A75C; }
+.collection-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:20px; }
+.artifact { font-size:clamp(32px,6vw,68px); text-align:center; padding:20px 0; }
+.certificate { width:100%; border-radius:8px; }
+.map-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:5px; }
+.map-grid>div { min-height:85px; padding:5px; background:#243c37; font-size:11px; }
+.page ol { padding-left:24px; }
+:focus-visible { outline:3px solid #f0c878; outline-offset:4px; }
+@media(max-width:760px){.game-columns{grid-template-columns:1fr}.page{padding:90px 16px 40px}.panel{padding:20px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+.timeline-row { display:grid; grid-template-columns:25px 1fr 44px 44px; gap:8px; align-items:center; padding:12px; border:1px solid #d6a75c35; border-radius:6px; }
+.page .timeline-row button { padding:8px; }
+.page .match-card { border:1px solid #d6a75c35; border-radius:6px; padding:16px; }
+.page .match-card legend { padding:0 5px; }
+.page .map-grid button { min-height:110px; padding:6px; background:#243c37; font-size:11px; overflow-wrap:anywhere; }
+.page button[aria-pressed=true] { background:#D6A75C; color:#101827; }
+.page .choice { cursor:pointer; }
+.page .choice input { flex-shrink:0; accent-color:#D6A75C; }

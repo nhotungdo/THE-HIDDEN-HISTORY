@@ -1,0 +1,4 @@
+{
+  "functions": { "api/history-guide.mjs": { "includeFiles": "src/data/chapters/**" } },
+  "rewrites": [{ "source": "/((?!api/).*)", "destination": "/index.html" }]
+}

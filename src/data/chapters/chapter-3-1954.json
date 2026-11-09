@@ -1,0 +1,219 @@
+{
+  "id": 3,
+  "year": 1954,
+  "codeName": "ĐƯỜNG ĐẾN ĐIỆN BIÊN",
+  "title": "Chiến thắng Điện Biên Phủ",
+  "subtitle": "Lừng lẫy năm châu, chấn động địa cầu",
+  "primaryColor": "#4A7C59",
+  "secondaryColor": "#C8A951",
+  "backgroundTheme": "jungle-fortress",
+  "unlockRequirement": {
+    "previousChapterId": 2,
+    "minimumScore": 150
+  },
+  "historicalContext": "Chiến dịch Điện Biên Phủ là trận quyết chiến chiến lược kết thúc cuộc kháng chiến 9 năm chống thực dân Pháp của nhân dân Việt Nam. Quân và dân ta dưới sự chỉ huy của Đại tướng Võ Nguyên Giáp đã tiêu diệt và bắt sống toàn bộ tập đoàn cứ điểm mạnh nhất Đông Dương.",
+  "tasks": [
+    {
+      "id": "c3-t1",
+      "taskType": "campaign-map",
+      "order": 1,
+      "title": "Bản Đồ Chiến Trường",
+      "points": 100,
+      "timeLimit": 120,
+      "gridSize": {
+        "rows": 4,
+        "cols": 4
+      },
+      "historicalDocument": {
+        "title": "Sơ đồ Tập đoàn cứ điểm Điện Biên Phủ",
+        "excerpt": "Tập đoàn cứ điểm Điện Biên Phủ được Pháp xây dựng thành hệ thống phòng thủ kiên cố với 49 cứ điểm, chia thành ba phân khu: Bắc, Trung và Nam. Phân khu Bắc gồm các cứ điểm Him Lam, Độc Lập, Bản Kéo. Phân khu Trung tâm là Mường Thanh với sân bay và hầm chỉ huy của Tướng Đờ Cát-xtri. Đồi A1 (Eliane 2) là cứ điểm then chốt được Pháp coi là 'chìa khóa' của tập đoàn cứ điểm.",
+        "sourceCitation": "Giáo trình Lịch sử Đảng Cộng sản Việt Nam – Bộ GD&ĐT"
+      },
+      "aiHints": {
+        "level1": "Hãy nhớ lại ba phân khu của tập đoàn cứ điểm Điện Biên Phủ: Bắc, Trung tâm và Nam. Mỗi vị trí có vai trò chiến lược khác nhau.",
+        "level2": "Him Lam thuộc phân khu Bắc, là nơi quân ta nổ súng mở màn chiến dịch ngày 13/3/1954. Mường Thanh là trung tâm chỉ huy của địch. Đồi A1 là điểm cao chiến lược then chốt. Hầm Đờ Cát-xtri nằm ngay tại Mường Thanh.",
+        "exploration": "Điện Biên Phủ nằm trong lòng chảo Mường Thanh, tỉnh Điện Biên ngày nay. Pháp chọn địa điểm này vì cho rằng địa hình hiểm trở khiến quân ta không thể kéo pháo vào. Nhưng với tinh thần 'dốc toàn lực', bộ đội ta đã kéo pháo bằng sức người qua những đèo dốc cheo leo, làm thay đổi hoàn toàn cục diện chiến trường."
+      },
+      "options": [
+        {
+          "id": "opt-c3t1-1",
+          "description": "Cứ điểm mở màn chiến dịch, thuộc phân khu Bắc",
+          "mapCoord": {
+            "row": 0,
+            "col": 1
+          },
+          "historicalNote": "Him Lam (Béatrice) là cứ điểm đầu tiên bị quân ta tiến công và tiêu diệt hoàn toàn trong đêm 13/3/1954, mở màn Chiến dịch Điện Biên Phủ.",
+          "text": "Him Lam"
+        },
+        {
+          "id": "opt-c3t1-2",
+          "description": "Cứ điểm then chốt, 'chìa khóa' của tập đoàn cứ điểm",
+          "mapCoord": {
+            "row": 2,
+            "col": 3
+          },
+          "historicalNote": "Đồi A1 (Eliane 2) là trận đánh ác liệt nhất trong đợt tấn công thứ hai và thứ ba. Quân ta phải chiến đấu quyết liệt nhiều ngày mới chiếm được vị trí này vào đêm 6 rạng ngày 7/5/1954.",
+          "text": "Đồi A1"
+        },
+        {
+          "id": "opt-c3t1-3",
+          "description": "Trung tâm chỉ huy, sân bay và sở chỉ huy địch",
+          "mapCoord": {
+            "row": 2,
+            "col": 1
+          },
+          "historicalNote": "Mường Thanh là phân khu trung tâm, nơi đặt sở chỉ huy của Tướng Đờ Cát-xtri và sân bay duy nhất tiếp tế cho cứ điểm. Khi sân bay bị pháo ta khống chế, địch rơi vào thế hoàn toàn bị cô lập.",
+          "text": "Mường Thanh"
+        },
+        {
+          "id": "opt-c3t1-4",
+          "description": "Hầm chỉ huy kiên cố của Tướng De Castries",
+          "mapCoord": {
+            "row": 3,
+            "col": 1
+          },
+          "historicalNote": "Hầm ngầm kiên cố của Tướng Christian de la Croix de Castries tại trung tâm Mường Thanh. Chiều 7/5/1954, lá cờ 'Quyết chiến Quyết thắng' của quân ta tung bay trên nóc hầm này, đánh dấu chiến thắng hoàn toàn.",
+          "text": "Hầm Đờ Cát-xtri"
+        }
+      ],
+      "correctAnswerSummary": "Bốn vị trí chiến lược của tập đoàn cứ điểm Điện Biên Phủ được phân bố từ phân khu Bắc (Him Lam) đến trung tâm Mường Thanh (Mường Thanh, Hầm Đờ Cát-xtri) và điểm cao chiến lược Đồi A1 ở phía Đông. Nắm được địa hình và vai trò từng cứ điểm là chìa khóa để hiểu nghệ thuật chỉ huy tài tình của Đại tướng Võ Nguyên Giáp.",
+      "historicalLesson": "Chiến dịch Điện Biên Phủ là minh chứng hùng hồn cho học thuyết chiến tranh nhân dân của Chủ tịch Hồ Chí Minh: 'Lấy ít địch nhiều, lấy yếu thắng mạnh'. Việc chủ động thay đổi phương châm từ 'đánh nhanh thắng nhanh' sang 'đánh chắc tiến chắc' của Đại tướng Võ Nguyên Giáp là quyết định lịch sử, bảo đảm cho chiến thắng toàn vẹn của quân và dân ta.",
+      "instructions": "Xác định vị trí 4 cứ điểm quan trọng trên chiến trường Điện Biên Phủ. Kéo thả tên từng cứ điểm vào ô tương ứng trên bản đồ 4×4.",
+      "question": "Bản Đồ Chiến Trường",
+      "correctAnswerIds": []
+    },
+    {
+      "id": "c3-t2",
+      "taskType": "truth-or-myth",
+      "order": 2,
+      "title": "Sự Thật Hay Huyền Thoại?",
+      "points": 100,
+      "timeLimit": 90,
+      "historicalDocument": {
+        "title": "Ba đợt tiến công trong Chiến dịch Điện Biên Phủ",
+        "excerpt": "Chiến dịch Điện Biên Phủ diễn ra qua ba đợt tấn công: Đợt 1 (13/3 – 17/3/1954): Tiêu diệt các cứ điểm Him Lam, Độc Lập, buộc địch bỏ Bản Kéo đầu hàng. Đợt 2 (30/3 – 26/4/1954): Tiến công đồng loạt các cứ điểm phía Đông và sân bay Mường Thanh. Đợt 3 (1/5 – 7/5/1954): Tổng công kích, tiêu diệt hoàn toàn tập đoàn cứ điểm, bắt sống tướng De Castries cùng toàn bộ ban tham mưu.",
+        "sourceCitation": "Giáo trình Lịch sử Đảng Cộng sản Việt Nam – Bộ GD&ĐT"
+      },
+      "aiHints": {
+        "level1": "Hãy chú ý đến các con số: ngày tháng, số lượng cứ điểm, và tên các vị trí trong mỗi đợt tấn công. Lịch sử thường bị 'bẫy' bởi những chi tiết tưởng như nhỏ nhặt.",
+        "level2": "Đợt 1 bắt đầu ngày 13/3 và kết thúc ngày 17/3/1954. Đợt 2 bắt đầu ngày 30/3 và kéo dài đến ngày 26/4. Đợt 3 từ 1/5 đến 7/5/1954. Hãy kiểm tra kỹ các mốc thời gian trong từng phát biểu.",
+        "exploration": "Quyết định 'đánh chắc tiến chắc' của Đại tướng Võ Nguyên Giáp ra đời sau khi ông quan sát thực địa và nhận thấy nếu đánh theo kế hoạch cũ sẽ gây tổn thất lớn cho bộ đội. Dù đã kéo pháo vào trận địa, lệnh kéo pháo ra vẫn được thực hiện, một quyết định vô cùng khó khăn nhưng sáng suốt của vị Tổng Tư lệnh."
+      },
+      "options": [
+        {
+          "id": "opt-c3t2-1",
+          "isCorrect": true,
+          "explanation": "ĐÚNG. Trong đợt 1, quân ta tiêu diệt Him Lam (13/3), Độc Lập (14-15/3) và địch ở Bản Kéo đã đầu hàng ngày 17/3/1954, hoàn thành xuất sắc mục tiêu đợt 1.",
+          "text": "Đợt tấn công thứ nhất (13/3 – 17/3/1954) đã tiêu diệt hoàn toàn cứ điểm Him Lam và buộc địch ở Bản Kéo đầu hàng."
+        },
+        {
+          "id": "opt-c3t2-2",
+          "isCorrect": false,
+          "explanation": "SAI. Chiến dịch Điện Biên Phủ chỉ diễn ra trong 3 đợt tấn công (không phải 4), từ ngày 13/3 đến 7/5/1954, kéo dài 56 ngày đêm (không bắt đầu từ tháng 2).",
+          "text": "Chiến dịch Điện Biên Phủ diễn ra trong 4 đợt tấn công từ tháng 2 đến tháng 5 năm 1954."
+        },
+        {
+          "id": "opt-c3t2-3",
+          "isCorrect": true,
+          "explanation": "ĐÚNG. Đợt 2 là giai đoạn ác liệt nhất, quân ta chiếm lĩnh nhiều điểm cao phía Đông và pháo binh khống chế sân bay, buộc địch phải thả dù tiếp tế, nhưng hiệu quả rất thấp và tổn hao nhiều.",
+          "text": "Trong đợt 2 (30/3 – 26/4/1954), quân ta tập trung tiến công các cứ điểm phía Đông và khống chế sân bay Mường Thanh, cắt đứt đường tiếp tế bằng không quân của địch."
+        },
+        {
+          "id": "opt-c3t2-4",
+          "isCorrect": false,
+          "explanation": "SAI. Tướng Christian de la Croix de Castries không thoát được. Ông bị bắt sống tại hầm chỉ huy chiều ngày 7/5/1954 cùng toàn bộ ban tham mưu, trở thành tù binh của Quân đội Nhân dân Việt Nam.",
+          "text": "Tướng De Castries đã thoát khỏi Điện Biên Phủ bằng máy bay trước khi quân ta tổng công kích ngày 7/5/1954."
+        }
+      ],
+      "correctAnswerSummary": "Chiến dịch Điện Biên Phủ diễn ra qua đúng 3 đợt tấn công trong 56 ngày đêm (13/3 – 7/5/1954). Đợt 1 tiêu diệt Him Lam và Độc Lập; Đợt 2 vây hãm và khống chế sân bay; Đợt 3 tổng công kích và bắt sống toàn bộ ban chỉ huy địch, bao gồm cả Tướng De Castries.",
+      "historicalLesson": "Chiến thắng Điện Biên Phủ được xây dựng từ sự chuẩn bị kỹ lưỡng, kiên nhẫn và khoa học qua từng đợt tấn công có trình tự. Bài học 'biết địch biết ta, trăm trận trăm thắng' thể hiện rõ trong việc quân ta liên tục điều chỉnh chiến thuật theo thực tế chiến trường, từ đó bảo đảm chiến thắng với thiệt hại ít nhất cho đồng bào, chiến sĩ.",
+      "instructions": "Đọc các phát biểu về 3 đợt tấn công của Chiến dịch Điện Biên Phủ. Xác định phát biểu nào là SỰ THẬT (Đúng) và phát biểu nào là SAI SỰ THẬT LỊCH SỬ (Sai).",
+      "question": "Sự Thật Hay Huyền Thoại?",
+      "correctAnswerIds": [
+        "opt-c3t2-1",
+        "opt-c3t2-3"
+      ]
+    },
+    {
+      "id": "c3-t3",
+      "taskType": "dossier-match",
+      "order": 3,
+      "title": "Hồ Sơ Nhân Vật",
+      "points": 100,
+      "timeLimit": 90,
+      "historicalDocument": {
+        "title": "Nhân vật chủ chốt trong Chiến dịch Điện Biên Phủ",
+        "excerpt": "Chiến dịch Điện Biên Phủ ghi danh nhiều nhân vật lịch sử quan trọng ở cả hai phía. Phía Việt Nam có Đại tướng Võ Nguyên Giáp – Tổng Tư lệnh chiến dịch. Phía Pháp có Tướng Henri Navarre – Tổng chỉ huy quân đội viễn chinh Pháp tại Đông Dương, Tướng René Cogny – Chỉ huy quân Pháp tại Bắc Việt, và Tướng Christian de la Croix de Castries – Chỉ huy tập đoàn cứ điểm Điện Biên Phủ.",
+        "sourceCitation": "Giáo trình Lịch sử Đảng Cộng sản Việt Nam – Bộ GD&ĐT"
+      },
+      "aiHints": {
+        "level1": "Hãy phân biệt rõ vai trò của từng cấp chỉ huy: ai là tổng chỉ huy toàn Đông Dương, ai chỉ huy tại Bắc Việt, và ai trực tiếp chỉ huy tập đoàn cứ điểm.",
+        "level2": "Navarre là kiến trúc sư của 'kế hoạch Navarre' và quyết định xây dựng Điện Biên Phủ thành 'con nhím' bất khả xâm phạm. Cogny là cấp dưới trực tiếp của Navarre tại Bắc Việt. De Castries là người trực tiếp chỉ huy và bị bắt sống tại Điện Biên Phủ.",
+        "exploration": "Đại tướng Võ Nguyên Giáp sinh năm 1911 tại Quảng Bình. Ông được Chủ tịch Hồ Chí Minh tin tưởng giao trọng trách Tổng Tư lệnh Quân đội Nhân dân Việt Nam. Quyết định thay đổi phương châm tác chiến tại Điện Biên Phủ được ông coi là quyết định khó khăn nhất trong cuộc đời cầm quân của mình."
+      },
+      "options": [
+        {
+          "id": "subj-1",
+          "text": "Võ Nguyên Giáp",
+          "matchTargetId": "opt-c3t3-1"
+        },
+        {
+          "id": "subj-2",
+          "text": "Đờ Cát-xtri (De Castries)",
+          "matchTargetId": "opt-c3t3-2"
+        },
+        {
+          "id": "subj-3",
+          "text": "Nava (Navarre)",
+          "matchTargetId": "opt-c3t3-3"
+        },
+        {
+          "id": "subj-4",
+          "text": "Cogny",
+          "matchTargetId": "opt-c3t3-4"
+        }
+      ],
+      "correctAnswerSummary": "Bốn nhân vật chủ chốt đại diện cho hai phía trong Chiến dịch Điện Biên Phủ: Đại tướng Võ Nguyên Giáp (Tổng Tư lệnh chiến thắng), Chuẩn tướng De Castries (bị bắt sống tại hầm chỉ huy), Đại tướng Navarre (thất bại chiến lược), và Thiếu tướng Cogny (bất lực trong việc chi viện). Mỗi nhân vật là một mảnh ghép của bức tranh lịch sử hào hùng ngày 7/5/1954.",
+      "historicalLesson": "Chiến thắng Điện Biên Phủ không chỉ là chiến thắng quân sự mà còn là chiến thắng của trí tuệ và ý chí con người. Sự tương phản giữa vị Tổng Tư lệnh Võ Nguyên Giáp – người quyết đoán, sáng suốt chủ động thay đổi phương án khi cần – với các tướng Pháp cứng nhắc tin vào pháo đài bất khả xâm phạm, cho thấy rằng yếu tố con người và sự linh hoạt trong tư duy chiến lược chính là chìa khóa của mọi chiến thắng.",
+      "instructions": "Ghép đúng mỗi tướng lĩnh / nhân vật với vai trò hoặc số phận của họ trong Chiến dịch Điện Biên Phủ.",
+      "question": "Hồ Sơ Nhân Vật",
+      "matchTargets": [
+        {
+          "id": "opt-c3t3-1",
+          "text": "Tổng Tư lệnh Chiến dịch Điện Biên Phủ; người quyết định thay đổi phương châm 'đánh chắc tiến chắc', trực tiếp chỉ huy 56 ngày đêm đánh tan tập đoàn cứ điểm mạnh nhất Đông Dương."
+        },
+        {
+          "id": "opt-c3t3-2",
+          "text": "Chỉ huy tập đoàn cứ điểm Điện Biên Phủ; bị bắt sống tại hầm chỉ huy chiều 7/5/1954 cùng toàn bộ ban tham mưu, kết thúc sự tồn tại của 'pháo đài bất khả xâm phạm'."
+        },
+        {
+          "id": "opt-c3t3-3",
+          "text": "Tổng Chỉ huy quân đội viễn chinh Pháp tại Đông Dương; kiến trúc sư của 'Kế hoạch Navarre' và quyết định biến Điện Biên Phủ thành 'con nhím' để nghiền nát chủ lực Việt Minh."
+        },
+        {
+          "id": "opt-c3t3-4",
+          "text": "Chỉ huy quân đội Pháp tại Bắc Việt Nam, cấp trên trực tiếp của De Castries; phụ trách tổ chức tiếp tế và chi viện cho Điện Biên Phủ nhưng bất lực khi sân bay bị quân ta khống chế."
+        }
+      ],
+      "correctAnswerIds": []
+    }
+  ],
+  "memoryFragment": {
+    "id": "fragment-3",
+    "name": "Ngọn Cờ Quyết Thắng",
+    "iconEmoji": "🚩",
+    "description": "Lá cờ Quyết chiến Quyết thắng tung bay trên nóc hầm chỉ huy Đờ Cát-xtri",
+    "fullStory": "Chiều tối ngày 7/5/1954, chiến sĩ Bùi Đình Kinh cùng đồng đội đã cắm lá cờ 'Quyết chiến Quyết thắng' của Hồ Chủ Tịch trao trên nóc hầm chỉ huy của Tướng De Castries. Hình ảnh lá cờ đỏ sao vàng tung bay giữa vùng lửa đạn trở thành biểu tượng bất diệt của ý chí quật cường dân tộc Việt Nam.",
+    "historicalDate": "7/5/1954",
+    "location": "Hầm chỉ huy De Castries, Mường Thanh, Điện Biên Phủ",
+    "unlockedMessage": "Bạn đã tìm thấy mảnh ký ức lịch sử! Lá cờ Quyết chiến Quyết thắng – biểu tượng của 56 ngày đêm không ngủ, của hàng triệu dân công và chiến sĩ đã ngã xuống vì độc lập, tự do của Tổ quốc.",
+    "historicalSignificance": "Chiến dịch Điện Biên Phủ là trận quyết chiến chiến lược kết thúc cuộc kháng chiến 9 năm chống thực dân Pháp của nhân dân Việt Nam. Quân và dân ta dưới sự chỉ huy của Đại tướng Võ Nguyên Giáp đã tiêu diệt và bắt sống toàn bộ tập đoàn cứ điểm mạnh nhất Đông Dương."
+  },
+  "chapterReward": {
+    "totalPoints": 300,
+    "badgeName": "Anh Hùng Điện Biên",
+    "badgeEmoji": "🏆",
+    "completionMessage": "Xuất sắc! Bạn đã hiểu sâu về Chiến thắng Điện Biên Phủ lừng lẫy năm châu. Hãy tiếp tục hành trình khám phá lịch sử đến Chương 4: Ngày Thống Nhất Non Sông!"
+  },
+  "slogan": "Lừng lẫy năm châu, chấn động địa cầu"
+}

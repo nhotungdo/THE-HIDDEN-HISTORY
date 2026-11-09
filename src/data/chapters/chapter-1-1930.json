@@ -1,0 +1,186 @@
+{
+  "id": 1,
+  "year": 1930,
+  "codeName": "KHỞI NGUỒN",
+  "title": "Đảng Ra Đời",
+  "slogan": "Từ bóng tối của lịch sử, ngọn lửa cách mạng được thắp lên",
+  "historicalContext": "Đầu năm 1930, phong trào cách mạng Việt Nam đứng trước yêu cầu cấp bách phải có một đảng thống nhất lãnh đạo. Ba tổ chức cộng sản hoạt động riêng lẻ gây phân tán lực lượng. Nguyễn Ái Quốc – người chiến sĩ cách mạng lỗi lạc – đã chủ trì Hội nghị hợp nhất tại Hồng Kông, khai sinh Đảng Cộng sản Việt Nam vào ngày 3 tháng 2 năm 1930.",
+  "primaryColor": "#8D3038",
+  "tasks": [
+    {
+      "id": "c1-t1",
+      "taskType": "dossier-match",
+      "title": "Hồ Sơ Mật: Ba Tổ Chức Cộng Sản",
+      "points": 100,
+      "historicalDocument": {
+        "title": "Hồ Sơ Mật: Ba Tổ Chức Cộng Sản",
+        "excerpt": "Năm 1929, ba tổ chức cộng sản lần lượt ra đời: Đông Dương Cộng sản Đảng (tháng 6), An Nam Cộng sản Đảng (tháng 8) và Đông Dương Cộng sản Liên đoàn (tháng 9). Các tổ chức hoạt động riêng rẽ, đặt ra yêu cầu thống nhất lực lượng.",
+        "sourceCitation": "Tư liệu Văn kiện Đảng: Các đại hội và hội nghị Trung ương ĐCSVN (1930–2018); Lịch sử biên niên ĐCSVN, tập 2."
+      },
+      "options": [
+        {
+          "id": "opt-c1t1-1",
+          "isCorrect": true,
+          "matchTargetId": "target-c1t1-1",
+          "text": "Đông Dương Cộng sản Đảng"
+        },
+        {
+          "id": "opt-c1t1-2",
+          "isCorrect": true,
+          "matchTargetId": "target-c1t1-2",
+          "text": "An Nam Cộng sản Đảng"
+        },
+        {
+          "id": "opt-c1t1-3",
+          "isCorrect": true,
+          "matchTargetId": "target-c1t1-3",
+          "text": "Đông Dương Cộng sản Liên đoàn"
+        }
+      ],
+      "matchTargets": [
+        {
+          "id": "target-c1t1-1",
+          "text": "Tháng 6/1929 — Bắc Kỳ"
+        },
+        {
+          "id": "target-c1t1-2",
+          "text": "Tháng 8/1929 — Nam Kỳ"
+        },
+        {
+          "id": "target-c1t1-3",
+          "text": "Tháng 9/1929 — từ các thành viên tiên tiến của Tân Việt Cách mạng Đảng"
+        }
+      ],
+      "aiHints": {
+        "level1": "Hãy chú ý đến thứ tự thời gian thành lập của từng tổ chức. Tổ chức nào xuất hiện đầu tiên? Vùng miền nào ở Việt Nam mà họ hoạt động chủ yếu?",
+        "level2": "Đối chiếu ba mốc tháng 6, tháng 8 và tháng 9 năm 1929 với thứ tự xuất hiện trong tư liệu.",
+        "exploration": "Sự xuất hiện của ba tổ chức cộng sản trong vòng chưa đầy một năm (1929) phản ánh sự chín muồi của phong trào cách mạng Việt Nam dưới ảnh hưởng của Quốc tế Cộng sản (Comintern). Tuy nhiên, sự phân tán này cũng là thách thức lớn, đặt ra yêu cầu hợp nhất thành một đảng thống nhất – nhiệm vụ lịch sử mà Nguyễn Ái Quốc sẽ hoàn thành đầu năm 1930."
+      },
+      "correctAnswerSummary": "Đông Dương Cộng sản Đảng: tháng 6/1929, Bắc Kỳ; An Nam Cộng sản Đảng: tháng 8/1929, Nam Kỳ; Đông Dương Cộng sản Liên đoàn: tháng 9/1929, từ các thành viên tiên tiến của Tân Việt. Đông Dương Cộng sản Liên đoàn gia nhập Đảng Cộng sản Việt Nam ngày 24/2/1930.",
+      "historicalLesson": "Lịch sử cho thấy sự phân tán lực lượng cách mạng là một trong những nguy cơ lớn nhất đối với bất kỳ phong trào giải phóng dân tộc nào. Việc hợp nhất ba tổ chức cộng sản thành một Đảng Cộng sản Việt Nam thống nhất không chỉ chấm dứt tình trạng chia rẽ mà còn tạo ra sức mạnh tổng hợp, đặt nền móng vững chắc cho cuộc đấu tranh giải phóng dân tộc suốt những thập kỷ tiếp theo.",
+      "instructions": "Ghép mỗi tổ chức cộng sản với mốc thành lập và khu vực hoạt động chính.",
+      "question": "Hồ Sơ Mật: Ba Tổ Chức Cộng Sản",
+      "correctAnswerIds": [
+        "opt-c1t1-1",
+        "opt-c1t1-2",
+        "opt-c1t1-3"
+      ]
+    },
+    {
+      "id": "c1-t2",
+      "taskType": "truth-or-myth",
+      "title": "Sự Thật Hay Huyền Thoại: Hội Nghị Hợp Nhất 1930",
+      "points": 100,
+      "historicalDocument": {
+        "title": "Sự Thật Hay Huyền Thoại: Hội Nghị Hợp Nhất 1930",
+        "excerpt": "\"Nguyễn Ái Quốc chủ trì Hội nghị hợp nhất các tổ chức cộng sản ở Việt Nam, họp tại Cửu Long (Hồng Kông) từ ngày 6-1 đến 7-2-1930. Hội nghị đã thảo luận và nhất trí hợp nhất các tổ chức cộng sản thành một đảng duy nhất lấy tên là Đảng Cộng sản Việt Nam; thông qua Chính cương vắn tắt, Sách lược vắn tắt, Điều lệ vắn tắt của Đảng do Nguyễn Ái Quốc soạn thảo.\"",
+        "sourceCitation": "Giáo trình Lịch sử Đảng Cộng sản Việt Nam – Bộ GD&ĐT, Nhà xuất bản Chính trị Quốc gia Sự thật, Hà Nội, 2021, tr. 31-32."
+      },
+      "options": [
+        {
+          "id": "opt-c1t2-1",
+          "isCorrect": true,
+          "explanation": "Đây là sự thật. Hội nghị họp tại bán đảo Cửu Long (Kowloon), Hồng Kông, khai mạc ngày 6/1/1930 và Nguyễn Ái Quốc – đại diện của Quốc tế Cộng sản – là người chủ trì hội nghị này.",
+          "text": "Hội nghị hợp nhất diễn ra tại Cửu Long, Hồng Kông từ ngày 6/1/1930 do Nguyễn Ái Quốc chủ trì."
+        },
+        {
+          "id": "opt-c1t2-2",
+          "isCorrect": true,
+          "explanation": "Đây là sự thật. Nguyễn Ái Quốc đã soạn thảo Chính cương vắn tắt, Sách lược vắn tắt và Điều lệ vắn tắt – những văn kiện nền tảng tư tưởng đầu tiên của Đảng, được thông qua tại Hội nghị.",
+          "text": "Chính cương vắn tắt và Sách lược vắn tắt được Nguyễn Ái Quốc soạn thảo và thông qua tại Hội nghị."
+        },
+        {
+          "id": "opt-c1t2-3",
+          "isCorrect": false,
+          "explanation": "Đây là huyền thoại (sai). Tại Hội nghị tháng 1-2/1930, chỉ có đại biểu của Đông Dương Cộng sản Đảng và An Nam Cộng sản Đảng tham dự. Đông Dương Cộng sản Liên đoàn gia nhập Đảng Cộng sản Việt Nam muộn hơn, vào ngày 24/2/1930.",
+          "text": "Hội nghị hợp nhất có sự tham dự đầy đủ của đại biểu cả ba tổ chức: Đông Dương Cộng sản Đảng, An Nam Cộng sản Đảng và Đông Dương Cộng sản Liên đoàn."
+        },
+        {
+          "id": "opt-c1t2-4",
+          "isCorrect": false,
+          "explanation": "Đây là huyền thoại (sai). Tên được thông qua tại Hội nghị là 'Đảng Cộng sản Việt Nam'. Sau đó, Quốc tế Cộng sản đề nghị đổi tên thành 'Đảng Cộng sản Đông Dương' vào tháng 10/1930, nhưng đó là sự kiện xảy ra sau Hội nghị hợp nhất.",
+          "text": "Tên ban đầu của Đảng được đặt là 'Đông Dương Cộng sản Đảng' theo đề nghị của Quốc tế Cộng sản."
+        }
+      ],
+      "aiHints": {
+        "level1": "Hãy chú ý đến ba yếu tố chính: địa điểm, thành phần đại biểu và tên gọi đầu tiên của Đảng. Có điều gì mà bạn chắc chắn là đúng không?",
+        "level2": "Một chi tiết quan trọng: Đông Dương Cộng sản Liên đoàn KHÔNG có mặt tại hội nghị tháng 1-2/1930. Họ gia nhập Đảng vào ngày 24/2/1930, sau khi Hội nghị kết thúc. Và tên gọi đầu tiên là 'Đảng Cộng sản Việt Nam', không phải 'Đông Dương Cộng sản Đảng'.",
+        "exploration": "Việc Đông Dương Cộng sản Liên đoàn vắng mặt tại Hội nghị Hồng Kông liên quan đến bối cảnh chính trị phức tạp và khó khăn trong liên lạc bí mật thời kỳ đó. Tên gọi 'Đảng Cộng sản Việt Nam' phản ánh tư tưởng của Nguyễn Ái Quốc về một đảng gắn liền với dân tộc Việt Nam, trước khi Quốc tế Cộng sản yêu cầu đổi tên thành 'Đảng Cộng sản Đông Dương' nhằm mục đích bao quát toàn bán đảo Đông Dương."
+      },
+      "correctAnswerSummary": "Hai phát biểu đúng là: (1) Hội nghị diễn ra tại Cửu Long, Hồng Kông từ 6/1/1930 do Nguyễn Ái Quốc chủ trì, và (2) Chính cương vắn tắt, Sách lược vắn tắt do Nguyễn Ái Quốc soạn thảo đã được thông qua. Hai phát biểu sai là: (3) Đông Dương Cộng sản Liên đoàn vắng mặt tại Hội nghị – họ gia nhập vào ngày 24/2/1930; và (4) Tên đầu tiên của Đảng là 'Đảng Cộng sản Việt Nam', không phải 'Đông Dương Cộng sản Đảng'.",
+      "historicalLesson": "Hội nghị hợp nhất ngày 3/2/1930 là một sự kiện lịch sử có ý nghĩa vô cùng trọng đại, đánh dấu bước ngoặt căn bản trong tiến trình vận động cách mạng Việt Nam. Việc Nguyễn Ái Quốc – người thấm nhuần lý luận Mác-Lênin – đứng ra chủ trì và soạn thảo các văn kiện nền tảng đã đảm bảo cho Đảng ngay từ khi thành lập có đường lối cách mạng đúng đắn, phù hợp với thực tiễn Việt Nam.",
+      "instructions": "Nhiều thông tin về Hội nghị hợp nhất bị cố tình làm sai lệch bởi kẻ thù. Hãy phân tích từng tuyên bố và xác định đâu là sự thật lịch sử, đâu là thông tin bịa đặt.",
+      "question": "Sự Thật Hay Huyền Thoại: Hội Nghị Hợp Nhất 1930",
+      "correctAnswerIds": [
+        "opt-c1t2-1",
+        "opt-c1t2-2"
+      ]
+    },
+    {
+      "id": "c1-t3",
+      "taskType": "dossier-match",
+      "title": "Giải Mã Cương Lĩnh Chính Trị Đầu Tiên",
+      "points": 100,
+      "historicalDocument": {
+        "title": "Giải Mã Cương Lĩnh Chính Trị Đầu Tiên",
+        "excerpt": "\"Chính cương vắn tắt xác định: Đường lối chiến lược của cách mạng Việt Nam là tiến hành 'tư sản dân quyền cách mạng và thổ địa cách mạng để đi tới xã hội cộng sản'. Lực lượng cách mạng là công nhân, nông dân, tiểu tư sản, trí thức; còn phú nông, trung tiểu địa chủ thì lợi dụng hoặc trung lập. Lãnh đạo cách mạng là giai cấp công nhân thông qua Đảng Cộng sản Việt Nam.\"",
+        "sourceCitation": "Giáo trình Lịch sử Đảng Cộng sản Việt Nam – Bộ GD&ĐT, Nhà xuất bản Chính trị Quốc gia Sự thật, Hà Nội, 2021, tr. 33."
+      },
+      "options": [
+        {
+          "id": "opt-c1t3-1",
+          "isCorrect": true,
+          "matchTargetId": "target-c1t3-1",
+          "text": "Mục tiêu chiến lược của cách mạng"
+        },
+        {
+          "id": "opt-c1t3-2",
+          "isCorrect": true,
+          "matchTargetId": "target-c1t3-2",
+          "text": "Lực lượng cách mạng"
+        },
+        {
+          "id": "opt-c1t3-3",
+          "isCorrect": true,
+          "matchTargetId": "target-c1t3-3",
+          "text": "Lực lượng lãnh đạo cách mạng"
+        }
+      ],
+      "matchTargets": [
+        {
+          "id": "target-c1t3-1",
+          "text": "Thực hiện 'tư sản dân quyền cách mạng và thổ địa cách mạng' để tiến lên chủ nghĩa cộng sản, đánh đổ đế quốc Pháp và bọn phong kiến tay sai, giành độc lập dân tộc."
+        },
+        {
+          "id": "target-c1t3-2",
+          "text": "Công nhân, nông dân, tiểu tư sản, trí thức; lợi dụng hoặc trung lập phú nông, trung tiểu địa chủ; đoàn kết với các dân tộc bị áp bức trên thế giới."
+        },
+        {
+          "id": "target-c1t3-3",
+          "text": "Giai cấp công nhân thông qua Đảng Cộng sản Việt Nam – đội tiên phong của giai cấp công nhân – nắm quyền lãnh đạo cách mạng."
+        }
+      ],
+      "aiHints": {
+        "level1": "Cương lĩnh chính trị bao giờ cũng trả lời ba câu hỏi lớn: Cách mạng hướng tới điều gì? Ai sẽ thực hiện cách mạng? Ai sẽ dẫn dắt cách mạng? Hãy tìm mục tiêu, lực lượng và người lãnh đạo.",
+        "level2": "Mục tiêu chiến lược gắn với khái niệm 'tư sản dân quyền cách mạng và thổ địa cách mạng'. Lực lượng cách mạng là khối đại đoàn kết dân tộc rộng rãi. Lực lượng lãnh đạo đặc biệt nhấn mạnh vai trò của giai cấp công nhân và Đảng Cộng sản.",
+        "exploration": "Chính cương vắn tắt là một văn kiện ngắn gọn nhưng súc tích, phản ánh tư duy chiến lược sắc bén của Nguyễn Ái Quốc. Khác với một số quan điểm cực tả của Quốc tế Cộng sản thời kỳ đó, Nguyễn Ái Quốc chủ trương xây dựng mặt trận dân tộc rộng rãi, không phân biệt giai cấp quá cứng nhắc – điều này về sau chứng minh là đúng đắn với thực tiễn cách mạng Việt Nam."
+      },
+      "correctAnswerSummary": "Cương lĩnh chính trị đầu tiên (Chính cương vắn tắt) xác định ba nội dung cốt lõi: (1) Mục tiêu: thực hiện tư sản dân quyền cách mạng và thổ địa cách mạng để tiến lên chủ nghĩa cộng sản; (2) Lực lượng: công nhân, nông dân, tiểu tư sản, trí thức, cùng các tầng lớp yêu nước khác; (3) Lãnh đạo: giai cấp công nhân thông qua Đảng Cộng sản Việt Nam.",
+      "historicalLesson": "Cương lĩnh chính trị đầu tiên của Đảng Cộng sản Việt Nam thể hiện sự vận dụng sáng tạo lý luận Mác-Lênin vào điều kiện cụ thể của một nước thuộc địa nửa phong kiến. Tư tưởng về xây dựng khối đại đoàn kết dân tộc rộng rãi, kết hợp nhiệm vụ giải phóng dân tộc với giải phóng giai cấp đã trở thành nguyên tắc xuyên suốt dẫn đường cho cách mạng Việt Nam trong suốt thế kỷ XX.",
+      "instructions": "Cương lĩnh chính trị đầu tiên của Đảng (Chính cương vắn tắt) chứa đựng những luận điểm nền tảng. Hãy ghép đúng từng điểm cương lĩnh với nội dung của nó.",
+      "question": "Giải Mã Cương Lĩnh Chính Trị Đầu Tiên",
+      "correctAnswerIds": [
+        "opt-c1t3-1",
+        "opt-c1t3-2",
+        "opt-c1t3-3"
+      ]
+    }
+  ],
+  "memoryFragment": {
+    "id": "fragment-1",
+    "name": "Ấn Vàng Khởi Nguồn",
+    "iconEmoji": "🔑",
+    "description": "Ấn tín vàng được trao trong ngày Đảng Cộng sản Việt Nam ra đời",
+    "historicalSignificance": "Đầu năm 1930, phong trào cách mạng Việt Nam đứng trước yêu cầu cấp bách phải có một đảng thống nhất lãnh đạo. Ba tổ chức cộng sản hoạt động riêng lẻ gây phân tán lực lượng. Nguyễn Ái Quốc – người chiến sĩ cách mạng lỗi lạc – đã chủ trì Hội nghị hợp nhất tại Hồng Kông, khai sinh Đảng Cộng sản Việt Nam vào ngày 3 tháng 2 năm 1930."
+  }
+}

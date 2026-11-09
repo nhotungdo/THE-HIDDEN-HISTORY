@@ -1,0 +1,213 @@
+{
+  "id": 5,
+  "year": 1986,
+  "codeName": "BƯỚC NGOẶT ĐỔI MỚI",
+  "primaryColor": "#6B8E23",
+  "title": "Đại hội VI và Công cuộc Đổi Mới",
+  "subtitle": "Bước ngoặt lịch sử của dân tộc Việt Nam",
+  "historicalDocument": {
+    "title": "Nghị quyết Đại hội Đại biểu toàn quốc lần thứ VI của Đảng Cộng sản Việt Nam",
+    "excerpt": "Đại hội VI của Đảng (tháng 12 năm 1986) đã thẳng thắn nhìn nhận những sai lầm, khuyết điểm trong lãnh đạo kinh tế - xã hội, từ đó đề ra đường lối Đổi Mới toàn diện đất nước. Tổng Bí thư Trường Chinh, trong bài phát biểu khai mạc Đại hội, nhấn mạnh: 'Đảng phải đổi mới tư duy, trước hết là tư duy kinh tế, nhìn thẳng vào sự thật, đánh giá đúng sự thật, nói rõ sự thật.' Nghị quyết Đại hội VI xác định: phát triển kinh tế hàng hoá nhiều thành phần, xoá bỏ cơ chế tập trung quan liêu bao cấp, thực hiện hạch toán kinh doanh, mở rộng quan hệ kinh tế đối ngoại, từng bước hội nhập khu vực và quốc tế.",
+    "date": "Tháng 12 năm 1986",
+    "location": "Hà Nội",
+    "sourceCitation": "Giáo trình Lịch sử Đảng Cộng sản Việt Nam – Bộ GD&ĐT"
+  },
+  "tasks": [
+    {
+      "id": "c5-t1",
+      "taskType": "dossier-match",
+      "title": "Ghép Hồ Sơ: Ba Chủ Trương Đổi Mới",
+      "points": 100,
+      "options": [
+        {
+          "id": "s1",
+          "text": "Đổi mới tư duy",
+          "matchTargetId": "o1"
+        },
+        {
+          "id": "s2",
+          "text": "Đổi mới kinh tế",
+          "matchTargetId": "o2"
+        },
+        {
+          "id": "s3",
+          "text": "Đổi mới tổ chức cán bộ",
+          "matchTargetId": "o3"
+        }
+      ],
+      "aiHints": {
+        "level1": "Ba chủ trương Đổi Mới được Đại hội VI đề ra nhằm giải quyết toàn diện cuộc khủng hoảng. Hãy nghĩ xem mỗi chủ trương hướng đến lĩnh vực nào: nhận thức, kinh tế hay con người?",
+        "level2": "Đổi mới tư duy liên quan đến cách Đảng nhìn nhận thực tế; Đổi mới kinh tế liên quan đến cơ chế quản lý; Đổi mới tổ chức cán bộ liên quan đến bộ máy con người. Hai phương án còn lại mâu thuẫn với tinh thần Đổi Mới.",
+        "exploration": "Tìm hiểu thêm về phát biểu của Tổng Bí thư Trường Chinh tại Đại hội VI và vai trò tiên phong của ông trong việc khởi xướng tư tưởng Đổi Mới ngay từ trước khi Đại hội diễn ra."
+      },
+      "correctAnswerSummary": "Ba chủ trương Đổi Mới của Đại hội VI (1986) tạo thành một thể thống nhất: Đổi mới tư duy là nền tảng nhận thức, Đổi mới kinh tế là trọng tâm thực tiễn, Đổi mới tổ chức cán bộ là điều kiện bảo đảm. Hai phương án gây nhiễu (tăng cường công nghiệp nặng và phân phối bình quân) thuộc về mô hình cũ mà Đổi Mới chủ trương từ bỏ.",
+      "historicalLesson": "Đổi Mới 1986 là bài học về dũng khí tự phê bình và sáng tạo trong tư duy lãnh đạo: Đảng dám nhìn thẳng vào những sai lầm của mình để tìm ra con đường phù hợp với thực tiễn Việt Nam. Tinh thần đó không chỉ cứu đất nước khỏi khủng hoảng mà còn đặt nền móng cho sự phát triển bền vững trong nhiều thập kỷ tiếp theo.",
+      "instructions": "Ghép đúng mỗi chủ trương đổi mới với nội dung cốt lõi tương ứng của nó. Hãy cẩn thận – có 2 phương án gây nhiễu không thuộc về bất kỳ chủ trương nào!",
+      "question": "Ghép Hồ Sơ: Ba Chủ Trương Đổi Mới",
+      "historicalDocument": {
+        "title": "Nghị quyết Đại hội Đại biểu toàn quốc lần thứ VI của Đảng Cộng sản Việt Nam",
+        "excerpt": "Đại hội VI của Đảng (tháng 12 năm 1986) đã thẳng thắn nhìn nhận những sai lầm, khuyết điểm trong lãnh đạo kinh tế - xã hội, từ đó đề ra đường lối Đổi Mới toàn diện đất nước. Tổng Bí thư Trường Chinh, trong bài phát biểu khai mạc Đại hội, nhấn mạnh: 'Đảng phải đổi mới tư duy, trước hết là tư duy kinh tế, nhìn thẳng vào sự thật, đánh giá đúng sự thật, nói rõ sự thật.' Nghị quyết Đại hội VI xác định: phát triển kinh tế hàng hoá nhiều thành phần, xoá bỏ cơ chế tập trung quan liêu bao cấp, thực hiện hạch toán kinh doanh, mở rộng quan hệ kinh tế đối ngoại, từng bước hội nhập khu vực và quốc tế.",
+        "sourceCitation": "Giáo trình Lịch sử Đảng Cộng sản Việt Nam – Bộ GD&ĐT"
+      },
+      "matchTargets": [
+        {
+          "id": "o1",
+          "text": "Từ bỏ giáo điều, nhìn thẳng vào sự thật, đánh giá đúng thực tiễn đất nước, không rập khuôn mô hình nước ngoài"
+        },
+        {
+          "id": "o2",
+          "text": "Xoá bỏ cơ chế tập trung quan liêu bao cấp, chuyển sang kinh tế hàng hoá nhiều thành phần, hạch toán kinh doanh"
+        },
+        {
+          "id": "o3",
+          "text": "Trẻ hoá đội ngũ, bố trí cán bộ đúng năng lực, chống tệ nạn quan liêu, cửa quyền trong bộ máy Đảng và Nhà nước"
+        },
+        {
+          "id": "o4",
+          "text": "Tăng cường sản xuất công nghiệp nặng theo mô hình Liên Xô, ưu tiên quốc doanh"
+        },
+        {
+          "id": "o5",
+          "text": "Thực hiện chế độ phân phối bình quân, bảo đảm công bằng tuyệt đối cho mọi tầng lớp nhân dân"
+        }
+      ],
+      "correctAnswerIds": []
+    },
+    {
+      "id": "c5-t2",
+      "taskType": "truth-or-myth",
+      "title": "Sự Thật Hay Huyền Thoại: Bối Cảnh Ra Đời Đổi Mới",
+      "points": 100,
+      "aiHints": {
+        "level1": "Hãy tập trung vào các con số và mốc thời gian cụ thể trong mỗi nhận định. Lịch sử thường bị bóp méo bởi những con số hoặc năm tháng không chính xác.",
+        "level2": "Kiểm tra kỹ: (1) Mức lạm phát năm 1986 có thực sự cao như vậy không? (2) Bản chất của cơ chế bao cấp là gì? (3) Đổi Mới có thực sự tư nhân hoá toàn bộ không? (4) Đại hội VI xảy ra năm nào?",
+        "exploration": "Tìm hiểu thêm về mô hình 'kinh tế thị trường định hướng xã hội chủ nghĩa' – điểm độc đáo của Việt Nam so với các nước Đông Âu chuyển đổi sau 1989 và so với mô hình kinh tế thị trường phương Tây."
+      },
+      "correctAnswerSummary": "Hai nhận định đúng phản ánh thực tế khủng hoảng: lạm phát phi mã và cơ chế bao cấp triệt tiêu động lực sản xuất. Hai nhận định sai cố tình xuyên tạc bản chất Đổi Mới (không phải tư nhân hoá hoàn toàn) và sai lệch về năm tháng lịch sử (Đại hội VI là 1986, không phải 1976).",
+      "historicalLesson": "Hiểu đúng bối cảnh ra đời của Đổi Mới giúp ta nhận thức rõ rằng đây không phải là sự từ bỏ con đường xã hội chủ nghĩa mà là sự sáng tạo, tìm tòi mô hình phát triển phù hợp với hoàn cảnh cụ thể của Việt Nam. Đổi Mới là minh chứng cho năng lực tự điều chỉnh và bản lĩnh thực tiễn của Đảng trước những thách thức nghiêm trọng của lịch sử.",
+      "instructions": "Đọc kỹ từng nhận định về bối cảnh kinh tế - xã hội dẫn đến Đổi Mới và những thay đổi mà chính sách này mang lại. Xác định đâu là SỰ THẬT lịch sử, đâu là NHẬN ĐỊNH SAI.",
+      "question": "Sự Thật Hay Huyền Thoại: Bối Cảnh Ra Đời Đổi Mới",
+      "historicalDocument": {
+        "title": "Nghị quyết Đại hội Đại biểu toàn quốc lần thứ VI của Đảng Cộng sản Việt Nam",
+        "excerpt": "Đại hội VI của Đảng (tháng 12 năm 1986) đã thẳng thắn nhìn nhận những sai lầm, khuyết điểm trong lãnh đạo kinh tế - xã hội, từ đó đề ra đường lối Đổi Mới toàn diện đất nước. Tổng Bí thư Trường Chinh, trong bài phát biểu khai mạc Đại hội, nhấn mạnh: 'Đảng phải đổi mới tư duy, trước hết là tư duy kinh tế, nhìn thẳng vào sự thật, đánh giá đúng sự thật, nói rõ sự thật.' Nghị quyết Đại hội VI xác định: phát triển kinh tế hàng hoá nhiều thành phần, xoá bỏ cơ chế tập trung quan liêu bao cấp, thực hiện hạch toán kinh doanh, mở rộng quan hệ kinh tế đối ngoại, từng bước hội nhập khu vực và quốc tế.",
+        "sourceCitation": "Giáo trình Lịch sử Đảng Cộng sản Việt Nam – Bộ GD&ĐT"
+      },
+      "options": [
+        {
+          "id": "st1",
+          "text": "Trước Đổi Mới, Việt Nam trải qua giai đoạn lạm phát phi mã (trên 700% vào năm 1986), đời sống nhân dân vô cùng khó khăn, hàng hoá khan hiếm trầm trọng.",
+          "isCorrect": true,
+          "explanation": "Đây là SỰ THẬT. Lạm phát năm 1986 lên tới khoảng 700–775%, là một trong những mức lạm phát cao nhất lịch sử Việt Nam, phản ánh cuộc khủng hoảng kinh tế - xã hội nghiêm trọng buộc Đảng phải thực hiện Đổi Mới."
+        },
+        {
+          "id": "st2",
+          "text": "Cơ chế bao cấp (tập trung quan liêu) trước Đổi Mới triệt tiêu động lực sản xuất vì Nhà nước kiểm soát toàn bộ giá cả, phân phối hàng hoá và sức lao động theo kế hoạch cứng nhắc.",
+          "isCorrect": true,
+          "explanation": "Đây là SỰ THẬT. Cơ chế tập trung quan liêu bao cấp khiến các đơn vị kinh tế không có quyền tự chủ, không có động lực cạnh tranh, dẫn đến trì trệ sản xuất và thiếu hụt hàng hoá. Đây là một trong những nguyên nhân cốt lõi dẫn đến Đổi Mới."
+        },
+        {
+          "id": "st3",
+          "text": "Đổi Mới 1986 chủ trương xoá bỏ hoàn toàn khu vực kinh tế nhà nước, tư nhân hoá toàn bộ doanh nghiệp và chuyển sang kinh tế thị trường tự do thuần tuý theo mô hình phương Tây.",
+          "isCorrect": false,
+          "explanation": "Đây là NHẬN ĐỊNH SAI. Đổi Mới không xoá bỏ kinh tế nhà nước mà chủ trương phát triển kinh tế hàng hoá nhiều thành phần, trong đó kinh tế nhà nước vẫn giữ vai trò chủ đạo. Việt Nam xây dựng 'kinh tế thị trường định hướng xã hội chủ nghĩa', không phải kinh tế thị trường tự do thuần tuý."
+        },
+        {
+          "id": "st4",
+          "text": "Nghị quyết Đại hội VI được thông qua vào năm 1976, ngay sau khi đất nước thống nhất, nhằm nhanh chóng phục hồi kinh tế sau chiến tranh.",
+          "isCorrect": false,
+          "explanation": "Đây là NHẬN ĐỊNH SAI. Đại hội VI diễn ra vào tháng 12 năm 1986, không phải 1976. Đại hội IV (1976) là đại hội đầu tiên sau thống nhất. Đổi Mới ra đời sau 10 năm đất nước thống nhất nhưng khủng hoảng kinh tế - xã hội ngày càng trầm trọng."
+        }
+      ],
+      "correctAnswerIds": [
+        "st1",
+        "st2"
+      ]
+    },
+    {
+      "id": "c5-t3",
+      "taskType": "timeline-order",
+      "title": "Giải Mã Dòng Thời Gian: Con Đường Đến Đổi Mới",
+      "points": 100,
+      "options": [
+        {
+          "id": "tl1",
+          "event": "Đại hội V của Đảng Cộng sản Việt Nam",
+          "detail": "Đại hội V (tháng 3/1982) xác định tiếp tục đường lối xây dựng chủ nghĩa xã hội, song bắt đầu có những tìm tòi điều chỉnh chính sách kinh tế trong bối cảnh đất nước còn nhiều khó khăn.",
+          "time": "Tháng 3 năm 1982",
+          "orderIndex": 1,
+          "text": "Đại hội V của Đảng Cộng sản Việt Nam"
+        },
+        {
+          "id": "tl2",
+          "event": "Khủng hoảng kinh tế - xã hội trầm trọng",
+          "detail": "Giai đoạn 1983–1985, Việt Nam lâm vào cuộc khủng hoảng kinh tế - xã hội nghiêm trọng: lạm phát tăng vọt, hàng hoá khan hiếm, đời sống nhân dân sa sút, cơ chế bao cấp bộc lộ những mâu thuẫn không thể giải quyết.",
+          "time": "Giai đoạn 1983–1985",
+          "orderIndex": 2,
+          "text": "Khủng hoảng kinh tế - xã hội trầm trọng"
+        },
+        {
+          "id": "tl3",
+          "event": "Đại hội VI – Chính thức khởi xướng Đổi Mới",
+          "detail": "Đại hội VI của Đảng (tháng 12/1986) thông qua đường lối Đổi Mới toàn diện dưới sự lãnh đạo của Tổng Bí thư Trường Chinh, chính thức mở ra kỷ nguyên mới cho đất nước.",
+          "time": "Tháng 12 năm 1986",
+          "orderIndex": 3,
+          "text": "Đại hội VI – Chính thức khởi xướng Đổi Mới"
+        },
+        {
+          "id": "tl4",
+          "event": "Ban hành Luật Đầu tư nước ngoài",
+          "detail": "Tháng 12/1987, Quốc hội thông qua Luật Đầu tư nước ngoài tại Việt Nam – một trong những văn bản pháp lý đầu tiên thể chế hoá chính sách mở cửa, thu hút vốn và công nghệ từ bên ngoài.",
+          "time": "Tháng 12 năm 1987",
+          "orderIndex": 4,
+          "text": "Ban hành Luật Đầu tư nước ngoài"
+        },
+        {
+          "id": "tl5",
+          "event": "Việt Nam gia nhập ASEAN",
+          "detail": "Ngày 28/7/1995, Việt Nam chính thức trở thành thành viên thứ 7 của ASEAN, đánh dấu sự hội nhập khu vực sâu rộng và thành quả quan trọng của chính sách đối ngoại Đổi Mới.",
+          "time": "Năm 1995",
+          "orderIndex": 5,
+          "text": "Việt Nam gia nhập ASEAN"
+        }
+      ],
+      "aiHints": {
+        "level1": "Hãy chú ý đến các năm được đề cập trong tên sự kiện hoặc phần mô tả. Dòng thời gian trải dài từ đầu thập niên 1980 đến giữa thập niên 1990.",
+        "level2": "Trật tự logic: Đại hội V (1982) → Khủng hoảng (1983-1985) → Đại hội VI/Đổi Mới (1986) → Luật Đầu tư (1987) → Gia nhập ASEAN (1995). Mỗi sự kiện là hệ quả hoặc điều kiện của sự kiện kế tiếp.",
+        "exploration": "Khám phá thêm hành trình hội nhập quốc tế của Việt Nam sau Đổi Mới: từ bình thường hoá quan hệ với Mỹ (1995) đến gia nhập WTO (2007) và tham gia các hiệp định thương mại tự do thế hệ mới như CPTPP, EVFTA."
+      },
+      "correctAnswerSummary": "Trình tự đúng là: Đại hội V (3/1982) → Khủng hoảng kinh tế - xã hội (1983–1985) → Đại hội VI/Đổi Mới (12/1986) → Luật Đầu tư nước ngoài (12/1987) → Việt Nam gia nhập ASEAN (1995). Đây là hành trình từ nhận ra khủng hoảng đến tìm ra lối thoát và gặt hái thành quả hội nhập.",
+      "historicalLesson": "Dòng thời gian từ 1982 đến 1995 cho thấy Đổi Mới không phải là quyết định bột phát mà là kết quả của quá trình tích luỹ nhận thức qua thực tiễn khủng hoảng đau đớn. Từ Đổi Mới 1986 đến gia nhập ASEAN 1995 chỉ 9 năm, nhưng đó là bước chuyển mình ngoạn mục, đưa Việt Nam từ bờ vực khủng hoảng trở thành quốc gia năng động, hội nhập tích cực vào cộng đồng quốc tế.",
+      "instructions": "Sắp xếp 5 mốc lịch sử quan trọng theo đúng trình tự thời gian từ sớm nhất đến muộn nhất. Mỗi sự kiện là một mắt xích trong hành trình dẫn đến và từ Đổi Mới.",
+      "question": "Giải Mã Dòng Thời Gian: Con Đường Đến Đổi Mới",
+      "historicalDocument": {
+        "title": "Nghị quyết Đại hội Đại biểu toàn quốc lần thứ VI của Đảng Cộng sản Việt Nam",
+        "excerpt": "Đại hội VI của Đảng (tháng 12 năm 1986) đã thẳng thắn nhìn nhận những sai lầm, khuyết điểm trong lãnh đạo kinh tế - xã hội, từ đó đề ra đường lối Đổi Mới toàn diện đất nước. Tổng Bí thư Trường Chinh, trong bài phát biểu khai mạc Đại hội, nhấn mạnh: 'Đảng phải đổi mới tư duy, trước hết là tư duy kinh tế, nhìn thẳng vào sự thật, đánh giá đúng sự thật, nói rõ sự thật.' Nghị quyết Đại hội VI xác định: phát triển kinh tế hàng hoá nhiều thành phần, xoá bỏ cơ chế tập trung quan liêu bao cấp, thực hiện hạch toán kinh doanh, mở rộng quan hệ kinh tế đối ngoại, từng bước hội nhập khu vực và quốc tế.",
+        "sourceCitation": "Giáo trình Lịch sử Đảng Cộng sản Việt Nam – Bộ GD&ĐT"
+      },
+      "correctAnswerIds": []
+    }
+  ],
+  "memoryFragment": {
+    "id": "fragment-5",
+    "name": "Bánh Răng Đổi Mới",
+    "iconEmoji": "⚙️",
+    "description": "Bánh răng cơ khí biểu tượng công cuộc Đổi Mới toàn diện đất nước từ 1986",
+    "flavorText": "Mỗi bánh răng chỉ có thể quay khi khớp với những bánh răng khác – cũng như Đổi Mới chỉ thành công khi tư duy, kinh tế và tổ chức cán bộ cùng chuyển động đồng bộ.",
+    "unlockCondition": "Hoàn thành cả 3 nhiệm vụ của Chương 5",
+    "rarity": "rare",
+    "historicalSignificance": "Đại hội VI của Đảng (tháng 12 năm 1986) đã thẳng thắn nhìn nhận những sai lầm, khuyết điểm trong lãnh đạo kinh tế - xã hội, từ đó đề ra đường lối Đổi Mới toàn diện đất nước. Tổng Bí thư Trường Chinh, trong bài phát biểu khai mạc Đại hội, nhấn mạnh: 'Đảng phải đổi mới tư duy, trước hết là tư duy kinh tế, nhìn thẳng vào sự thật, đánh giá đúng sự thật, nói rõ sự thật.' Nghị quyết Đại hội VI xác định: phát triển kinh tế hàng hoá nhiều thành phần, xoá bỏ cơ chế tập trung quan liêu bao cấp, thực hiện hạch toán kinh doanh, mở rộng quan hệ kinh tế đối ngoại, từng bước hội nhập khu vực và quốc tế."
+  },
+  "chapterSummary": {
+    "overview": "Tháng 12 năm 1986, Đại hội VI của Đảng Cộng sản Việt Nam đã khai sinh đường lối Đổi Mới – một quyết sách lịch sử cứu đất nước khỏi vòng xoáy khủng hoảng kinh tế - xã hội trầm trọng. Từ tư duy dám nhìn thẳng vào sự thật, Đảng đề ra ba chủ trương cốt lõi: đổi mới tư duy, đổi mới kinh tế và đổi mới tổ chức cán bộ.",
+    "keyFigures": [
+      {
+        "name": "Trường Chinh",
+        "role": "Tổng Bí thư Đảng Cộng sản Việt Nam (1986)",
+        "contribution": "Người khởi xướng và lãnh đạo Đại hội VI, đặt nền tảng tư tưởng cho công cuộc Đổi Mới toàn diện"
+      }
+    ],
+    "significance": "Đổi Mới 1986 là bước ngoặt quyết định đưa Việt Nam thoát khỏi khủng hoảng, chuyển sang kinh tế thị trường định hướng xã hội chủ nghĩa và hội nhập quốc tế, tạo nền tảng cho sự phát triển vượt bậc trong các thập kỷ sau."
+  },
+  "slogan": "Bước ngoặt lịch sử của dân tộc Việt Nam",
+  "historicalContext": "Đại hội VI của Đảng (tháng 12 năm 1986) đã thẳng thắn nhìn nhận những sai lầm, khuyết điểm trong lãnh đạo kinh tế - xã hội, từ đó đề ra đường lối Đổi Mới toàn diện đất nước. Tổng Bí thư Trường Chinh, trong bài phát biểu khai mạc Đại hội, nhấn mạnh: 'Đảng phải đổi mới tư duy, trước hết là tư duy kinh tế, nhìn thẳng vào sự thật, đánh giá đúng sự thật, nói rõ sự thật.' Nghị quyết Đại hội VI xác định: phát triển kinh tế hàng hoá nhiều thành phần, xoá bỏ cơ chế tập trung quan liêu bao cấp, thực hiện hạch toán kinh doanh, mở rộng quan hệ kinh tế đối ngoại, từng bước hội nhập khu vực và quốc tế."
+}
