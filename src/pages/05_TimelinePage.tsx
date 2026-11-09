@@ -169,7 +169,7 @@ export default function TimelinePage() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.1 }}
-                  className={isLastOdd ? 'sm:col-span-2 lg:col-span-1' : ''}
+                  className={isLastOdd ? 'sm:col-span-2 sm:max-w-sm sm:mx-auto lg:max-w-none lg:col-span-1 w-full' : 'w-full'}
                 >
                   <button
                     type="button"
