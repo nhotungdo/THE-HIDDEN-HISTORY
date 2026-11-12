@@ -1,16 +1,344 @@
 <!doctype html>
 <html lang="vi">
   <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mật Mã Thời Gian — VNR202 | The Hidden History</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Cinzel:wght@500;700;800;900&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,800;1,400;1,600&display=swap" rel="stylesheet">
+    <title>Việt Nam: 30 Năm Kháng Chiến (1945–1975) — Không Gian Triển Lãm Lịch Sử 3D</title>
+    <meta
+      name="description"
+      content="Không gian triển lãm lịch sử số hóa 3D — Khám phá hai cuộc kháng chiến vĩ đại của dân tộc Việt Nam: Kháng chiến chống thực dân Pháp (1945–1954) và Kháng chiến chống đế quốc Mỹ (1954–1975)."
+    />
+
+    <!-- Google Fonts: Cinzel + Cormorant Garamond + Be Vietnam Pro -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./style.css" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 15 C45 35 35 45 50 85 C65 45 55 35 50 15 Z' fill='%23C9A84C'/><path d='M50 45 C30 45 20 55 30 75 C45 65 48 55 50 45 Z' fill='%23C9A84C' opacity='0.9'/><path d='M50 45 C70 45 80 55 70 75 C55 65 52 55 50 45 Z' fill='%23C9A84C' opacity='0.9'/></svg>">
   </head>
+
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <!-- ============================================================ -->
+    <!-- 1. WEBSITE LOGO — Góc trên cùng bên trái                         -->
+    <!-- ============================================================ -->
+    <div id="main-web-logo" title="Bảo tàng lịch sử nghệ thuật 3D">
+      <svg viewBox="0 0 100 100" class="gold-lotus-logo">
+        <path d="M50 15 C45 35 35 45 50 85 C65 45 55 35 50 15 Z" fill="url(#gold-grad-header)"/>
+        <path d="M50 45 C30 45 20 55 30 75 C45 65 48 55 50 45 Z" fill="url(#gold-grad-header)" opacity="0.9"/>
+        <path d="M50 45 C70 45 80 55 70 75 C55 65 52 55 50 45 Z" fill="url(#gold-grad-header)" opacity="0.9"/>
+        <path d="M50 55 C15 55 10 65 20 80 C35 75 42 68 50 55 Z" fill="url(#gold-grad-header)" opacity="0.8"/>
+        <path d="M50 55 C85 55 90 65 80 80 C65 75 58 68 50 55 Z" fill="url(#gold-grad-header)" opacity="0.8"/>
+        <defs>
+          <linearGradient id="gold-grad-header" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FFE79A" />
+            <stop offset="50%" stop-color="#C9A84C" />
+            <stop offset="100%" stop-color="#8A6421" />
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="logo-text">
+        <span class="logo-main">VIỆT NAM 1945–1975</span>
+        <span class="logo-sub">PHÒNG TRIỂN LÃM LỊCH SỬ</span>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 2. INTRO SCREEN — Sảnh Đón Tiếp Triển Lãm                    -->
+    <!-- ============================================================ -->
+    <div id="menu">
+      <div id="starry_night_bg"></div>
+      <div id="menu-overlay"></div>
+
+      <div class="landing-container">
+        <!-- Cột Trái: Thông Tin & Menu Điều Hướng -->
+        <div class="landing-left">
+          <div class="landing-logo">
+            <svg viewBox="0 0 51 48" class="gold-star-logo">
+              <path fill="#C9A84C" d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"/>
+            </svg>
+            <span class="landing-badge">BẢO TÀNG LỊCH SỬ NGHỆ THUẬT 3D</span>
+          </div>
+
+          <div class="landing-title-group">
+            <div class="landing-kicker">TRIỂN LÃM CHUYÊN ĐỀ QUỐC GIA</div>
+            <h1>VIỆT NAM</h1>
+            <h2>30 Năm Kháng Chiến Chống Xâm Lược</h2>
+            <div class="landing-divider"></div>
+            <p class="landing-tagline">
+              "Không có gì quý hơn độc lập, tự do. Nước độc lập muốn thật sự là nước độc lập thì
+              dân cũng phải đứng dậy tự giải phóng lấy mình."
+            </p>
+          </div>
+
+          <ul class="game-menu-list">
+            <li class="menu-item active" id="play_button">
+              <span class="menu-pointer">✦</span>
+              <span class="menu-label">BẮT ĐẦU THAM QUAN</span>
+            </li>
+            <li class="menu-item" id="about_button">
+              <span class="menu-pointer">✦</span>
+              <span class="menu-label">GIỚI THIỆU TRIỂN LÃM</span>
+            </li>
+            <li class="menu-item" id="btn_toggle_hud_volume">
+              <span class="menu-pointer">✦</span>
+              <span class="menu-label">CÀI ĐẶT &amp; PHÍM TẮT</span>
+            </li>
+          </ul>
+
+          <div class="landing-footer">
+            <div class="partner-lockup">
+              <img src="/logo/Logo_Trường_Đại_học_FPT.svg.png" alt="Đại học FPT" class="partner-logo">
+              <div class="partner-info">
+                <span class="partner-label">ĐỒ ÁN HỌC PHẦN</span>
+                <span class="partner-name">VNR202 — ĐẠI HỌC FPT</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cột Phải: Các Gian Trưng Bày (Wings & Chapters) -->
+        <div class="landing-right">
+          <div class="chapter-card-wrapper">
+            <div class="chapter-card-header">
+              <div class="gallery-wings-tag">LỘ TRÌNH THAM QUAN</div>
+              <h3>CÁC GIAN TRƯNG BÀY</h3>
+              <p>Khám phá hai cuộc kháng chiến vĩ đại của dân tộc Việt Nam</p>
+            </div>
+
+            <div class="chapter-list">
+              <div class="chapter-item" data-desc="Hành trình đầu tiên đưa người tham quan từ ngày Chủ tịch Hồ Chí Minh đọc Tuyên Ngôn Độc Lập 2/9/1945, qua Chiến thắng Việt Bắc Thu - Đông 1947, Chiến dịch Biên Giới 1950, đến Chiến thắng Điện Biên Phủ 'lừng lẫy năm châu, chấn động địa cầu' năm 1954 — kết thúc thắng lợi 9 năm trường kỳ kháng chiến chống thực dân Pháp.">
+                <span class="chapter-num">GIAN TRƯNG BÀY I</span>
+                <span class="chapter-name">Kháng chiến chống thực dân Pháp (1945–1954)</span>
+                <span class="chapter-arrow">→</span>
+              </div>
+              <div class="chapter-item" data-desc="Hành trình thứ hai tái hiện cuộc chiến đấu quật cường từ Phong trào Đồng Khởi 1960 tại Bến Tre, qua Tổng tiến công Tết Mậu Thân 1968, Trận Điện Biên Phủ trên không 1972 đến Chiến dịch Hồ Chí Minh lịch sử mùa xuân 1975 — giải phóng hoàn toàn miền Nam, thống nhất đất nước.">
+                <span class="chapter-num">GIAN TRƯNG BÀY II</span>
+                <span class="chapter-name">Kháng chiến chống đế quốc Mỹ (1954–1975)</span>
+                <span class="chapter-arrow">→</span>
+              </div>
+            </div>
+
+            <div class="chapter-detail-panel">
+              <h4 id="chapter-detail-title">Chọn một gian trưng bày để xem thuyết minh</h4>
+              <p id="chapter-detail-text">
+                Di chuyển chuột qua các gian trưng bày ở trên để xem tóm lược lịch sử và các tác phẩm tư liệu được tuyển chọn trong không gian triển lãm.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 3. ABOUT OVERLAY — Giới Thiệu Không Gian Triển Lãm             -->
+    <!-- ============================================================ -->
+    <div id="about-overlay">
+      <button id="close-about">✕ ĐÓNG</button>
+
+      <div class="about-content">
+        <div class="about-badge">VỀ PHÒNG TRIỂN LÃM</div>
+        <h1>Việt Nam: 30 Năm Kháng Chiến Chống Xâm Lược (1945–1975)</h1>
+        <p class="about-lead">Không gian nghệ thuật &amp; tư liệu lịch sử số hóa 3D</p>
+
+        <p style="font-size: 15px; line-height: 1.85; color: var(--color-cream-dim); margin-bottom: 24px;">
+          Phòng triển lãm lịch sử 3D là sản phẩm học phần <strong>VNR202</strong> của sinh viên Đại học FPT, ứng dụng công nghệ <strong>Web3D Three.js</strong> để tái hiện một không gian trưng bày trang nghiêm, sâu lắng, mang đến cảm giác chân thực như đang dạo bước trong một bảo tàng lịch sử quốc gia.
+        </p>
+        <p style="font-size: 15px; line-height: 1.85; color: var(--color-cream-dim); margin-bottom: 30px;">
+          Khách tham quan được thưởng lãm hệ thống 16 bức tranh tư liệu quý giá, phân bố theo trình tự không gian 4 bức tường tương ứng với hai mốc son vĩ đại: 9 năm kháng chiến chống thực dân Pháp (1945–1954) và 21 năm kháng chiến chống đế quốc Mỹ (1954–1975).
+        </p>
+
+        <div class="about-wings">
+          <div class="wing-item">
+            <span class="wing-tag">Tường Trước</span>
+            <span>Tuyên Ngôn Độc Lập — Chiến thắng Việt Bắc — Chiến dịch Biên Giới</span>
+          </div>
+          <div class="wing-item">
+            <span class="wing-tag">Tường Trái</span>
+            <span>Điện Biên Phủ — Hiệp định Genève — Đồng Khởi — Mặt trận Dân tộc Giải phóng — Đánh bại Chiến tranh đặc biệt</span>
+          </div>
+          <div class="wing-item">
+            <span class="wing-tag">Tường Sau</span>
+            <span>Sự kiện Vịnh Bắc Bộ — Đánh bại Chiến tranh cục bộ — Tổng tiến công Tết Mậu Thân</span>
+          </div>
+          <div class="wing-item">
+            <span class="wing-tag">Tường Phải</span>
+            <span>Mùa hè đỏ lửa 1972 — Điện Biên Phủ trên không — Hiệp định Paris — Phước Long — Tây Nguyên</span>
+          </div>
+        </div>
+
+        <div class="about-controls">
+          <h2>Chỉ dẫn tham quan</h2>
+          <div class="controls-grid">
+            <div class="control-item">
+              <kbd>W A S D</kbd><span>Di chuyển trong không gian triển lãm</span>
+            </div>
+            <div class="control-item">
+              <kbd>Chuột</kbd><span>Xoay góc nhìn toàn cảnh</span>
+            </div>
+            <div class="control-item">
+              <kbd>Click</kbd><span>Xem thuyết minh chi tiết tác phẩm</span>
+            </div>
+            <div class="control-item">
+              <kbd id="kbd_showMenu">M</kbd><span>Quay về sảnh đón tiếp (Menu)</span>
+            </div>
+            <div class="control-item">
+              <kbd id="kbd_toggleLights">L</kbd><span>Bật / tắt đèn chiếu sáng triển lãm</span>
+            </div>
+            <div class="control-item">
+              <kbd id="kbd_toggleAudio">K</kbd><span>Bật / tắt âm thanh thuyết minh (Audio Guide)</span>
+            </div>
+            <div class="control-item">
+              <kbd id="kbd_inspectObject">T</kbd><span>Nghe bản tin lịch sử (Radio cổ điển)</span>
+            </div>
+            <div class="control-item">
+              <kbd id="kbd_toggleMouse">Space</kbd><span>Khóa / Nhả con trỏ chuột</span>
+            </div>
+            <div class="control-item">
+              <kbd id="kbd_sprint">Shift</kbd><span>Tăng tốc độ di chuyển</span>
+            </div>
+            <div class="control-item">
+              <kbd>Esc</kbd><span>Thoát chế độ con trỏ chuột</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 4. AUDIO GUIDE & LIGHTING QUICK HUD (GÓC TRÊN BÊN PHẢI)         -->
+    <!-- ============================================================ -->
+    <div id="audio_controls" style="display: none">
+      <div class="hud-control-group">
+        <button id="btn_toggle_audio" class="hud-control-btn">🎵 Tải nhạc...</button>
+        <div class="hud-volume-control" title="Âm lượng hướng dẫn">
+          <span class="hud-volume-icon">🔊</span>
+          <input type="range" id="volume_slider" min="0" max="1" step="0.05" value="0.35" class="hud-slider"/>
+        </div>
+        <div class="hud-track-dropdown">
+          <button id="btn_dropdown_toggle" class="hud-control-btn">💿 Chọn bài ▾</button>
+          <div id="track_dropdown_menu" class="dropdown-menu-content" style="display: none">
+            <div class="dropdown-item active" data-index="0">Tiersen (BGM Nhẹ Nhàng)</div>
+            <div class="dropdown-item" data-index="1">The Ballad of Ho Chi Minh</div>
+            <div class="dropdown-item" data-index="2">Người là niềm tin tất thắng</div>
+            <div class="dropdown-item" data-index="3">Đêm nghe hát đò đưa nhớ Bác</div>
+          </div>
+        </div>
+        <button id="toggle_light" class="hud-control-btn">💡 Chế độ đèn</button>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 6. CHỈ DẪN THAM QUAN PANEL (GÓC DƯỚI BÊN PHẢI)                -->
+    <!-- ============================================================ -->
+    <div id="info-panel">
+      <div id="info-header">
+        <h3>CHỈ DẪN THAM QUAN</h3>
+        <button id="toggle-info">Ẩn</button>
+      </div>
+      <div id="info-content">
+        <p><b>W/A/S/D:</b> Di chuyển</p>
+        <p><b>Chuột:</b> Xoay góc nhìn</p>
+        <p><b>Click:</b> Chi tiết tranh</p>
+        <p><b class="key-inspect-label">T:</b> Bật radio cổ</p>
+        <p><b class="key-lights-label">L:</b> Chế độ đèn</p>
+        <p><b class="key-audio-label">K:</b> Bật/tắt nhạc</p>
+        <p><b class="key-menu-label">M:</b> Sảnh đón tiếp</p>
+        <p><b class="key-sprint-label">Shift:</b> Chạy nhanh</p>
+        <p><b>Space:</b> Khóa chuột</p>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 7. CẤU HÌNH & PHÍM TẮT MODAL                                  -->
+    <!-- ============================================================ -->
+    <div id="settings-modal" class="modal">
+      <div class="settings-modal-dialog">
+        <button class="close-modal" id="close-settings-btn">✕</button>
+        <div class="modal-tag">CẤU HÌNH TRIỂN LÃM</div>
+        <h2 class="modal-artwork-title" style="margin-bottom: 22px;">Cài Đặt Phím Tắt &amp; Âm Thanh</h2>
+
+        <div style="margin-bottom: 24px;">
+          <div class="settings-section-title">Âm Lượng Nhạc Nền (Audio Guide)</div>
+          <div class="settings-volume-box">
+            <span style="font-size: 16px; color: var(--color-gold);">🔊</span>
+            <input type="range" id="settings_volume_slider" min="0" max="1" step="0.05" value="0.35" class="hud-slider" style="flex: 1;"/>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 24px;">
+          <div class="settings-section-title">Tùy Chỉnh Phím Tắt Thao Tác</div>
+          <div class="keybind-grid">
+            <div class="keybind-row">
+              <span class="keybind-label">Bật / Tắt Đèn Triển Lãm:</span>
+              <input type="text" class="keybind-input" data-action="toggleLights" readonly />
+            </div>
+            <div class="keybind-row">
+              <span class="keybind-label">Bật / Tắt Nhạc Nền:</span>
+              <input type="text" class="keybind-input" data-action="toggleAudio" readonly />
+            </div>
+            <div class="keybind-row">
+              <span class="keybind-label">Nghe Bản Tin Lịch Sử:</span>
+              <input type="text" class="keybind-input" data-action="inspectObject" readonly />
+            </div>
+            <div class="keybind-row">
+              <span class="keybind-label">Quay Về Sảnh Đón Tiếp:</span>
+              <input type="text" class="keybind-input" data-action="showMenu" readonly />
+            </div>
+            <div class="keybind-row">
+              <span class="keybind-label">Khóa / Nhả Con Trỏ Chuột:</span>
+              <input type="text" class="keybind-input" data-action="toggleMouse" readonly />
+            </div>
+            <div class="keybind-row">
+              <span class="keybind-label">Tăng Tốc Di Chuyển:</span>
+              <input type="text" class="keybind-input" data-action="sprint" readonly />
+            </div>
+          </div>
+        </div>
+
+        <div id="settings_error_msg"></div>
+
+        <div style="display: flex; gap: 14px; margin-top: 14px;">
+          <button id="btn_reset_keys" class="btn-gallery-secondary" style="flex: 1;">Khôi Phục Mặc Định</button>
+          <button id="btn_save_settings" class="btn-gallery-primary" style="flex: 1;">Lưu Lại</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 8. EXIT HOLD PROGRESS BAR                                      -->
+    <!-- ============================================================ -->
+    <div id="exit-hold-progress-container">
+      <div class="exit-progress-text">Đang rời phòng triển lãm...</div>
+      <div class="exit-progress-track">
+        <div id="exit-hold-progress-bar"></div>
+      </div>
+    </div>
+
+    <!-- Bảng tên hiện vật / tác phẩm khi ngắm nhìn (Bottom Plaque) -->
+    <div id="painting-info"></div>
+
+    <!-- Tâm ngắm kính lúp bảo tàng (Gallery Reticle) -->
+    <div id="crosshair"></div>
+
+    <!-- Gợi ý tương tác ban đầu khi vừa vào sảnh -->
+    <div id="first-pov-hint">🎨 Di chuyển chuột để nhìn quanh — Nhấn <b>Click</b> vào tranh để xem tư liệu</div>
+
+    <!-- Hồ sơ hiện vật chi tiết (Khi click vào tranh) -->
+    <div id="infoModal" class="modal">
+      <div class="modal-content">
+        <button class="close-modal" id="close-modal-btn">✕</button>
+        <div id="modalContent"></div>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- BOOTSTRAP SCRIPT                                              -->
+    <!-- ============================================================ -->
+    <script type="module" src="./js/loadComponents.js"></script>
   </body>
 </html>
