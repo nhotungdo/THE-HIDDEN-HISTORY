@@ -18,6 +18,7 @@
     "three-stdlib": "^2.21.8"
   },
   "devDependencies": {
+    "qrcode": "^1.5.4",
     "vite": "^4.3.1"
   }
 }

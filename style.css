@@ -137,26 +137,31 @@ button {
   z-index: 1500;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   pointer-events: auto;
   user-select: none;
-  background: rgba(16, 12, 9, 0.78);
+  background: rgba(16, 12, 9, 0.82);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  padding: 8px 20px 8px 12px;
+  padding: 7px 16px 7px 12px;
   border-radius: var(--radius-pill);
   border: 1px solid var(--color-gold-border);
   box-shadow: 0 10px 32px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.06);
   transition: all 0.4s var(--ease-gallery);
   text-decoration: none;
-  cursor: pointer;
 }
 
 #main-web-logo:hover {
   border-color: var(--color-gold);
-  background: rgba(26, 19, 14, 0.92);
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.7), 0 0 20px rgba(201, 168, 76, 0.3);
-  transform: translateY(-2px);
+  background: rgba(24, 18, 13, 0.94);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.7), 0 0 20px rgba(201, 168, 76, 0.25);
+}
+
+.logo-brand-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
 }
 
 .gold-lotus-logo {
@@ -166,7 +171,7 @@ button {
   transition: transform 0.8s var(--ease-gallery);
 }
 
-#main-web-logo:hover .gold-lotus-logo {
+.logo-brand-wrap:hover .gold-lotus-logo {
   transform: rotate(360deg) scale(1.08);
 }
 
@@ -195,6 +200,173 @@ button {
   text-transform: uppercase;
   margin-top: 2px;
   opacity: 0.95;
+}
+
+/* ── HEADER QR CODE ─────────────────────────────────────────── */
+.header-qr-divider {
+  width: 1px;
+  height: 22px;
+  background: var(--color-gold-border);
+  opacity: 0.7;
+}
+
+.header-qr-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.header-qr-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: rgba(201, 168, 76, 0.12);
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  cursor: pointer;
+  transition: all 0.3s var(--ease-gallery);
+  outline: none;
+}
+
+.header-qr-btn:hover,
+.header-qr-wrapper.is-open .header-qr-btn {
+  background: rgba(201, 168, 76, 0.26);
+  border-color: var(--color-gold);
+  box-shadow: 0 0 14px rgba(201, 168, 76, 0.35);
+}
+
+.header-qr-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  background: #FFFDF9;
+  padding: 1.5px;
+  display: block;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.header-qr-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-gold);
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+/* Popover Card */
+.header-qr-popover {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-6px);
+  width: 224px;
+  background: rgba(16, 12, 9, 0.96);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--color-gold);
+  border-radius: 14px;
+  padding: 16px 14px 14px;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.9), 0 0 24px rgba(201, 168, 76, 0.22);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s var(--ease-gallery);
+  pointer-events: none;
+  z-index: 2100;
+  text-align: center;
+}
+
+.header-qr-wrapper:hover .header-qr-popover,
+.header-qr-wrapper.is-open .header-qr-popover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.header-qr-popover::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 10px;
+  height: 10px;
+  background: rgba(16, 12, 9, 0.96);
+  border-left: 1px solid var(--color-gold);
+  border-top: 1px solid var(--color-gold);
+}
+
+.qr-popover-tag {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 8px;
+  font-weight: 700;
+  color: var(--color-gold);
+  background: rgba(201, 168, 76, 0.14);
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.14em;
+  margin-bottom: 5px;
+}
+
+.qr-popover-title {
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--color-cream);
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+
+.qr-popover-img-wrap {
+  background: #FFFDF9;
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  margin: 0 auto 10px;
+  width: 166px;
+  height: 166px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-popover-img {
+  width: 150px;
+  height: 150px;
+  display: block;
+}
+
+.qr-popover-guide {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  color: var(--color-cream-dim);
+  line-height: 1.45;
+  margin: 0 0 10px 0;
+}
+
+.qr-popover-url {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 9.5px;
+  font-weight: 600;
+  color: var(--color-gold);
+  text-decoration: none;
+  background: rgba(201, 168, 76, 0.1);
+  border: 1px dashed rgba(201, 168, 76, 0.35);
+  padding: 5px 8px;
+  border-radius: 6px;
+  word-break: break-all;
+  transition: all 0.2s ease;
+}
+
+.qr-popover-url:hover {
+  background: rgba(201, 168, 76, 0.24);
+  border-color: var(--color-gold);
+  color: #FFF;
 }
 
 /* ── 5. GAME / EXHIBITION LANDING MENU (#menu) ───────────────── */
@@ -1627,18 +1799,46 @@ canvas {
   #main-web-logo {
     top: 12px;
     left: 12px;
-    padding: 6px 12px 6px 8px;
+    padding: 5px 10px 5px 8px;
     gap: 8px;
   }
   .gold-lotus-logo {
-    width: 26px;
-    height: 26px;
+    width: 24px;
+    height: 24px;
   }
   .logo-main {
-    font-size: 12px;
+    font-size: 11px;
   }
   .logo-sub {
-    font-size: 7.5px;
+    font-size: 7px;
+  }
+  .header-qr-label {
+    display: none;
+  }
+  .header-qr-btn {
+    padding: 3px 6px;
+    gap: 0;
+  }
+  .header-qr-popover {
+    left: 0;
+    transform: translateY(-6px);
+    width: 204px;
+  }
+  .header-qr-wrapper:hover .header-qr-popover,
+  .header-qr-wrapper.is-open .header-qr-popover {
+    transform: translateY(0);
+  }
+  .header-qr-popover::before {
+    left: 20px;
+    transform: rotate(45deg);
+  }
+  .qr-popover-img-wrap {
+    width: 144px;
+    height: 144px;
+  }
+  .qr-popover-img {
+    width: 130px;
+    height: 130px;
   }
   #painting-info {
     min-width: 280px;
