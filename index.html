@@ -24,50 +24,26 @@
 
   <body>
     <!-- ============================================================ -->
-    <!-- 1. WEBSITE LOGO & QR CODE — Góc trên cùng bên trái            -->
+    <!-- 1. WEBSITE LOGO — Góc trên cùng bên trái                         -->
     <!-- ============================================================ -->
-    <div id="main-web-logo">
-      <div class="logo-brand-wrap" title="Bảo tàng lịch sử nghệ thuật 3D">
-        <svg viewBox="0 0 100 100" class="gold-lotus-logo">
-          <path d="M50 15 C45 35 35 45 50 85 C65 45 55 35 50 15 Z" fill="url(#gold-grad-header)"/>
-          <path d="M50 45 C30 45 20 55 30 75 C45 65 48 55 50 45 Z" fill="url(#gold-grad-header)" opacity="0.9"/>
-          <path d="M50 45 C70 45 80 55 70 75 C55 65 52 55 50 45 Z" fill="url(#gold-grad-header)" opacity="0.9"/>
-          <path d="M50 55 C15 55 10 65 20 80 C35 75 42 68 50 55 Z" fill="url(#gold-grad-header)" opacity="0.8"/>
-          <path d="M50 55 C85 55 90 65 80 80 C65 75 58 68 50 55 Z" fill="url(#gold-grad-header)" opacity="0.8"/>
-          <defs>
-            <linearGradient id="gold-grad-header" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#FFE79A" />
-              <stop offset="50%" stop-color="#C9A84C" />
-              <stop offset="100%" stop-color="#8A6421" />
-            </linearGradient>
-          </defs>
-        </svg>
-        <div class="logo-text">
-          <span class="logo-main">VIỆT NAM 1945–1975</span>
-          <span class="logo-sub">PHÒNG TRIỂN LÃM LỊCH SỬ</span>
-        </div>
-      </div>
-
-      <div class="header-qr-divider"></div>
-
-      <!-- Khối Mã QR gắn trực tiếp trên header -->
-      <div class="header-qr-wrapper" id="header-qr-wrapper">
-        <button type="button" class="header-qr-btn" id="header-qr-btn" title="Quét mã QR để mở trên điện thoại">
-          <img src="/img/qr-code.svg" alt="Mã QR" class="header-qr-thumb" />
-          <span class="header-qr-label">MÃ QR</span>
-        </button>
-
-        <div class="header-qr-popover" id="header-qr-popover">
-          <div class="qr-popover-tag">DI ĐỘNG &amp; VR</div>
-          <div class="qr-popover-title">QUÉT MÃ TRẢI NGHIỆM 3D</div>
-          <div class="qr-popover-img-wrap">
-            <img src="/img/qr-code.svg" alt="Mã QR https://history-art-gallery.vercel.app/" class="qr-popover-img" />
-          </div>
-          <p class="qr-popover-guide">Dùng camera điện thoại quét mã để truy cập ngay không gian 3D</p>
-          <a href="https://history-art-gallery.vercel.app/" target="_blank" rel="noopener noreferrer" class="qr-popover-url">
-            https://history-art-gallery.vercel.app/ ↗
-          </a>
-        </div>
+    <div id="main-web-logo" title="Bảo tàng lịch sử nghệ thuật 3D">
+      <svg viewBox="0 0 100 100" class="gold-lotus-logo">
+        <path d="M50 15 C45 35 35 45 50 85 C65 45 55 35 50 15 Z" fill="url(#gold-grad-header)"/>
+        <path d="M50 45 C30 45 20 55 30 75 C45 65 48 55 50 45 Z" fill="url(#gold-grad-header)" opacity="0.9"/>
+        <path d="M50 45 C70 45 80 55 70 75 C55 65 52 55 50 45 Z" fill="url(#gold-grad-header)" opacity="0.9"/>
+        <path d="M50 55 C15 55 10 65 20 80 C35 75 42 68 50 55 Z" fill="url(#gold-grad-header)" opacity="0.8"/>
+        <path d="M50 55 C85 55 90 65 80 80 C65 75 58 68 50 55 Z" fill="url(#gold-grad-header)" opacity="0.8"/>
+        <defs>
+          <linearGradient id="gold-grad-header" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FFE79A" />
+            <stop offset="50%" stop-color="#C9A84C" />
+            <stop offset="100%" stop-color="#8A6421" />
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="logo-text">
+        <span class="logo-main">VIỆT NAM 1945–1975</span>
+        <span class="logo-sub">PHÒNG TRIỂN LÃM LỊCH SỬ</span>
       </div>
     </div>
 
@@ -234,26 +210,35 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- 4. AUDIO GUIDE & LIGHTING QUICK HUD (GÓC TRÊN BÊN PHẢI)         -->
+    <!-- 4. HEADER RIGHT ACTIONS (GÓC TRÊN CÙNG BÊN PHẢI)              -->
     <!-- ============================================================ -->
-    <div id="audio_controls" style="display: none">
-      <div class="hud-control-group">
-        <button id="btn_toggle_audio" class="hud-control-btn">🎵 Tải nhạc...</button>
-        <div class="hud-volume-control" title="Âm lượng hướng dẫn">
-          <span class="hud-volume-icon">🔊</span>
-          <input type="range" id="volume_slider" min="0" max="1" step="0.05" value="0.35" class="hud-slider"/>
-        </div>
-        <div class="hud-track-dropdown">
-          <button id="btn_dropdown_toggle" class="hud-control-btn">💿 Chọn bài ▾</button>
-          <div id="track_dropdown_menu" class="dropdown-menu-content" style="display: none">
-            <div class="dropdown-item active" data-index="0">Tiersen (BGM Nhẹ Nhàng)</div>
-            <div class="dropdown-item" data-index="1">The Ballad of Ho Chi Minh</div>
-            <div class="dropdown-item" data-index="2">Người là niềm tin tất thắng</div>
-            <div class="dropdown-item" data-index="3">Đêm nghe hát đò đưa nhớ Bác</div>
+    <div id="header-right-actions">
+      <!-- Audio HUD (chỉ hiện khi bắt đầu tham quan 3D) -->
+      <div id="audio_controls" style="display: none">
+        <div class="hud-control-group">
+          <button id="btn_toggle_audio" class="hud-control-btn">🎵 Tải nhạc...</button>
+          <div class="hud-volume-control" title="Âm lượng hướng dẫn">
+            <span class="hud-volume-icon">🔊</span>
+            <input type="range" id="volume_slider" min="0" max="1" step="0.05" value="0.35" class="hud-slider"/>
           </div>
+          <div class="hud-track-dropdown">
+            <button id="btn_dropdown_toggle" class="hud-control-btn">💿 Chọn bài ▾</button>
+            <div id="track_dropdown_menu" class="dropdown-menu-content" style="display: none">
+              <div class="dropdown-item active" data-index="0">Tiersen (BGM Nhẹ Nhàng)</div>
+              <div class="dropdown-item" data-index="1">The Ballad of Ho Chi Minh</div>
+              <div class="dropdown-item" data-index="2">Người là niềm tin tất thắng</div>
+              <div class="dropdown-item" data-index="3">Đêm nghe hát đò đưa nhớ Bác</div>
+            </div>
+          </div>
+          <button id="toggle_light" class="hud-control-btn">💡 Chế độ đèn</button>
         </div>
-        <button id="toggle_light" class="hud-control-btn">💡 Chế độ đèn</button>
       </div>
+
+      <!-- Nút Mã QR bên phải màn hình -->
+      <button type="button" id="btn-open-qr-modal" class="header-qr-pill" title="Mở mã QR trải nghiệm trên di động">
+        <img src="/img/qr-code.svg" alt="QR" class="header-qr-pill-icon" />
+        <span class="header-qr-pill-text">MÃ QR</span>
+      </button>
     </div>
 
     <!-- ============================================================ -->
@@ -357,6 +342,52 @@
       <div class="modal-content">
         <button class="close-modal" id="close-modal-btn">✕</button>
         <div id="modalContent"></div>
+      </div>
+    </div>
+
+    <!-- Popup Modal Mã QR Trải Nghiệm Di Động -->
+    <div id="qrModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="qr-modal-title">
+      <div class="modal-content qr-modal-content">
+        <button class="close-modal" id="close-qr-modal-btn" aria-label="Đóng popup">✕</button>
+
+        <div class="qr-modal-badge">
+          <span>✦</span>
+          <span>TRẢI NGHIỆM ĐA NỀN TẢNG</span>
+          <span>✦</span>
+        </div>
+
+        <h2 id="qr-modal-title" class="qr-modal-heading">QUÉT MÃ TRẢI NGHIỆM 3D</h2>
+        <p class="qr-modal-subheading">
+          Khám phá không gian triển lãm lịch sử thực tế ảo trực tiếp trên điện thoại thông minh hoặc kính VR
+        </p>
+
+        <div class="qr-modal-card">
+          <div class="qr-modal-frame">
+            <img src="/img/qr-code.svg" alt="QR Code https://history-art-gallery.vercel.app/" class="qr-modal-img" />
+          </div>
+
+          <div class="qr-modal-info">
+            <div class="qr-guide-step">
+              <span class="qr-step-num">1</span>
+              <span>Mở ứng dụng <b>Camera</b> hoặc <b>Zalo / Google Lens</b></span>
+            </div>
+            <div class="qr-guide-step">
+              <span class="qr-step-num">2</span>
+              <span>Quét mã QR và bấm vào đường link xuất hiện</span>
+            </div>
+            <div class="qr-guide-step">
+              <span class="qr-step-num">3</span>
+              <span>Bật chế độ xoay ngang màn hình để trải nghiệm tốt nhất</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="qr-modal-link-box">
+          <span class="qr-link-label">Đường dẫn trực tiếp:</span>
+          <a href="https://history-art-gallery.vercel.app/" target="_blank" rel="noopener noreferrer" class="qr-direct-link">
+            https://history-art-gallery.vercel.app/ ↗
+          </a>
+        </div>
       </div>
     </div>
 

@@ -2,34 +2,57 @@
  * loadComponents.js — Bootstrap game sau khi DOM đã sẵn sàng
  *
  * Tất cả component HTML đã được inline trong index.html.
- * Script này phát event 'components:all-loaded', cấu hình tương tác Header QR, rồi import main.js.
+ * Script này phát event 'components:all-loaded', cấu hình tương tác Popup Mã QR, rồi import main.js.
  */
 
-function setupHeaderQR() {
-  const qrWrapper = document.getElementById('header-qr-wrapper');
-  const qrBtn = document.getElementById('header-qr-btn');
-  if (qrWrapper && qrBtn) {
-    qrBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      qrWrapper.classList.toggle('is-open');
-    });
+function setupQRModal() {
+  const openBtn = document.getElementById('btn-open-qr-modal');
+  const modal = document.getElementById('qrModal');
+  const closeBtn = document.getElementById('close-qr-modal-btn');
 
-    document.addEventListener('click', (e) => {
-      if (!qrWrapper.contains(e.target)) {
-        qrWrapper.classList.remove('is-open');
-      }
-    });
+  function openQR(e) {
+    if (e) e.stopPropagation();
+    if (!modal) return;
+    modal.classList.add('active');
+    modal.style.display = 'flex';
+    if (document.pointerLockElement) {
+      document.exitPointerLock();
+    }
+  }
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        qrWrapper.classList.remove('is-open');
+  function closeQR(e) {
+    if (e) e.stopPropagation();
+    if (!modal) return;
+    modal.classList.remove('active');
+    modal.style.display = 'none';
+  }
+
+  if (openBtn) {
+    openBtn.addEventListener('click', openQR);
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeQR);
+  }
+
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      // Đóng khi click vào vùng nền tối bên ngoài hộp nội dung
+      if (e.target === modal) {
+        closeQR();
       }
     });
   }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
+      closeQR();
+    }
+  });
 }
 
 async function bootstrapGame() {
-  setupHeaderQR();
+  setupQRModal();
   window.dispatchEvent(new CustomEvent('components:all-loaded'));
   try {
     await import('../main.js');
