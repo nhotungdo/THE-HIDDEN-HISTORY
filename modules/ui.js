@@ -3,7 +3,7 @@
 // and never write `modalContent.innerHTML` directly. This keeps the modal template consistent
 // and prevents drift between painting modal and historical-info modal.
 
-import { setExploringState } from './touchControls.js';
+import { setExploringState, isMobileDevice } from './touchControls.js';
 
 let controlsRef = null;
 
@@ -19,8 +19,12 @@ export function showModal(html) {
         content.innerHTML = html;
         modal.classList.add('active');
         modal.style.display = 'flex';
-        if (controlsRef) controlsRef.unlock();
-        if (document.pointerLockElement) document.exitPointerLock();
+        if (controlsRef && !isMobileDevice() && typeof document.exitPointerLock === 'function') {
+            try { controlsRef.unlock(); } catch (e) {}
+        }
+        if (document.pointerLockElement) {
+            try { document.exitPointerLock(); } catch (e) {}
+        }
     }
 }
 
@@ -31,9 +35,13 @@ export function hideModal() {
     modal.style.display = 'none';
     modal.classList.remove('active');
     setExploringState(true);
-    if (controlsRef) {
+    if (controlsRef && !isMobileDevice() && typeof document.body.requestPointerLock === 'function') {
         setTimeout(() => {
-            if (controlsRef) controlsRef.lock();
+            try {
+                if (controlsRef) controlsRef.lock();
+            } catch (e) {
+                console.warn('[UI] Pointer lock resume skipped:', e);
+            }
         }, 100);
     }
 }

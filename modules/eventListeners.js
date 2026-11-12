@@ -131,6 +131,26 @@ export const setupEventListeners = (controls, camera, scene) => {
     });
   }
 
+  // Nút mở Menu chính từ HUD
+  const hudMenuBtn = document.getElementById("btn_hud_menu");
+  if (hudMenuBtn) {
+    hudMenuBtn.addEventListener("click", (e) => {
+      e.currentTarget.blur();
+      clearAllMovementKeys();
+      showMenu();
+    });
+  }
+
+  // Logo bảo tàng góc trên trái: bấm vào để về Menu
+  const mainLogo = document.getElementById("main-web-logo");
+  if (mainLogo) {
+    mainLogo.style.cursor = "pointer";
+    mainLogo.addEventListener("click", () => {
+      clearAllMovementKeys();
+      showMenu();
+    });
+  }
+
   // Volume Slider Event
   const volumeSlider = document.getElementById("volume_slider");
   if (volumeSlider) {

@@ -55,9 +55,27 @@ function setupOrientationHint() {
   const dismissBtn = document.getElementById('btn-dismiss-orientation');
   const overlay = document.getElementById('orientation-overlay');
   if (dismissBtn && overlay) {
-    dismissBtn.addEventListener('click', () => {
+    const handleDismiss = (e) => {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
       overlay.classList.add('dismissed');
-    });
+      overlay.style.display = 'none';
+      try {
+        sessionStorage.setItem('hcm_gallery_orientation_dismissed', '1');
+      } catch (err) {}
+    };
+
+    dismissBtn.addEventListener('click', handleDismiss);
+    dismissBtn.addEventListener('touchend', handleDismiss);
+
+    try {
+      if (sessionStorage.getItem('hcm_gallery_orientation_dismissed') === '1') {
+        overlay.classList.add('dismissed');
+        overlay.style.display = 'none';
+      }
+    } catch (err) {}
   }
 }
 

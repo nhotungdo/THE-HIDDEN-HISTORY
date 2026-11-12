@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { getExploringState } from "./touchControls.js";
 
 // ── Audio state ───────────────────────────────────────────────
 let bgSound;          // Nhạc nền ambient chạy vòng lặp
@@ -51,6 +52,9 @@ export const setupAudio = (camera) => {
       bufferLoaded = true;
       console.log("[Audio] Background music loaded successfully:", WING_TRACKS[0]);
       updateUIButton();
+      if (getExploringState() && !bgSound.isPlaying) {
+        startAudio();
+      }
     },
     // On progress
     undefined,
@@ -63,10 +67,17 @@ export const setupAudio = (camera) => {
 
 // ── Bật nhạc nền ─────────────────────────────────────────────
 export const startAudio = () => {
+  if (listener && listener.context && listener.context.state === 'suspended') {
+    listener.context.resume().catch(() => {});
+  }
   if (bgSound && bufferLoaded && !bgSound.isPlaying) {
-    bgSound.play();
-    console.log("[Audio] Playing background music");
-    updateUIButton();
+    try {
+      bgSound.play();
+      console.log("[Audio] Playing background music");
+      updateUIButton();
+    } catch (e) {
+      console.warn("[Audio] Audio playback failed or blocked:", e);
+    }
   } else if (bgSound && !bufferLoaded) {
     console.warn("[Audio] Audio buffer is still loading, please wait...");
   }

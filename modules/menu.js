@@ -1,5 +1,5 @@
 import { startAudio } from "./audioGuide.js";
-import { setExploringState, isTouchDevice } from "./touchControls.js";
+import { setExploringState, isTouchDevice, isMobileDevice } from "./touchControls.js";
 
 // Bind PointerLockControls so showMenu() can pause/resume gameplay safely.
 // Required because the in-game menu uses the same pointer-locked scene and
@@ -37,27 +37,41 @@ export const showMenu = () => {
     }
 
     // Unlock pointer so camera stops drifting while user reads the menu.
-    if (controlsRef) controlsRef.unlock();
+    if (controlsRef && !isMobileDevice() && typeof document.exitPointerLock === 'function') {
+        try {
+            controlsRef.unlock();
+        } catch (e) {
+            console.warn('[Controls] Unlock failed:', e);
+        }
+    }
 };
 
 // Lock the pointer and start tour.
-// IMPORTANT: controls.lock() MUST run synchronously inside the click
-// handler. The browser's user-gesture context expires after the current
-// task, so wrapping lock() in setTimeout(0) breaks pointer acquisition.
 export const startExperience = (controls) => {
-    controls.lock();
+    // 1. Chỉ gọi pointer lock trên desktop chuột (không hỗ trợ hoặc bỏ qua trên màn hình cảm ứng di động)
+    if (!isMobileDevice() && controls && controls.domElement && typeof controls.domElement.requestPointerLock === 'function') {
+        try {
+            controls.lock();
+        } catch (e) {
+            console.warn('[Controls] Pointer Lock failed:', e);
+        }
+    }
+
+    // 2. Ẩn menu chào đón ngay lập tức và chuyển sang giao diện 3D
     hideMenu();
 
-    // Auto-play BGM
-    setTimeout(() => {
+    // 3. Khởi chạy Audio Guide trực tiếp trong user gesture
+    try {
         startAudio();
-    }, 100);
+    } catch (e) {
+        console.warn('[Audio] Failed to start audio:', e);
+    }
 
-    // First-time onboarding hint: tell player to look around and click.
+    // 4. Onboarding hint: thông báo cho người tham quan cách nhìn quanh và tương tác
     const hint = document.getElementById('first-pov-hint');
     if (hint) {
         if (isTouchDevice()) {
-            hint.innerHTML = '🕹️ Cần gạt bên trái để di chuyển — Vuốt bên phải nhìn quanh — Chạm vào tranh xem tư liệu';
+            hint.innerHTML = '🕹️ Cần gạt bên trái: di chuyển — Nửa phải: vuốt nhìn quanh &amp; chạm xem tranh';
         }
         hint.classList.add('show');
         // Auto-hide after 6 seconds so it doesn't obstruct the gallery view.
@@ -68,7 +82,19 @@ export const startExperience = (controls) => {
 export const setupPlayButton = (controls) => {
   const playButton = document.getElementById('play_button');
   if (playButton) {
-    playButton.addEventListener('click', () => startExperience(controls));
+    let handled = false;
+    const triggerStart = (e) => {
+      if (handled) return;
+      handled = true;
+      setTimeout(() => { handled = false; }, 600);
+      startExperience(controls);
+    };
+
+    playButton.addEventListener('click', triggerStart);
+    playButton.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      triggerStart(e);
+    });
   }
 };
 

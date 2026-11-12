@@ -13,8 +13,18 @@ export const isTouchDevice = () => {
   return (
     'ontouchstart' in window ||
     navigator.maxTouchPoints > 0 ||
-    window.matchMedia('(pointer: coarse)').matches
+    window.matchMedia('(pointer: coarse)').matches ||
+    /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
   );
+};
+
+// Phân biệt thiết bị mobile/tablet thực thụ so với desktop cảm ứng
+export const isMobileDevice = () => {
+  const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  const isMobileUA = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  const isSmallScreen = window.matchMedia('(max-width: 900px)').matches;
+  const isCoarse = window.matchMedia('(pointer: coarse)').matches;
+  return isMobileUA || (hasTouch && (isSmallScreen || isCoarse));
 };
 
 // Trạng thái người chơi đang trong triển lãm (không bị chặn bởi Menu hay Modal)
@@ -25,6 +35,15 @@ export const setExploringState = (active) => {
   const touchUI = document.getElementById('mobile-controls-container');
   if (touchUI && isTouchDevice()) {
     touchUI.style.display = isExploring ? 'block' : 'none';
+    if (isExploring) {
+      setTimeout(() => {
+        const hints = document.querySelectorAll('.mobile-zone-hint');
+        hints.forEach(h => {
+          h.style.opacity = '0';
+          h.style.pointerEvents = 'none';
+        });
+      }, 5000);
+    }
   }
 };
 
@@ -143,6 +162,8 @@ export function initTouchControls(camera, controls) {
     leftZone.addEventListener('touchcancel', endJoystick, { passive: true });
   }
 
+  const _touchEuler = new THREE.Euler(0, 0, 0, 'YXZ');
+
   // ── 2. TOUCH LOOK & QUICK TAP (NỬA PHẢI) ─────────────────────
   if (rightZone) {
     rightZone.addEventListener('touchstart', (e) => {
@@ -168,12 +189,17 @@ export function initTouchControls(camera, controls) {
           const deltaX = touch.clientX - lastLookX;
           const deltaY = touch.clientY - lastLookY;
 
-          // Xoay góc nhìn camera theo cử chỉ vuốt
-          camera.rotation.y -= deltaX * LOOK_SENSITIVITY;
-          camera.rotation.x -= deltaY * LOOK_SENSITIVITY;
+          // Xoay góc nhìn camera theo chuẩn Quaternion Euler
+          _touchEuler.setFromQuaternion(camera.quaternion);
+          _touchEuler.y -= deltaX * LOOK_SENSITIVITY;
+          _touchEuler.x -= deltaY * LOOK_SENSITIVITY;
 
           // Khống chế góc ngẩng đầu/cúi đầu
-          camera.rotation.x = Math.max(-MAX_PITCH, Math.min(MAX_PITCH, camera.rotation.x));
+          _touchEuler.x = Math.max(-MAX_PITCH, Math.min(MAX_PITCH, _touchEuler.x));
+
+          camera.quaternion.setFromEuler(_touchEuler);
+          camera.updateMatrix();
+          camera.updateMatrixWorld();
 
           lastLookX = touch.clientX;
           lastLookY = touch.clientY;
@@ -210,25 +236,45 @@ export function initTouchControls(camera, controls) {
   // ── 3. NÚT CHẠY NHANH (SPRINT) ──────────────────────────────
   if (sprintBtn) {
     const toggleSprint = (e) => {
-      e.preventDefault();
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
       isSprintingMobile = !isSprintingMobile;
       sprintBtn.classList.toggle('active', isSprintingMobile);
     };
     sprintBtn.addEventListener('click', toggleSprint);
-    sprintBtn.addEventListener('touchstart', (e) => {
-      e.stopPropagation();
-    }, { passive: true });
+    sprintBtn.addEventListener('touchend', toggleSprint);
   }
 
   // ── 4. NÚT TƯƠNG TÁC NHANH TRÊN MÀN HÌNH ───────────────────
   if (interactBtn) {
-    interactBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
+    const triggerInteract = (e) => {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
       if (typeof onMobileTapCallback === 'function') {
         // Tương tác vật thể đang nhắm ngay tâm camera
         onMobileTapCallback(window.innerWidth / 2, window.innerHeight / 2);
       }
-    });
+    };
+    interactBtn.addEventListener('click', triggerInteract);
+    interactBtn.addEventListener('touchend', triggerInteract);
+  }
+
+  // ── 5. NÚT MENU CHÍNH TRÊN MOBILE ───────────────────────────
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  if (menuBtn) {
+    const handleMenuClick = (e) => {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      import('./menu.js').then(m => m.showMenu());
+    };
+    menuBtn.addEventListener('click', handleMenuClick);
+    menuBtn.addEventListener('touchend', handleMenuClick);
   }
 }
 
