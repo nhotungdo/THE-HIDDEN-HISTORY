@@ -129,11 +129,12 @@ button {
   pointer-events: none;
 }
 
-/* ── 4. WEBSITE FLOATING LOGO (TOP-LEFT) ─────────────────────── */
+/* ── 4. WEBSITE FLOATING LOGO (TOP-CENTER) ───────────────────── */
 #main-web-logo {
   position: fixed;
   top: 22px;
-  left: 24px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 1500;
   display: flex;
   align-items: center;
@@ -150,13 +151,14 @@ button {
   transition: all 0.4s var(--ease-gallery);
   text-decoration: none;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 #main-web-logo:hover {
   border-color: var(--color-gold);
   background: rgba(26, 19, 14, 0.94);
   box-shadow: 0 14px 40px rgba(0, 0, 0, 0.7), 0 0 20px rgba(201, 168, 76, 0.3);
-  transform: translateY(-2px);
+  transform: translateX(-50%) translateY(-2px);
 }
 
 .gold-lotus-logo {
@@ -1839,9 +1841,13 @@ canvas {
 @media (max-width: 480px) {
   #main-web-logo {
     top: 12px;
-    left: 12px;
-    padding: 5px 10px 5px 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 12px 5px 8px;
     gap: 8px;
+  }
+  #main-web-logo:hover {
+    transform: translateX(-50%) translateY(-1px);
   }
   .gold-lotus-logo {
     width: 24px;
