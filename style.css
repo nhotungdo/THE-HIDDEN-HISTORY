@@ -1893,3 +1893,240 @@ canvas {
     font-size: 11.5px;
   }
 }
+
+/* ── 15. MOBILE TOUCH CONTROLS & VIRTUAL JOYSTICK ───────────── */
+#mobile-controls-container {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  pointer-events: none;
+  touch-action: none;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+.touch-zone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  pointer-events: auto;
+  touch-action: none;
+}
+
+#mobile-left-zone {
+  left: 0;
+  width: 50vw;
+}
+
+#mobile-right-zone {
+  right: 0;
+  width: 50vw;
+}
+
+/* Zone Hints */
+.mobile-zone-hint {
+  position: absolute;
+  bottom: 24px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(245, 238, 220, 0.6);
+  background: rgba(16, 12, 9, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  pointer-events: none;
+  opacity: 0.85;
+  transition: opacity 0.5s ease;
+}
+
+.mobile-left-hint {
+  left: 20px;
+}
+
+.mobile-right-hint {
+  right: 20px;
+}
+
+/* Joystick Styling */
+.joystick-base {
+  position: absolute;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 168, 76, 0.18) 0%, rgba(16, 12, 9, 0.8) 100%);
+  border: 2px solid var(--color-gold);
+  box-shadow: 0 0 20px rgba(201, 168, 76, 0.35), inset 0 0 14px rgba(0, 0, 0, 0.6);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 1250;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.joystick-knob {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #FFE79A 0%, #C9A84C 60%, #8A6421 100%);
+  border: 1.5px solid #FFFDF9;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6), 0 0 10px rgba(201, 168, 76, 0.5);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* Mobile Actions Bar (Bottom Right) */
+#mobile-actions-bar {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  pointer-events: auto;
+  z-index: 1260;
+}
+
+.mobile-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 52px;
+  height: 52px;
+  padding: 0 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(18, 14, 10, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1.5px solid var(--color-gold-border);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transition: all 0.25s var(--ease-gallery);
+  outline: none;
+  user-select: none;
+}
+
+.mobile-action-btn .action-icon {
+  font-size: 18px;
+}
+
+.mobile-action-btn .action-text {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-gold);
+  letter-spacing: 0.08em;
+}
+
+.mobile-action-btn:active,
+.mobile-action-btn.active {
+  background: rgba(201, 168, 76, 0.28);
+  border-color: var(--color-gold);
+  box-shadow: 0 0 20px rgba(201, 168, 76, 0.5);
+  transform: scale(0.95);
+}
+
+.mobile-interact-btn {
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.35) 0%, rgba(138, 100, 33, 0.45) 100%);
+  border-color: var(--color-gold);
+  animation: pulseGold 2s infinite;
+}
+
+@keyframes pulseGold {
+  0%, 100% { box-shadow: 0 0 14px rgba(201, 168, 76, 0.4); }
+  50% { box-shadow: 0 0 26px rgba(201, 168, 76, 0.8); }
+}
+
+/* ── 16. ORIENTATION OVERLAY (LANDSCAPE HINT) ───────────────── */
+#orientation-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(10, 8, 5, 0.96);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+}
+
+@media (max-width: 900px) and (orientation: portrait) {
+  #orientation-overlay:not(.dismissed) {
+    display: flex;
+  }
+}
+
+.orientation-box {
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.phone-rotate-anim {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 20px;
+  animation: rotatePhoneAnim 2.5s infinite ease-in-out;
+}
+
+@keyframes rotatePhoneAnim {
+  0%, 20% { transform: rotate(0deg); }
+  50%, 75% { transform: rotate(90deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.rotate-phone-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.orientation-box h3 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--color-gold);
+  letter-spacing: 0.12em;
+  margin: 0 0 10px;
+}
+
+.orientation-box p {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--color-cream-dim);
+  line-height: 1.6;
+  margin: 0 0 24px;
+}
+
+.btn-dismiss-orientation {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  color: var(--color-cream);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 20px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-dismiss-orientation:hover {
+  background: rgba(201, 168, 76, 0.2);
+  border-color: var(--color-gold);
+}
+
+/* Ẩn bảng phím máy tính trên màn hình cảm ứng */
+@media (pointer: coarse) {
+  #info-panel {
+    display: none !important;
+  }
+}

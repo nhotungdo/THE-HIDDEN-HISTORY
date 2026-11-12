@@ -17,9 +17,11 @@ export const setupScene = () => {
   scene.add(camera); // add the camera to the scene
   camera.position.set(0, 2.2, 17); // Đón đầu tại Cửa vào với chiều cao tầm mắt người bình thường (y = 2.2)
 
-  renderer = new THREE.WebGLRenderer({ antialias: true }); // Enable antialias for smoother edges
-  renderer.setPixelRatio(window.devicePixelRatio); // Render at native screen resolution
-  renderer.setSize(window.innerWidth, window.innerHeight); // set the size of the renderer
+  renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+  // Tối ưu hiệu năng: Giới hạn pixel ratio tối đa 1.75 để chống quá tải GPU và tụt FPS trên mobile màn hình Retina/High-DPI
+  const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.75);
+  renderer.setPixelRatio(pixelRatio);
+  renderer.setSize(window.innerWidth, window.innerHeight);
 
   // Màu nền tối — fallback khi player nhìn ra ngoài qua cửa sổ/cửa ra.
   // Đây là phòng kín (closed room): 4 tường đặc BoxGeometry 80×20 ở position ±20

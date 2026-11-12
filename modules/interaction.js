@@ -7,6 +7,7 @@ import {
     hideModal,
 } from './ui.js';
 import { triggerEndingModal } from './gates.js';
+import { isTouchDevice, getExploringState, setMobileTapCallback } from './touchControls.js';
 
 let raycaster;
 const mouse = new THREE.Vector2(0, 0);
@@ -53,6 +54,25 @@ export function setupInteraction(camera, objects, paintings) {
         if (!hit) return;
         const target = getInteractiveRoot(hit.object);
         triggerInteraction(target);
+    });
+
+    // Mobile tap callback: chạm vào vật thể trên màn hình hoặc bấm nút tương tác
+    setMobileTapCallback((screenX, screenY) => {
+        const tapMouse = new THREE.Vector2(
+            (screenX / window.innerWidth) * 2 - 1,
+            -(screenY / window.innerHeight) * 2 + 1
+        );
+        raycaster.setFromCamera(tapMouse, camera);
+        const intersects = raycaster.intersectObjects(interactiveObjects, true);
+        const hit = intersects.find(i => i.distance < 22);
+        if (hit) {
+            const target = getInteractiveRoot(hit.object);
+            triggerInteraction(target);
+            return;
+        }
+        if (hoveredObject) {
+            triggerInteraction(hoveredObject);
+        }
     });
 
     const closeBtn = document.getElementById('close-modal-btn');
@@ -111,12 +131,16 @@ function getInteractiveRoot(object) {
 export function updateInteraction(camera) {
     if (interactiveObjects.length === 0) return;
 
-    if (!document.pointerLockElement) {
+    const isActive = document.pointerLockElement || (isTouchDevice() && getExploringState());
+    const mobileInteractBtn = document.getElementById('mobile-interact-btn');
+
+    if (!isActive) {
         if (hoveredObject) {
             resetExitHolding();
             resetHoverEffect(hoveredObject);
             hoveredObject = null;
         }
+        if (mobileInteractBtn) mobileInteractBtn.style.display = 'none';
         return;
     }
 
@@ -133,11 +157,17 @@ export function updateInteraction(camera) {
             hoveredObject = target;
             applyHoverEffect(hoveredObject);
         }
+        if (mobileInteractBtn && isTouchDevice()) {
+            mobileInteractBtn.style.display = 'flex';
+        }
     } else {
         if (hoveredObject) {
             resetExitHolding();
             resetHoverEffect(hoveredObject);
             hoveredObject = null;
+        }
+        if (mobileInteractBtn && isTouchDevice()) {
+            mobileInteractBtn.style.display = 'none';
         }
     }
 }
@@ -256,7 +286,8 @@ function startExitHolding() {
     const startTime = performance.now();
 
     function updateExitProgress() {
-        if (!document.pointerLockElement || !hoveredObject) {
+        const isActive = document.pointerLockElement || (isTouchDevice() && getExploringState());
+        if (!isActive || !hoveredObject) {
             resetExitHolding();
             return;
         }

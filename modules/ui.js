@@ -3,6 +3,8 @@
 // and never write `modalContent.innerHTML` directly. This keeps the modal template consistent
 // and prevents drift between painting modal and historical-info modal.
 
+import { setExploringState } from './touchControls.js';
+
 let controlsRef = null;
 
 export function bindControls(controls) {
@@ -13,6 +15,7 @@ export function showModal(html) {
     const modal = document.getElementById('infoModal');
     const content = document.getElementById('modalContent');
     if (modal && content) {
+        setExploringState(false);
         content.innerHTML = html;
         modal.classList.add('active');
         modal.style.display = 'flex';
@@ -27,6 +30,7 @@ export function hideModal() {
     if (modal.style.display === 'none' || modal.style.display === '') return;
     modal.style.display = 'none';
     modal.classList.remove('active');
+    setExploringState(true);
     if (controlsRef) {
         setTimeout(() => {
             if (controlsRef) controlsRef.lock();

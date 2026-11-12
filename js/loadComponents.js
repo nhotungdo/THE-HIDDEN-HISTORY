@@ -51,8 +51,19 @@ function setupQRModal() {
   });
 }
 
+function setupOrientationHint() {
+  const dismissBtn = document.getElementById('btn-dismiss-orientation');
+  const overlay = document.getElementById('orientation-overlay');
+  if (dismissBtn && overlay) {
+    dismissBtn.addEventListener('click', () => {
+      overlay.classList.add('dismissed');
+    });
+  }
+}
+
 async function bootstrapGame() {
   setupQRModal();
+  setupOrientationHint();
   window.dispatchEvent(new CustomEvent('components:all-loaded'));
   try {
     await import('../main.js');

@@ -17,6 +17,7 @@ import { setupInteraction, interactiveObjects } from "./modules/interaction.js";
 import { bindControls } from "./modules/ui.js";
 import { paintingData } from "./modules/paintingData.js";
 import { loadOfficeModels } from "./modules/office.js";
+import { initTouchControls } from "./modules/touchControls.js";
 
 // 1. Scene + camera + controls + renderer
 let { camera, controls, renderer } = setupScene();
@@ -61,6 +62,9 @@ loadOfficeModels(scene, interactiveObjects);
 
 // 8. Interaction setup (raycaster, hover, click, modal).
 setupInteraction(camera, interactiveObjects, paintings);
+
+// 8b. Mobile touch controls (Virtual Joystick + Touch Look + Action Buttons)
+initTouchControls(camera, controls);
 
 // 9. Render loop
 window.interactiveCamera = camera;

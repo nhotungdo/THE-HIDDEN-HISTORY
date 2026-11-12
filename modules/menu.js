@@ -1,4 +1,5 @@
 import { startAudio } from "./audioGuide.js";
+import { setExploringState, isTouchDevice } from "./touchControls.js";
 
 // Bind PointerLockControls so showMenu() can pause/resume gameplay safely.
 // Required because the in-game menu uses the same pointer-locked scene and
@@ -12,6 +13,9 @@ export const hideMenu = () => {
     const menu = document.getElementById('menu');
     if (menu) menu.style.display = 'none'; // Hide the menu
 
+    // Bật trạng thái khám phá cho mobile touch controls
+    setExploringState(true);
+
     // Show the HUD controls panel (audio, lights toggle)
     const hudControls = document.getElementById('audio_controls');
     if (hudControls) {
@@ -22,6 +26,9 @@ export const hideMenu = () => {
 export const showMenu = () => {
     const menu = document.getElementById('menu');
     if (menu) menu.style.display = 'flex'; // Show the menu (using flex to align full-screen container)
+
+    // Tạm dừng trạng thái khám phá
+    setExploringState(false);
 
     // Hide the HUD controls panel
     const hudControls = document.getElementById('audio_controls');
@@ -49,6 +56,9 @@ export const startExperience = (controls) => {
     // First-time onboarding hint: tell player to look around and click.
     const hint = document.getElementById('first-pov-hint');
     if (hint) {
+        if (isTouchDevice()) {
+            hint.innerHTML = '🕹️ Cần gạt bên trái để di chuyển — Vuốt bên phải nhìn quanh — Chạm vào tranh xem tư liệu';
+        }
         hint.classList.add('show');
         // Auto-hide after 6 seconds so it doesn't obstruct the gallery view.
         setTimeout(() => hint.classList.remove('show'), 6000);

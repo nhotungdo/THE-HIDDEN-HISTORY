@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { deskBox } from './office.js';
+import { isTouchDevice, joystickVector, isMobileSprinting, getExploringState } from './touchControls.js';
 
 // Keys tracked by modules/eventListeners.js.
 // Supporting WASD, Arrow keys, Vietnamese Telex (w -> ư, etc.), and Sprint.
@@ -92,12 +93,15 @@ function collidesWithDesk(pos) {
  * and 2-axis wall sliding collision.
  */
 export const updateMovement = (delta, controls, camera, walls) => {
-  if (!controls || !controls.isLocked) {
+  const isMobileActive = isTouchDevice() && getExploringState();
+  const isDesktopActive = controls && controls.isLocked;
+
+  if (!isMobileActive && !isDesktopActive) {
     currentVelocity.set(0, 0);
     return;
   }
 
-  // 1. Gather input from tracked keys
+  // 1. Gather input from tracked keys and mobile virtual joystick
   let forwardInput = 0;
   let rightInput = 0;
 
@@ -106,15 +110,21 @@ export const updateMovement = (delta, controls, camera, walls) => {
   if (keysPressed.d || keysPressed.ArrowRight) rightInput += 1;
   if (keysPressed.a || keysPressed.ArrowLeft) rightInput -= 1;
 
-  // 2. Normalize input direction (prevents faster diagonal movement)
+  // Hợp nhất dữ liệu joystick cảm ứng nếu trên mobile
+  if (isMobileActive) {
+    forwardInput += joystickVector.y;
+    rightInput += joystickVector.x;
+  }
+
+  // 2. Normalize input direction (khống chế không cho vượt quá 1.0)
   const inputMagnitude = Math.hypot(rightInput, forwardInput);
-  if (inputMagnitude > 0) {
+  if (inputMagnitude > 1.0) {
     rightInput /= inputMagnitude;
     forwardInput /= inputMagnitude;
   }
 
   // 3. Compute target velocity
-  const isSprinting = !!keysPressed.sprint;
+  const isSprinting = !!keysPressed.sprint || (isMobileActive && isMobileSprinting());
   const targetSpeed = isSprinting ? SPRINT_SPEED : WALK_SPEED;
   const targetVelX = rightInput * targetSpeed;
   const targetVelY = forwardInput * targetSpeed;
