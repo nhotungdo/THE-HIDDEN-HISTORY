@@ -1,5 +1,5 @@
 # 🎙️ BẢN THUYẾT TRÌNH SẢN PHẨM SÁNG TẠO
-## ĐỒ ÁN HỌC PHẦN: LỊCH SỬ ĐẢNG CỘNG SẢN VIỆT NAM (VNR202) — ĐẠI HỌC FPT
+## SẢN PHẨM SÁNG TẠO: LỊCH SỬ ĐẢNG CỘNG SẢN VIỆT NAM (VNR202) — ĐẠI HỌC FPT
 
 ---
 
@@ -28,7 +28,7 @@
 ## 1. TỔNG QUAN VỀ BÀI THUYẾT TRÌNH & PHÂN BỔ THỜI GIAN
 
 * **Thời lượng tối ưu:** 6 - 8 phút (hoặc rút gọn linh hoạt thành 5 phút).
-* **Đối tượng lắng nghe:** Giảng viên bộ môn VNR202, Hội đồng đánh giá đồ án, sinh viên và khách tham quan.
+* **Đối tượng lắng nghe:** Giảng viên bộ môn VNR202, Hội đồng đánh giá sản phẩm sáng tạo, sinh viên và khách tham quan.
 * **Phong thái trình bày:**
   * Trang nghiêm, hào hùng nhưng gần gũi, giàu cảm xúc tự hào dân tộc.
   * Tự tin, kết hợp nhịp nhàng giữa **lời nói** và **thao tác di chuyển chuột/màn hình cảm ứng trực tiếp trên website**.
@@ -115,7 +115,7 @@
 >
 > *"Kính thưa thầy cô, điểm đến cuối cùng của triển lãm là Cổng Ra — nơi khách tham quan giữ phím để kết thúc chuyến đi và đón nhận thông điệp lịch sử tri ân các thế hệ cha anh đã ngã xuống vì nền độc lập tự do của Tổ quốc.*
 >
-> *Dự án **'Việt Nam: 30 Năm Kháng Chiến'** không chỉ đơn thuần là một bài tập học phần VNR202, mà mang trong mình những giá trị thực tiễn sâu sắc:*
+> *Dự án **'Việt Nam: 30 Năm Kháng Chiến'** không chỉ đơn thuần là một sản phẩm sáng tạo học phần VNR202, mà mang trong mình những giá trị thực tiễn sâu sắc:*
 >
 > 1. **Chuyển đổi số trong giáo dục lịch sử:** Biến những tiết học lịch sử thụ động thành những chuyến du khảo số hóa chủ động, khơi gợi lòng tự hào dân tộc trong học sinh, sinh viên.
 > 2. **Bảo tồn di sản phi vật thể:** Số hóa các hình ảnh, âm thanh tư liệu kháng chiến quý giá lên không gian mạng Internet, trường tồn cùng thời gian.
@@ -172,4 +172,5 @@ Dưới đây là các câu hỏi tiềm năng mà Giảng viên và Hội đồ
 ---
 
 > 🇻🇳 **"LỊCH SỬ KHÔNG CHỈ LÀ QUÁ KHỨ — LỊCH SỬ CHÍNH LÀ ĐIỂM TỰA ĐỂ DÂN TỘC VIỆT NAM VỮNG BƯỚC VÀO TƯƠNG LAI."**  
-> *Đồ án học phần VNR202 — Đại học FPT.*
+> *Sản phẩm sáng tạo học phần VNR202 — Đại học FPT.*
+
